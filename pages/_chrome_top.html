@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="description" content="@@DESC@@">
+  <meta name="author" content="Muhammad Danish">
+  <title>@@TITLE@@</title>
+  <link rel="canonical" href="@@CANONICAL@@">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta property="og:title" content="@@PAGE_TITLE@@ Machine Learning Tutorial | ML Atlas">
+  <meta property="og:description" content="@@DESC@@">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="@@CANONICAL@@">
+  <meta property="og:image" content="@@OG_IMAGE@@">
+  <meta property="og:site_name" content="Machine Learning Atlas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="@@PAGE_TITLE@@ Machine Learning Tutorial | ML Atlas">
+  <meta name="twitter:description" content="@@DESC@@">
+  <meta name="twitter:image" content="@@OG_IMAGE@@">
+  <script type="application/ld+json">@@SCHEMA@@</script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem('atlas_theme') || 'dark'; } catch { document.documentElement.dataset.theme = 'dark'; }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body data-model="@@ID@@">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="../index.html" class="nav-brand" aria-label="Machine Learning Atlas home"><span class="brand-mark">ML</span><span>ATLAS</span></a>
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="../index.html#model-explorer" class="nav-link active">Algorithms</a></li>
+      <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
+      <li><a href="mathematics.html" class="nav-link">Math</a></li>
+      <li><a href="comparison.html" class="nav-link">Compare</a></li>
+      <li><a href="model-selector.html" class="nav-link">Choose a Model</a></li>
+      <li><a href="glossary.html" class="nav-link">Glossary</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="search-btn" class="icon-btn" aria-label="Open search"><span aria-hidden="true">⌘</span> Search</button>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <div class="container container-wide model-layout">
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
+
+    <main id="main-content">
+      <header class="model-hero model-hero-premium">
+        <div>
+          <div class="eyebrow">@@CAT@@</div>
+          <h1 class="model-title">@@NAME@@</h1>
+          <p class="model-subtitle">@@SUB@@</p>
+          <div class="hero-badges">@@BADGES@@</div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+        </div>
+        <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
+      </header>
+
+      <div id="progress-wrap" class="progress-wrap" data-model="@@ID@@">
+        <span class="progress-label" aria-live="polite"></span>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill"></div></div>
+        <div class="progress-actions"><button id="mark-learned" class="btn btn-primary btn-sm" data-model="@@ID@@" aria-pressed="false">Mark as Learned</button><span class="storage-note">Saved only in this browser</span></div>
+      </div>
+
+      <nav id="model-toc" class="toc" aria-label="On this page"></nav>
+
+      <section class="section-block" id="overview">
+        <h2 class="section-title"><span class="section-number">01</span> Overview</h2>
+        <div id="sec-overview-body"></div>
+      </section>

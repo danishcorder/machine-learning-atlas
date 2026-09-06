@@ -1,0 +1,48 @@
+/* ML ATLAS — Responsive Design */
+@media (max-width: 1080px) {
+  .model-layout { grid-template-columns: 1fr; }
+  .model-sidebar {
+    position: static; max-height: none; order: -1;
+    display: none;
+  }
+  .model-sidebar.open { display: block; }
+  .model-sidebar-toggle { display: inline-flex; }
+}
+
+@media (max-width: 900px) {
+  .navbar { padding: 0 1rem; }
+  .model-hero { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hamburger { display: block; }
+  .nav-links {
+    position: fixed; top: var(--nav-h); right: 0; left: 0;
+    flex-direction: column; align-items: stretch; gap: 0.25rem;
+    background: var(--bg-primary); border-bottom: 1px solid var(--border-subtle);
+    padding: 1rem; display: none; z-index: 999;
+  }
+  .nav-links.open { display: flex; }
+  .nav-link { padding: 0.8rem 1rem; }
+  .nav-controls { grid-template-columns: 1fr 1fr; }
+  .nav-center { grid-column: 1 / -1; order: -1; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 1.5rem 1rem 3rem; }
+  .model-title { font-size: 2.1rem; }
+  .section-title { font-size: 1.35rem; }
+  .nav-actions .search-btn-text { display: none; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .qa-a p { padding-left: 1.3rem; }
+  .qa-q .q-cat { display: none; }
+  .toc { grid-template-columns: 1fr; }
+  .nav-controls { grid-template-columns: 1fr; }
+  .nav-center { order: 0; }
+  .compare-table-wrap { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

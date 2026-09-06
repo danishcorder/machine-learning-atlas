@@ -1,0 +1,15 @@
+{
+  "name": "machine-learning-atlas",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static, interactive machine learning learning platform with browser-based visualizations.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "audit": "node scripts/audit.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

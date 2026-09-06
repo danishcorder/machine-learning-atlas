@@ -1,0 +1,47 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>Suppose customer records have no labels. K-Means groups nearby records into a chosen number of segments by repeatedly assigning points to their nearest centre and moving each centre to its group mean.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Clustering turns an unlabelled dataset into a first map of its structure. It is useful for segmentation, compression, anomaly review, and exploratory analysis.</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>Place <em>k</em> movable centres on the map. Every point joins its closest centre, then every centre moves to the average of its members. Alternating those two steps settles into a locally good partition.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>The objective is within-cluster squared distance. Euclidean distance makes the mean the centre that minimises the total squared error for its assigned points.</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ J = \sum_{k=1}^{K}\sum_{x_i\in C_k}\|x_i-\mu_k\|^2 \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(C_k\)</span> points assigned to cluster <em>k</em></li>
+          <li><span class="eq-symbol">\(\mu_k\)</span> mean of cluster <em>k</em></li>
+          <li><span class="eq-symbol">\(J\)</span> total within-cluster inertia</li>
+        </ul>
+      </section>
+      <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step">Choose <em>k</em> initial centres.</li>
+          <li class="flow-step">Assign each point to its nearest centre.</li>
+          <li class="flow-step">Replace each centre with its assigned mean.</li>
+          <li class="flow-step">Repeat until assignments stop changing.</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow"><div class="flow-step">Initial centres</div><div class="flow-arrow">↓</div><div class="flow-step">Assign</div><div class="flow-arrow">↓</div><div class="flow-step">Update means</div><div class="flow-arrow">↓</div><div class="flow-step">Converged clusters</div></div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">Choose k, add points by clicking the canvas, and run Lloyd's algorithm.</p>
+        <div class="viz-container"><div class="viz-controls"><label for="km-k">Clusters <span id="km-k-label">k = 3</span></label><input type="range" id="km-k" min="1" max="6" value="3"><button id="km-run" class="btn btn-sm">Run K-Means</button><button id="km-reseed" class="btn btn-sm">Reseed</button></div><canvas id="km-canvas" class="viz-stage" aria-label="K-Means clustering canvas"></canvas><div id="km-info"></div></div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>With <em>k</em> = 2, points near (1, 1) and (8, 8) quickly pull their centres toward those two groups. The final inertia measures the remaining within-cluster spread.</p>
+      </section>

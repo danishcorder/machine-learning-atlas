@@ -1,0 +1,63 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>A doctor must answer yes/no: <strong>does this tumour be malignant?</strong> The evidence is a number — a blood-marker concentration — not a category label she already has. The problem is turning a continuous measurement into a calibrated <strong>probability</strong> of the positive class, then crossing a threshold that balances missed cancers against false alarms.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Malignancy is binary in outcome but probabilistic in evidence. Logistic regression gives a <em>probability</em>, not a hard label — so a clinician can pick the threshold that suits the cost of a false negative versus a false positive. That calibration is what makes it the default for ranking and for risk scoring.</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>Linear regression on a 0/1 label can overshoot — predicting "1.3" or "-0.2", which is nonsense as a probability. The <strong>sigmoid</strong> squashes any real score into (0,1): small scores stay near 0, large ones saturate near 1, and the transition is smooth. A single decision threshold turns that probability into a label.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>A linear score \(z=\beta_0+\beta^{\top}x\) is passed through the logistic function \(\sigma(z)=1/(1+e^{-z})\). We fit \(\beta\) by <strong>maximum likelihood</strong> — equivalently by minimising the <strong>log-loss (cross-entropy)</strong> \(-\sum[y_i\log p_i+(1-y_i)\log(1-p_i)]\), which is convex so the optimum is unique.</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ p = \sigma(z)=\frac{1}{1+e^{-z}}, \quad z=\beta_0+\beta^{\top}x, \quad \mathcal{L}=-\sum_{i}\bigl[y_i\log p_i+(1-y_i)\log(1-p_i)\bigr] \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(z\)</span> the linear score from the features</li>
+          <li><span class="eq-symbol">\(\sigma\)</span> the sigmoid — maps any real \(z\) into (0,1)</li>
+          <li><span class="eq-symbol">\(p\)</span> predicted probability of the positive class</li>
+          <li><span class="eq-symbol">\(\mathcal{L}\)</span> log-loss — the objective minimised to fit</li>
+        </ul>
+      </section>
+      <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step"><strong>Start flat.</strong> \(\beta_0=\beta_1=0\) ⇒ probability 0.5 everywhere.</li>
+          <li class="flow-step"><strong>Compute gradient</strong> of log-loss (it is nonzero until separation is reached).</li>
+          <li class="flow-step"><strong>Step downhill</strong> \(\beta\leftarrow\beta-\eta\,\nabla\mathcal{L}\).</li>
+          <li class="flow-step"><strong>Read off probabilities</strong> via the sigmoid and cross one threshold.</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow">
+          <div class="flow-step">Labelled data (xᵢ, yᵢ∈{0,1})</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Score z=β₀+βᵀx</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">σ(z) → p</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Gradient ↓ log-loss</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Threshold p → label</div>
+        </div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">Left-click adds a negative case, right/shift-click a positive case. Slide the intercept and slope and the decision threshold to trade off the two error types. <em>Simplified visualization.</em></p>
+        <div class="viz-container">
+          <div class="viz-controls">
+            <div class="control-group"><label for="lgr-b0">Intercept β₀</label><input type="range" id="lgr-b0" min="-8" max="8" step="0.1" value="-5.5"></div>
+            <div class="control-group"><label for="lgr-b1">Slope β₁</label><input type="range" id="lgr-b1" min="-5" max="5" step="0.1" value="1.1"></div>
+            <div class="control-group"><label for="lgr-thr">Threshold</label><input type="range" id="lgr-thr" min="0" max="1" step="0.01" value="0.5"></div>
+          </div>
+          <canvas id="lgr-canvas" class="viz-stage" aria-label="Logistic regression sigmoid curve and probability regions"></canvas>
+          <div class="viz-actions"><button id="lgr-reset" class="btn btn-sm">Reset parameters</button></div>
+          <div id="lgr-info"></div>
+        </div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>Marker \(x\): negatives avg 2.0, positives avg 6.2. Fit \(\beta_0=-9.5,\beta_1=2.7\). For \(x=5\): \(z=-9.5+13.5=4\), \(p=1/(1+e^{-4})=0.98\). At threshold 0.5 → “malignant”. Lower threshold to 0.3 ⇒ catches earlier cases but raises false alarms — the threshold is the clinical policy.</p>
+      </section>

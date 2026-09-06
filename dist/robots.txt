@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://danishcorder.github.io/ml-atlas/sitemap.xml

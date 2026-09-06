@@ -1,0 +1,61 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>An econometrician forecasts next quarter’s growth from dozens of correlated indicators: GDP, inflation, unemployment, interest rates. Plain regression will fit, but the coefficients fly apart — a tiny data change swings them by 100%. The problem is <strong>multicollinearity</strong>: features that move together make the least-squares solution numerically unstable.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Ridge regression trades a pinprick of bias for a huge drop in variance. When \(X^{\top}X\) is nearly singular, the ridge term \(\lambda I\) makes it invertible and the coefficients behave. It is the default fix whenever features outnumber samples or march in step.</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>Ordinary least squares tries to explain every wiggle, even noise — so coefficients inflate to chase outliers. Ridge <strong>shrinks</strong> every coefficient toward zero (it never zeros them), damping the wobble. Raise \(\lambda\) and the fit grows calmer, at the price of a little bias. The bias–variance tradeoff made tangible.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>The objective adds an L2 penalty: \(J_{Ridge}=\|y-X\beta\|^2+\lambda\|\beta\|^2\). Differentiating gives \((X^{\top}X+\lambda I)\beta=X^{\top}y\). The \(\lambda I\) diagonal <strong>stabilises</strong> the matrix: even if features are collinear, \(X^{\top}X+\lambda I\) stays invertible. Shrinkage is the price of stability.</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ \hat{\beta} = (X^{\top}X + \lambda I)^{-1}X^{\top}y \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(X\)</span> \(n\times p\) design matrix of features</li>
+          <li><span class="eq-symbol">\(y\)</span> vector of \(n\) observed targets</li>
+          <li><span class="eq-symbol">\(\lambda\)</span> regularisation strength — 0 recovers OLS, ∞ shrinks everything to 0</li>
+          <li><span class="eq-symbol">\(I\)</span> identity matrix; the L2 penalty added to the diagonal</li>
+        </ul>
+      </section>
+      <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step"><strong>Standardise features</strong> so the penalty is fair to all.</li>
+          <li class="flow-step"><strong>Add \(\lambda I\)</strong> to the Gram matrix \(X^{\top}X\).</li>
+          <li class="flow-step"><strong>Solve</strong> \((X^{\top}X+\lambda I)\beta=X^{\top}y\).</li>
+          <li class="flow-step"><strong>Tune \(\lambda\)</strong> by cross-validation — small is less biased, large is more stable.</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow">
+          <div class="flow-step">Data (X, y)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Scale features</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Add λI to XᵀX</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Solve → β̂</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">ŷ = Xβ̂</div>
+        </div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">Drag points, then raise <strong>λ</strong> — watch the coefficients shrink and the line settle. <em>Simplified visualization.</em></p>
+        <div class="viz-container">
+          <div class="viz-controls">
+            <div class="control-group"><label for="ri-lambda">λ <span id="ri-lambda-label">λ = 1.0</span></label><input type="range" id="ri-lambda" min="0" max="10" step="0.1" value="1"></div>
+          </div>
+          <canvas id="ri-canvas" class="viz-stage" aria-label="Ridge regression fit with lambda shrinkage control"></canvas>
+          <div class="viz-actions"><button id="ri-reseed" class="btn btn-sm">Reseed data</button></div>
+          <div id="ri-info"></div>
+        </div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>Forecast growth from 4 collinear indicators; OLS gives \(\beta=(12,-8,9,-11)\) — signs flip on reordering. Ridge with \(\lambda=4\) gives \(\beta=(1.9,0.6,-0.4,0.3)\): stable, sensible, every coefficient positive-ish. A little bias bought a lot of trustworthiness.</p>
+      </section>

@@ -1,0 +1,62 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>A medical researcher predicts a patient's blood-pressure change from <strong>several measurements at once</strong>: age, weight, baseline BP, exercise minutes. No single number tells the story. Real targets rarely have one cause, so the question is “how much, given several inputs?” — and the answer must still say <em>what each input is worth</em>.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Multiple regression is applied statistics' workhorse. Its power is <strong>ceteris paribus</strong> reading: a coefficient is a feature’s effect holding the others fixed — exactly how a doctor reasons (“age raises risk by X per year, independent of weight”).</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>One feature tilts a line. Two features tilt a <strong>plane</strong>; \(p\) features define a <strong>hyperplane</strong> in \(p{+}1\) dimensions. Fitting rotates that sheet until the total squared vertical distance to every point is minimal — the ruler game generalised.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>Stack examples in the <strong>design matrix</strong> \(X\) (one column of 1s for the intercept) and targets in \(y\). Predictions are \(\hat y = X\beta\) and the cost \(\|y-X\beta\|^2\) is convex and quadratic in \(\beta\). Setting the gradient \(-2X^{\top}(y-X\beta)\) to zero gives the <strong>normal equations</strong> \(X^{\top}X\,\beta = X^{\top}y\).</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ \hat{\beta} = (X^{\top}X)^{-1}X^{\top}y \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(X\)</span> \(n \times (p{+}1)\) design matrix; first column all 1s</li>
+          <li><span class="eq-symbol">\(y\)</span> vector of \(n\) observed targets</li>
+          <li><span class="eq-symbol">\(\beta\)</span> coefficients \((\beta_0,\dots,\beta_p)\) being learned</li>
+          <li><span class="eq-symbol">\(X^{\top}X\)</span> Gram matrix of feature co-variation</li>
+          <li><span class="eq-symbol">\(X^{\top}y\)</span> cross-covariance of features with the target</li>
+        </ul>
+      </section>
+      <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step"><strong>Assemble \(X\) and \(y\)</strong> — one row per example, intercept column first.</li>
+          <li class="flow-step"><strong>Form \(X^{\top}X\) and \(X^{\top}y\)</strong> — sums of squares and cross-products.</li>
+          <li class="flow-step"><strong>Gaussian elimination</strong> on \(X^{\top}X\,\beta = X^{\top}y\).</li>
+          <li class="flow-step"><strong>Read coefficients.</strong> Each \(\beta_j\) is the marginal effect of feature \(j\).</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow">
+          <div class="flow-step">Data table (n × p + target)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Build \(X\) and \(y\)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Compute \(X^{\top}X,\;X^{\top}y\)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Solve → \(\hat\beta\)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">\(\hat{y}=x^{\top}\hat\beta\)</div>
+        </div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">Two features drive the prediction \(\hat{y}=\beta_0+\beta_1 x_1+\beta_2 x_2\). Move the sliders for the query point and watch the heatmap update. <em>Simplified visualization.</em></p>
+        <div class="viz-container">
+          <div class="viz-controls">
+            <div class="control-group"><label for="mlr-x1">Feature \(x_1\)</label><input type="range" id="mlr-x1" min="0" max="10" step="0.1" value="5"></div>
+            <div class="control-group"><label for="mlr-x2">Feature \(x_2\)</label><input type="range" id="mlr-x2" min="0" max="10" step="0.1" value="5"></div>
+          </div>
+          <canvas id="mlr-canvas" class="viz-stage" aria-label="Two-feature regression prediction heatmap"></canvas>
+          <div id="mlr-info"></div>
+        </div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>Fitted \(\hat{y}=2+1.2\,x_1-0.8\,x_2\). Client \(x_1=40,x_2=5\): \(\hat{y}=2+48-4=46\). Age adds 1.2 per year; exercise removes 0.8 — and clients differing only in exercise by 2 score \(2\times0.8=1.6\), ceteris paribus in action.</p>
+      </section>

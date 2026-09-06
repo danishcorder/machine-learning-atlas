@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn mathematics for machine learning visually: vectors, matrices, derivatives, gradient descent, probability, Bayes theorem, covariance, entropy, regularization and more.">
+  <title>Mathematics for Machine Learning: Visual Foundations | ML Atlas</title>
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/mathematics.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Mathematics for Machine Learning | ML Atlas">
+  <meta property="og:description" content="Learn mathematics for machine learning visually: vectors, matrices, derivatives, gradient descent, probability, Bayes theorem, covariance, entropy, regularization and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/mathematics.html">
+  <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Mathematics for Machine Learning", "description": "Learn mathematics for machine learning visually: vectors, matrices, derivatives, gradient descent, probability, Bayes theorem, covariance, entropy, regularization and more.", "url": "https://danishcorder.github.io/ml-atlas/pages/mathematics.html", "isAccessibleForFree": true, "provider": {"@type": "Organization", "name": "Machine Learning Atlas"}}</script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="../index.html" class="nav-brand">⚡ ML ATLAS</a>
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="../index.html#model-explorer" class="nav-link">Models</a></li>
+      <li><a href="mathematics.html" class="nav-link active">Mathematics</a></li>
+      <li><a href="comparison.html" class="nav-link">Compare</a></li>
+      <li><a href="model-selector.html" class="nav-link">Selector</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="search-btn" class="icon-btn" aria-label="Open search">🔍 Search</button>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <main id="main-content" class="container">
+    <header class="model-hero" style="grid-template-columns:1fr;">
+      <div>
+        <div class="model-title-category">MATHEMATICAL FOUNDATIONS</div>
+        <h1 class="model-title">THE MATHEMATICS <em>BENEATH</em></h1>
+        <p class="model-subtitle">Every model in this atlas stands on a handful of mathematical ideas. Each concept below answers one question first: <strong>why does this mathematics appear in machine learning at all?</strong></p>
+      </div>
+    </header>
+
+    <section class="section-block" id="paradigms">
+      <h2 class="section-title"><span class="section-number">00</span> Two learning paradigms</h2>
+      <div class="grid-cards">
+        <div class="card" id="supervised"><h3 class="card-title">Supervised learning</h3><p class="card-body"><strong>Definition.</strong> Learn a mapping from features \(x\) to a known target \(y\) from labelled examples \((x_i, y_i)\).</p><p class="card-body"><strong>Intuition.</strong> Studying with an answer key: every mistake is measurable, so the loss is well-defined.</p><p class="card-body"><strong>Used by:</strong> all regression and classification models.</p></div>
+        <div class="card" id="unsupervised"><h3 class="card-title">Unsupervised learning</h3><p class="card-body"><strong>Definition.</strong> Find structure in \(x\) alone — the objective is defined by the structure itself (compactness, density, variance).</p><p class="card-body"><strong>Intuition.</strong> Sorting a drawer of mixed buttons without a picture of the finished sets.</p><p class="card-body"><strong>Used by:</strong> K-Means, Hierarchical Clustering, DBSCAN, PCA.</p></div>
+      </div>
+    </section>
+
+    <section class="section-block" id="linear-algebra">
+      <h2 class="section-title"><span class="section-number">01</span> Linear algebra</h2>
+      <div class="grid-cards-2">
+        <div class="card" id="vectors"><h3 class="card-title">Scalars, vectors, matrices</h3>
+          <p class="card-body"><strong>Definition.</strong> A scalar is one number; a vector \(x \in \mathbb{R}^n\) is an ordered list; a matrix \(X \in \mathbb{R}^{n \times p}\) has one row per example, one column per feature.</p>
+          <p class="card-body"><strong>Intuition.</strong> A dataset <em>is</em> a matrix; a single house is a vector of measurements.</p>
+          <div class="equation-card">\[ \hat{y} = X\beta \]</div>
+          <p class="card-body"><strong>ML connection.</strong> The design matrix \(X\) and target \(y\) are the objects every regression model consumes.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="multiple-linear-regression.html">Multiple Linear Regression</a>, <a href="pca.html">PCA</a>, <a href="svm.html">SVM</a>.</p>
+        </div>
+        <div class="card" id="dot-product"><h3 class="card-title">Dot product</h3>
+          <p class="card-body"><strong>Definition.</strong> \(x^{\top}y = \sum_i x_i y_i\) — multiply pairwise, then sum.</p>
+          <p class="card-body"><strong>Intuition.</strong> It measures alignment: large when vectors agree, zero when perpendicular.</p>
+          <div class="equation-card">\[ x^{\top}y = \sum_{i=1}^{n} x_i y_i = \|x\|\,\|y\|\cos\theta \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Every linear model's score \(z = \beta_0 + \beta^{\top}x\) is a dot product; kernels compute dot products in expanded spaces.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="svm.html">SVM</a>, <a href="logistic-regression.html">Logistic Regression</a>.</p>
+        </div>
+        <div class="card" id="matrix-multiplication"><h3 class="card-title">Matrix multiplication</h3>
+          <p class="card-body"><strong>Definition.</strong> \((AB)_{ij} = \sum_k A_{ik}B_{kj}\) — row of \(A\) dotted with column of \(B\).</p>
+          <p class="card-body"><strong>Intuition.</strong> Apply one transformation after another, to every row at once.</p>
+          <div class="equation-card">\[ (X^{\top}X)_{jk} = \sum_{i=1}^{n} x_{ij}\,x_{ik} \]</div>
+          <p class="card-body"><strong>ML connection.</strong> \(X\beta\) predicts every target in one multiplication; \(X^{\top}X\) aggregates every feature co-variation into the Gram matrix.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="multiple-linear-regression.html">Multiple Linear Regression</a>, <a href="pca.html">PCA</a>, <a href="ridge-regression.html">Ridge</a>.</p>
+        </div>
+        <div class="card" id="norms"><h3 class="card-title">Norms</h3>
+          <p class="card-body"><strong>Definition.</strong> A norm measures a vector's length: \(L_2\) is the straight line, \(L_1\) the city block.</p>
+          <p class="card-body"><strong>Intuition.</strong> L2 punishes big components hard; L1 taxes every unit equally — that is why L1 makes exact zeros.</p>
+          <div class="equation-card">\[ \|x\|_2=\sqrt{\textstyle\sum_i x_i^2}, \qquad \|x\|_1=\sum_i |x_i| \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Ridge penalises \(\|\beta\|_2^2\), Lasso penalises \(\|\beta\|_1\); K-Means minimises \(\|x-\mu\|_2^2\).</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="ridge-regression.html">Ridge</a>, <a href="lasso-regression.html">Lasso</a>, <a href="svm.html">SVM</a>, <a href="kmeans.html">K-Means</a>, <a href="knn.html">KNN</a>.</p>
+        </div>
+        <div class="card" id="eigenvalues"><h3 class="card-title">Eigenvalues &amp; eigenvectors</h3>
+          <p class="card-body"><strong>Definition.</strong> \(v\) is an eigenvector of \(A\) with eigenvalue \(\lambda\) if \(Av = \lambda v\) — the matrix only stretches \(v\), never rotates it.</p>
+          <p class="card-body"><strong>Intuition.</strong> The directions a transformation treats specially: the data's natural axes.</p>
+          <div class="equation-card">\[ \Sigma v_j = \lambda_j v_j \]</div>
+          <p class="card-body"><strong>ML connection.</strong> PCA eigendecomposes the covariance matrix: eigenvectors are the principal directions, eigenvalues the variance along them.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="pca.html">PCA</a>, <a href="ridge-regression.html">Ridge</a> (eigenvalue shift by \(\lambda\)).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="calculus">
+      <h2 class="section-title"><span class="section-number">02</span> Calculus</h2>
+      <div class="grid-cards-2">
+        <div class="card" id="derivatives"><h3 class="card-title">Derivatives</h3>
+          <p class="card-body"><strong>Definition.</strong> \(f'(x)\) is the instantaneous rate of change of \(f\) at \(x\).</p>
+          <p class="card-body"><strong>Intuition.</strong> Stand on the loss surface: the derivative is the slope under your feet — it tells you which way is downhill.</p>
+          <div class="equation-card">\[ f'(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Setting \(\frac{dJ}{d\beta}=0\) solves ordinary least squares exactly; the sign of the slope dictates each gradient-descent step.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="linear-regression.html">Linear Regression</a>, <a href="logistic-regression.html">Logistic Regression</a>, <a href="polynomial-regression.html">Polynomial Regression</a>.</p>
+        </div>
+        <div class="card" id="partial-derivatives"><h3 class="card-title">Partial derivatives</h3>
+          <p class="card-body"><strong>Definition.</strong> \(\frac{\partial J}{\partial\beta_j}\) measures how \(J\) changes when only \(\beta_j\) moves.</p>
+          <p class="card-body"><strong>Intuition.</strong> With many dials, sweep one dial at a time and watch the loss tick.</p>
+          <div class="equation-card">\[ \frac{\partial J}{\partial\beta_j} = \frac{1}{n}\sum_i -2(y_i - \beta^\top x_i)\,x_{ij} \]</div>
+          <p class="card-body"><strong>ML connection.</strong> The gradient \(\nabla J\) is the vector of all partials — the compass gradient descent follows: \(\beta \leftarrow \beta - \eta\nabla J\).</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="linear-regression.html">Linear Regression</a>, <a href="logistic-regression.html">Logistic Regression</a>, <a href="svm.html">SVM</a>, <a href="ridge-regression.html">Ridge</a>.</p>
+        </div>
+        <div class="card" id="gradient-descent"><h3 class="card-title">Gradient descent &amp; the chain rule</h3>
+          <p class="card-body"><strong>Definition.</strong> Iteratively step opposite the gradient: \(\beta^{(t+1)} = \beta^{(t)} - \eta\nabla J(\beta^{(t)})\). The chain rule computes gradients through composed functions.</p>
+          <p class="card-body"><strong>Intuition.</strong> Descend a foggy mountain by feeling only the slope underfoot; \(\eta\) is your stride — too small crawls, too large leaps across the valley.</p>
+          <div class="equation-card">\[ \beta \leftarrow \beta - \eta\,\nabla J(\beta) \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Gradient descent is the learning loop for almost every model that has no closed form — the chain rule distributes it through layered structures.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="logistic-regression.html">Logistic Regression</a>, <a href="svm.html">SVM</a>, neural networks.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="probability">
+      <h2 class="section-title"><span class="section-number">03</span> Probability</h2>
+      <div class="grid-cards-2">
+        <div class="card" id="probability-basics"><h3 class="card-title">Probability &amp; random variables</h3>
+          <p class="card-body"><strong>Definition.</strong> A probability \(P(A) \in [0,1]\) measures the chance of an outcome; a random variable assigns numbers to outcomes and comes with a distribution \(\mathrm{Pr}(X=x)\).</p>
+          <p class="card-body"><strong>Intuition.</strong> The world is noisy — every label carries uncertainty. Probability is the calculus of that uncertainty.</p>
+          <div class="equation-card">\[ \sum_{x}\mathrm{Pr}(X=x) = 1 \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Classification models output probability estimates; uncertainty feeds risk decisions.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="naive-bayes.html">Naive Bayes</a>, <a href="logistic-regression.html">Logistic Regression</a>, <a href="decision-tree.html">Decision Trees</a>.</p>
+        </div>
+        <div class="card" id="conditional-probability"><h3 class="card-title">Conditional probability</h3>
+          <p class="card-body"><strong>Definition.</strong> \(P(A \mid B) = \frac{P(A \cap B)}{P(B)}\) is the chance of \(A\) given \(B\) is known.</p>
+          <p class="card-body"><strong>Intuition.</strong> New evidence rescales what you believe: knowing it's raining changes the probability you'll need your umbrella.</p>
+          <div class="equation-card">\[ P(A \mid B) = \frac{P(A \cap B)}{P(B)} \]</div>
+          <p class="card-body"><strong>ML connection.</strong> \(P(\text{class} \mid \text{features})\) is precisely the conditional probability every classifier estimates.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="naive-bayes.html">Naive Bayes</a>, <a href="logistic-regression.html">Logistic Regression</a>.</p>
+        </div>
+        <div class="card" id="bayes-theorem"><h3 class="card-title">Bayes' theorem</h3>
+          <p class="card-body"><strong>Definition.</strong> Flips a conditional probability: \(P(C\mid x) = \frac{P(x\mid C)\,P(C)}{P(x)}\).</p>
+          <p class="card-body"><strong>Intuition.</strong> Start with a prior belief \(P(C)\), multiply by the likelihood of the evidence \(P(x\mid C)\), renormalise.</p>
+          <div class="equation-card">\[ P(C\mid x) = \frac{P(x\mid C)\,P(C)}{P(x)} \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Naive Bayes applies it with independence \(P(x\mid C)=\prod_j P(x_j \mid C)\) so the product stays computable.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="naive-bayes.html">Naive Bayes</a>.</p>
+        </div>
+        <div class="card" id="distributions"><h3 class="card-title">Distributions</h3>
+          <p class="card-body"><strong>Definition.</strong> A distribution describes which values a random variable takes and how often — the normal, Bernoulli and multinomial are the workhorses.</p>
+          <p class="card-body"><strong>Intuition.</strong> The Gaussian models additive noise; the Bernoulli models a coin flip with probability \(p\).</p>
+          <div class="equation-card">\[ \mathcal{N}(x;\mu,\sigma^2)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Regression's noise is the Gaussian; classification's label is Bernoulli; text counts are multinomial.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="linear-regression.html">Linear Regression</a>, <a href="naive-bayes.html">Naive Bayes</a>, <a href="logistic-regression.html">Logistic Regression</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="statistics">
+      <h2 class="section-title"><span class="section-number">04</span> Statistics</h2>
+      <div class="grid-cards-2">
+        <div class="card" id="mean-variance"><h3 class="card-title">Mean, variance &amp; standard deviation</h3>
+          <p class="card-body"><strong>Definition.</strong> \(\mu = \frac{1}{n}\sum_i x_i\) is the centre; \(\sigma^2 = \frac{1}{n}\sum_i (x_i-\mu)^2\) is the spread.</p>
+          <p class="card-body"><strong>Intuition.</strong> Where is the cloud, and how wide is it?</p>
+          <div class="equation-card">\[ \mu=\frac{1}{n}\sum_i x_i,\qquad \sigma^2=\frac{1}{n}\sum_{i}(x_i-\mu)^2 \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Standardisation \((x-\mu)/\sigma\) makes features comparable; variance is what regression and PCA are built around.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="linear-regression.html">Linear Regression</a>, <a href="pca.html">PCA</a>, <a href="kmeans.html">K-Means</a>, <a href="knn.html">KNN</a>.</p>
+        </div>
+        <div class="card" id="covariance"><h3 class="card-title">Covariance</h3>
+          <p class="card-body"><strong>Definition.</strong> How two features vary together: positive when they rise together, negative when they move oppositely.</p>
+          <p class="card-body"><strong>Intuition.</strong> Height and weight covary positive; training time and error covary negative.</p>
+          <div class="equation-card">\[ \mathrm{Cov}(x,y)=\frac{1}{n}\sum_i (x_i-\bar{x})(y_i-\bar{y}) \]</div>
+          <p class="card-body"><strong>ML connection.</strong> The covariance matrix \(\Sigma\) collects all pairwise covariances — the object PCA eigendecomposes and where multicollinearity lives.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="pca.html">PCA</a>, <a href="multiple-linear-regression.html">Multiple Regression</a>, <a href="ridge-regression.html">Ridge</a>.</p>
+        </div>
+        <div class="card" id="correlation"><h3 class="card-title">Correlation</h3>
+          <p class="card-body"><strong>Definition.</strong> Covariance rescaled to \([-1,1]\): \(\rho_{xy}=\frac{\mathrm{Cov}(x,y)}{\sigma_x\sigma_y}\).</p>
+          <p class="card-body"><strong>Intuition.</strong> Removes units, so correlation is comparable across very different features.</p>
+          <div class="equation-card">\[ \rho_{xy}=\frac{\mathrm{Cov}(x,y)}{\sigma_x\,\sigma_y} \in [-1,1] \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Strongly correlated features threaten a stable regression fit (multicollinearity) and are exactly what PCA compresses away.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="linear-regression.html">Linear Regression</a>, <a href="ridge-regression.html">Ridge</a>, <a href="pca.html">PCA</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="optimization">
+      <h2 class="section-title"><span class="section-number">05</span> Optimization</h2>
+      <div class="grid-cards-2">
+        <div class="card" id="objective-loss"><h3 class="card-title">Objective, loss &amp; cost functions</h3>
+          <p class="card-body"><strong>Definition.</strong> A loss \(L(y,\hat{y})\) scores one prediction; the cost \(J=\frac{1}{n}\sum_i L(y_i,\hat{y}_i)\) averages the loss over the dataset. Training is minimising \(J\).</p>
+          <p class="card-body"><strong>Intuition.</strong> The cost is a trainer: the model keeps the parameters that make it as small as possible.</p>
+          <div class="equation-card">\[ J(\theta)=\frac{1}{n}\sum_{i=1}^{n} L\big(y_i,\, f_\theta(x_i)\big) \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Squared error drives regression; log-loss drives classifiers; inertia drives K-Means.</p>
+          <p class="card-body"><strong>Used by:</strong> all models.</p>
+        </div>
+        <div class="card" id="local-global"><h3 class="card-title">Local vs global minimum</h3>
+          <p class="card-body"><strong>Definition.</strong> A global minimum is the lowest point of the cost surface; a local minimum is a valley that is not the lowest overall.</p>
+          <p class="card-body"><strong>Intuition.</strong> In rolling terrain, gradient descent can settle in the first valley it finds even if a deeper one exists elsewhere.</p>
+          <div class="equation-card">\[ \theta^* = \arg\min_{\theta} J(\theta) \]</div>
+          <p class="card-body"><strong>ML connection.</strong> Linear and logistic regression have <em>convex</em> bowls — one global minimum; K-Means and deep nets pay a local-minima tax.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="linear-regression.html">Linear Regression</a>, <a href="logistic-regression.html">Logistic Regression</a>, <a href="kmeans.html">K-Means</a>.</p>
+        </div>
+        <div class="card" id="regularization"><h3 class="card-title">Regularization</h3>
+          <p class="card-body"><strong>Definition.</strong> An extra penalty that prefers simpler parameters: \(J_\lambda(\theta)=J(\theta)+\lambda \|\theta\|\).</p>
+          <p class="card-body"><strong>Intuition.</strong> Complexity costs extra — so a coefficient is only kept when the data genuinely earn it.</p>
+          <div class="equation-card">\[ J_{\lambda}(\theta)=J(\theta)+\lambda \|\theta\| \]</div>
+          <p class="card-body"><strong>ML connection.</strong> L1 (Lasso) drives coefficients to zero for feature selection; L2 (Ridge) shrinks them to tame collinearity. Both curb overfitting.</p>
+          <p class="card-body"><strong>Used by:</strong> <a href="ridge-regression.html">Ridge</a>, <a href="lasso-regression.html">Lasso</a>, <a href="svm.html">SVM</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">ML ATLAS — From Mathematical Foundations to Real-World Intelligence</footer>
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

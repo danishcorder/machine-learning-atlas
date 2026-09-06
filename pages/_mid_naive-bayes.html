@@ -1,0 +1,66 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>A mail service reads one email and must decide: <strong>spam or not?</strong> It cannot read prose, but it can see which words fired. Alone each word is fragile — “free” screams spam, “meeting” screams ham — yet combined they should be decisive. The problem is fusing many weak, independent clues into one probability.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Bayes' theorem reverses cause and effect: from \(P(\text{word}\mid\text{spam})\) to \(P(\text{spam}\mid\text{words})\). It is the honest way to start from a prior and update with evidence; speed and accuracy on word counts made it the text-champion for decades.</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>Every word votes, weighted by how diagnostic it is. “Free” appears in spam 55% of the time but ham only 4%, so seeing it pushes strongly toward spam. The <strong>naive</strong> assumption treats words as conditionally independent given the class — a fiction, but powerful when no single word is perfect.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>\(P(C_k\mid x)\propto P(C_k)\prod_j P(x_j\mid C_k)\). Products underflow, so we <strong>sum in log space</strong>: \(\log P=\log P(C_k)+\sum_j \log P(x_j\mid C_k)\). Laplace smoothing \((+\alpha)\) dodges zero probabilities when a word is absent in training.</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ P(\text{spam}\mid \mathbf{w}) = \frac{P(\text{spam})\prod_{j} P(w_j\mid\text{spam})}{P(\text{spam})\prod_{j}P(w_j\mid\text{spam})+P(\text{ham})\prod_{j}P(w_j\mid\text{ham})} \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(P(\text{spam})\)</span> prior probability of spam in the population</li>
+          <li><span class="eq-symbol">\(P(w_j\mid\text{spam})\)</span> likelihood of word \(w_j\) in a spam email</li>
+          <li><span class="eq-symbol">\(\prod_j\)</span> the naive conditional-independence product over words</li>
+                <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step"><strong>Count</strong> how often each word appears in spam vs ham emails.</li>
+          <li class="flow-step"><strong>Estimate</strong> \(P(w_j\mid C_k)\) with Laplace smoothing to dodge zeros.</li>
+          <li class="flow-step"><strong>Fix a prior</strong> \(P(\text{spam})\) — adjust the slider for your inbox.</li>
+          <li class="flow-step"><strong>At predict</strong>: apply Bayes in log space and threshold.</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow">
+          <div class="flow-step">Training counts</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Smoothed P(word|class)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Bayes rule in log space</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Sum evidence → posterior</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Threshold → label</div>
+        </div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">Toggle which words the email contains and slide the spam prior — watch the posterior update in real time. <em>Simplified visualization.</em></p>
+        <div class="viz-container">
+          <div class="viz-controls">
+            <div class="control-group"><label for="nb-prior">P(spam) <span id="nb-prior-label">P(spam)=0.40</span></label><input type="range" id="nb-prior" min="0" max="1" step="0.01" value="0.4"></div>
+          </div>
+          <div class="control-group checkboxes">
+            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-0" checked> free</span>
+            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-1" checked> winner</span>
+            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-2"> meeting</span>
+            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-3"> project</span>
+            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-4"> click</span>
+            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-5"> invoice</span>
+          </div>
+          <canvas id="nb-canvas" class="viz-stage" aria-label="Naive Bayes spam probability vs prior and word evidence"></canvas>
+          <div id="nb-info"></div>
+        </div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>Email contains “free” (P=0.55) and “winner” (0.40); absent “meeting” (so factor 0.70). Prior P(spam)=0.4. Log-odds = ln(0.4/0.6)+ln(0.55/0.04)+ln(0.40/0.02)+ln(0.70/0.30) ≈ 0.56 → P(spam) ≈ 0.64. Positive words swung it from 0.40 to 0.64 — Bayes in one paragraph.</p>
+      </section>
+

@@ -1,0 +1,62 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>A loan officer faces a stack of applications and must decide <strong>approve or reject</strong> each. The reasons are not a single number — credit score, income, debt ratio, employment length — and the rule people actually follow is a chain of <em>if-then</em> questions: “if income &gt; $50k <em>and</em> debt ratio &lt; 0.3, then approve.” The problem is learning that chain of splits from labelled examples, and being able to <strong>explain</strong> every decision.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Trees mirror human decision-making: a readable set of binary questions ending in a verdict. They need no feature scaling, they ignore useless columns automatically, and a stakeholder can audit a single prediction by just following the path — the reason they anchor every credit-scorecard and medical checklist.</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>Start with all applicants in one bucket. Ask the single question that <strong>splits them most cleanly</strong> — the one that separates approves from rejects most decisively. Then, inside each child bucket, ask the same question again, recursively, until buckets are pure (or nearly so). Each leaf is a verdict; each internal node is a test on one feature.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>A split is good if it makes children <strong>purer</strong> than the parent. Purity is measured by <strong>entropy</strong> \(H=-p_+\log_2 p_+ - p_-\log_2 p_-\) — 0 when the bucket is all one class, 1 at a 50/50 toss. The quality of a split is its <strong>information gain</strong>: how much entropy it buys. A cheaper alternative is the <strong>Gini impurity</strong> \(G=1-p_+^2-p_-^2\), which picks almost the same split.</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ \text{Information Gain}(S,\,A)=H(S)-\sum_{v\in\text{vals}(A)}\frac{|S_v|}{|S|}\,H(S_v) \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(H(S)\)</span> entropy of the parent set before the split</li>
+          <li><span class="eq-symbol">\(S_v\)</span> the subset reaching child \(v\) after testing \(A\)</li>
+          <li><span class="eq-symbol">\(|S_v|/|S|\)</span> fraction of rows sent down that branch</li>
+        </ul>
+      </section>
+      <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step"><strong>For every candidate split</strong> (feature × threshold), measure how much purer the two children are.</li>
+          <li class="flow-step"><strong>Keep the best</strong> — the split with the highest information gain (or lowest Gini).</li>
+          <li class="flow-step"><strong>Recurse</strong> on each child until a stopping rule (depth, min samples, or purity) is met.</li>
+          <li class="flow-step"><strong>Label the leaves</strong> by majority class.</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow">
+          <div class="flow-step">Training data</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Best split (max gain)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Recurse on left & right</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Leaves = majority label</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Route new point → leaf prediction</div>
+        </div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">A tree is grown from (age, income) predicting loan approval by greedy information-gain splits. Step through one level at a time and watch the scatter recolour by leaf. <em>Simplified visualization.</em></p>
+        <div id="dt-lab" class="viz-container">
+          <div class="viz-controls">
+            <button data-dt-expand class="btn btn-sm">Expand one level</button>
+            <button data-dt-collapse class="btn btn-sm">Collapse level</button>
+          </div>
+          <svg role="img" aria-label="Decision tree grown level by level" style="width:100%;height:auto;"></svg>
+          <canvas class="viz-stage" aria-label="Dataset scatter coloured by predicted leaf" style="height:200px;"></canvas>
+          <div id="dt-info"></div>
+        </div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>Parent 8 “yes”, 4 “no”: \(H=0.985\). Split on \(x_1\leq 32\): left \(3y,1n\) (\(H=0.811\)), right \(5y,3n\) (\(H=0.954\)). Gain = \(0.985-\tfrac{4}{12}0.811-\tfrac{8}{12}0.954=0.13\) bits. That is the feature chosen; recurse on each child. A path like \(x_1\leq32 \to x_2>50 \to\) leaf is exactly the “if-then” rule a loan officer can explain.</p>
+      </section>
+

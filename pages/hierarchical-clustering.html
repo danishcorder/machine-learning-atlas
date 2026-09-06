@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="description" content="Learn Hierarchical Clustering visually: agglomerative merging, linkage methods, dendrograms and step-by-step clustering.">
+  <meta name="author" content="Muhammad Danish">
+  <title>Hierarchical Clustering Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
+  <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/hierarchical-clustering.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta property="og:title" content="Hierarchical Clustering Machine Learning Tutorial | ML Atlas">
+  <meta property="og:description" content="Learn Hierarchical Clustering visually: agglomerative merging, linkage methods, dendrograms and step-by-step clustering.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/hierarchical-clustering.html">
+  <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <meta property="og:site_name" content="Machine Learning Atlas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hierarchical Clustering Machine Learning Tutorial | ML Atlas">
+  <meta name="twitter:description" content="Learn Hierarchical Clustering visually: agglomerative merging, linkage methods, dendrograms and step-by-step clustering.">
+  <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Hierarchical Clustering Machine Learning Tutorial","description":"Learn Hierarchical Clustering visually: agglomerative merging, linkage methods, dendrograms and step-by-step clustering.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/hierarchical-clustering.html","about":{"@type":"DefinedTerm","name":"Hierarchical Clustering","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Hierarchical Clustering, interactive machine learning, hierarchical clustering"}</script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem('atlas_theme') || 'dark'; } catch { document.documentElement.dataset.theme = 'dark'; }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body data-model="hierarchical-clustering">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="../index.html" class="nav-brand" aria-label="Machine Learning Atlas home"><span class="brand-mark">ML</span><span>ATLAS</span></a>
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="../index.html#model-explorer" class="nav-link active">Algorithms</a></li>
+      <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
+      <li><a href="mathematics.html" class="nav-link">Math</a></li>
+      <li><a href="comparison.html" class="nav-link">Compare</a></li>
+      <li><a href="model-selector.html" class="nav-link">Choose a Model</a></li>
+      <li><a href="glossary.html" class="nav-link">Glossary</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="search-btn" class="icon-btn" aria-label="Open search"><span aria-hidden="true">⌘</span> Search</button>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <div class="container container-wide model-layout">
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
+
+    <main id="main-content">
+      <header class="model-hero model-hero-premium">
+        <div>
+          <div class="eyebrow">MACHINE LEARNING / CLUSTERING</div>
+          <h1 class="model-title">HIERARCHICAL <em>CLUSTERING</em></h1>
+          <p class="model-subtitle">Build a family tree of data by repeatedly merging the closest clusters.</p>
+          <div class="hero-badges"><span class="badge">Unsupervised</span><span class="badge">Clustering</span><span class="badge">Dendrogram</span><span class="badge">Linkage</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+        </div>
+        <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
+      </header>
+
+      <div id="progress-wrap" class="progress-wrap" data-model="hierarchical-clustering">
+        <span class="progress-label" aria-live="polite"></span>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill"></div></div>
+        <div class="progress-actions"><button id="mark-learned" class="btn btn-primary btn-sm" data-model="hierarchical-clustering" aria-pressed="false">Mark as Learned</button><span class="storage-note">Saved only in this browser</span></div>
+      </div>
+
+      <nav id="model-toc" class="toc" aria-label="On this page"></nav>
+
+      <section class="section-block" id="overview">
+        <h2 class="section-title"><span class="section-number">01</span> Overview</h2>
+        <div id="sec-overview-body"></div>
+      </section>
+
+      <section class="section-block" id="problem"><h2 class="section-title"><span class="section-number">02</span> The Problem</h2><p>When the number of groups is uncertain, hierarchical clustering builds a nested history of merges so the data can be inspected at several granularities.</p></section>
+      <section class="section-block" id="why"><h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2><p>The dendrogram preserves a record of which clusters joined and at what distance. Cutting it at different heights gives different numbers of groups.</p></section>
+      <section class="section-block" id="intuition"><h2 class="section-title"><span class="section-number">04</span> Intuition</h2><p>Start with every point alone. Repeatedly merge the closest pair of clusters until one family tree remains.</p></section>
+      <section class="section-block" id="math"><h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2><p>A linkage rule defines distance between clusters. Single linkage uses the closest pair across two clusters, while other rules use averages or furthest pairs.</p></section>
+      <section class="section-block" id="equation"><h2 class="section-title"><span class="section-number">06</span> The Equation</h2><div class="equation-card">\[d_{single}(A,B)=\min_{a\in A,b\in B}d(a,b)\]</div><ul class="equation-symbol-list"><li><span class="eq-symbol">\(A,B\)</span> candidate clusters</li><li><span class="eq-symbol">\(d(a,b)\)</span> point distance</li><li><span class="eq-symbol">\(d_{single}\)</span> linkage distance</li></ul></section>
+      <section class="section-block" id="learns"><h2 class="section-title"><span class="section-number">07</span> How It Learns</h2><ol class="flow"><li class="flow-step">Initialise one cluster per point.</li><li class="flow-step">Find the closest pair under the linkage rule.</li><li class="flow-step">Merge that pair.</li><li class="flow-step">Record the distance and repeat.</li></ol></section>
+      <section class="section-block" id="algorithm"><h2 class="section-title"><span class="section-number">08</span> Algorithm</h2><div class="flow"><div class="flow-step">Singleton clusters</div><div class="flow-arrow">↓</div><div class="flow-step">Closest merge</div><div class="flow-arrow">↓</div><div class="flow-step">Dendrogram</div></div></section>
+      <section class="section-block" id="lab"><h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2><p class="section-subtitle">Step forward and backward through the single-linkage merge schedule.</p><div class="viz-container"><div class="viz-controls"><button id="hc-back" class="btn btn-sm">Back</button><button id="hc-step" class="btn btn-sm">Merge next</button><button id="hc-reset" class="btn btn-sm">Reset</button></div><canvas id="hc-canvas" class="viz-stage" aria-label="Hierarchical clustering dendrogram canvas"></canvas><div id="hc-info"></div></div></section>
+      <section class="section-block" id="example"><h2 class="section-title"><span class="section-number">10</span> Worked Example</h2><p class="section-subtitle">A dendrogram can be cut just before a large jump in merge distance, treating that jump as evidence that distinct groups are being joined.</p></section>
+
+
+      <section class="section-block" id="data">
+        <h2 class="section-title"><span class="section-number">11</span> Data &amp; Features</h2>
+        <div id="sec-data-features"></div>
+      </section>
+
+      <section class="section-block" id="evaluation">
+        <h2 class="section-title"><span class="section-number">12</span> Evaluation</h2>
+        <div id="sec-evaluation"></div>
+      </section>
+
+      <section class="section-block" id="strengths">
+        <h2 class="section-title"><span class="section-number">13</span> Strengths</h2>
+        <div id="sec-strengths"></div>
+      </section>
+
+      <section class="section-block" id="limitations">
+        <h2 class="section-title"><span class="section-number">14</span> Limitations</h2>
+        <div id="sec-limitations"></div>
+      </section>
+
+      <section class="section-block" id="when">
+        <h2 class="section-title"><span class="section-number">15</span> When to Use</h2>
+        <div id="sec-when"></div>
+      </section>
+
+      <section class="section-block" id="not">
+        <h2 class="section-title"><span class="section-number">16</span> When Not to Use</h2>
+        <div id="sec-whennot"></div>
+      </section>
+
+      <section class="section-block" id="apps">
+        <h2 class="section-title"><span class="section-number">17</span> Real-World Applications</h2>
+        <div class="grid-cards-2" id="sec-apps-grid"></div>
+      </section>
+
+      <section class="section-block" id="qa">
+        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
+        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
+        <div id="qa-list" class="qa-list"></div>
+      </section>
+
+      <section class="section-block" id="related">
+        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
+        <div id="sec-related"></div>
+      </section>
+
+      <section class="section-block" id="recap">
+        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <div id="sec-recap"></div>
+      </section>
+
+      <section class="section-block" id="continue">
+        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <div id="continue-learning"></div>
+      </section>
+
+      <div id="prev-next"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <meta name="description" content="Learn machine learning visually with interactive algorithm tutorials, mathematics, real-world examples, quizzes, model comparison and a model selector — 100% in your browser.">
+  <meta name="author" content="Muhammad Danish">
+  <title>Learn Machine Learning Visually | Machine Learning Atlas</title>
+  <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta property="og:title" content="Learn Machine Learning Visually | Machine Learning Atlas">
+  <meta property="og:description" content="Interactive machine learning tutorials with math, visualizations, quizzes and real-world use cases. No login. No backend. Learn by doing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/">
+  <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <meta property="og:site_name" content="Machine Learning Atlas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learn Machine Learning Visually | ML Atlas">
+  <meta name="twitter:description" content="Machine learning algorithms, mathematics and interactive visualizations in one free browser-based atlas.">
+  <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Machine Learning Atlas","alternateName":"ML Atlas","url":"https://danishcorder.github.io/ml-atlas/","description":"Interactive machine learning tutorials, mathematics, visualizations, quizzes and model selection guidance.","inLanguage":"en","isAccessibleForFree":true,"potentialAction":{"@type":"SearchAction","target":"https://danishcorder.github.io/ml-atlas/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('atlas_theme')||'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div>
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="index.html" class="nav-brand" aria-label="Machine Learning Atlas home"><span class="brand-mark">ML</span><span>ATLAS</span></a>
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="#model-explorer" class="nav-link">Algorithms</a></li>
+      <li><a href="pages/roadmap.html" class="nav-link">Roadmap</a></li>
+      <li><a href="pages/mathematics.html" class="nav-link">Math</a></li>
+      <li><a href="pages/comparison.html" class="nav-link">Compare</a></li>
+      <li><a href="pages/model-selector.html" class="nav-link">Choose a Model</a></li>
+      <li><a href="pages/glossary.html" class="nav-link">Glossary</a></li>
+    </ul>
+    <div class="nav-actions"><button id="search-btn" class="icon-btn" aria-label="Open search">⌘ Search</button><button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">☾</button></div>
+  </nav>
+
+  <main id="main-content" class="container home-shell">
+    <header class="home-hero reveal visible">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> FREE • INTERACTIVE • 100% IN YOUR BROWSER</div>
+        <h1>Learn <span class="gradient-text">Machine Learning</span><br>by seeing it work.</h1>
+        <p class="hero-lead">A visual-first machine learning tutorial that connects <strong>intuition → mathematics → algorithm → interactive experiment → real-world use</strong>. No setup, no login and no black-box demos.</p>
+        <div class="hero-actions"><a href="pages/roadmap.html" class="btn btn-primary btn-lg">Start the learning path →</a><a href="#model-explorer" class="btn btn-ghost btn-lg">Explore ML algorithms</a></div>
+        <div class="trust-row" aria-label="Platform features"><span>15 core algorithms</span><span>15 interactive labs</span><span>75+ concept questions</span><span>Local progress</span></div>
+      </div>
+      <div class="hero-demo" aria-label="Machine learning workflow preview">
+        <div class="demo-window">
+          <div class="demo-top"><span></span><span></span><span></span><b>learning-loop.js</b></div>
+          <div class="demo-grid">
+            <div class="demo-node active"><small>01</small><strong>Problem</strong><span>What should we predict?</span></div>
+            <div class="demo-arrow">→</div><div class="demo-node"><small>02</small><strong>Math</strong><span>What function fits?</span></div>
+            <div class="demo-arrow">↓</div><div class="demo-node glow"><small>04</small><strong>Visualize</strong><span>Change parameters live</span></div>
+            <div class="demo-arrow">←</div><div class="demo-node"><small>03</small><strong>Learn</strong><span>Minimize the loss</span></div>
+          </div>
+          <div class="loss-strip"><span>loss</span><i style="height:72%"></i><i style="height:55%"></i><i style="height:44%"></i><i style="height:31%"></i><i style="height:22%"></i><i style="height:14%"></i><b>converging ✓</b></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section-block home-progress-block" id="progress">
+      <div class="section-kicker">YOUR LEARNING STATE</div><h2 class="section-title clean">Continue where you left off</h2><div id="home-progress"></div>
+    </section>
+
+    <section class="section-block" id="paths">
+      <div class="section-kicker">GUIDED CURRICULUM</div><h2 class="section-title clean">One atlas. Three ways to learn.</h2>
+      <p class="section-subtitle wide">Start from the mathematics, start from an algorithm, or start from a real problem. Every route reconnects to the same mental map.</p>
+      <div class="path-grid">
+        <a class="path-card path-primary" href="pages/roadmap.html"><span class="path-no">01</span><div class="path-icon">↗</div><h3>Beginner Roadmap</h3><p>Follow the recommended order from data and functions to regression, classification, clustering and dimensionality reduction.</p><span class="path-link">Start from zero →</span></a>
+        <a class="path-card" href="pages/mathematics.html"><span class="path-no">02</span><div class="path-icon">∑</div><h3>Math for ML</h3><p>Connect vectors, matrices, probability, derivatives, gradients, entropy and eigenvectors directly to the models that use them.</p><span class="path-link">Explore the math →</span></a>
+        <a class="path-card" href="pages/model-selector.html"><span class="path-no">03</span><div class="path-icon">◇</div><h3>Choose a Model</h3><p>Describe the prediction problem and let the frontend decision engine narrow the model family and explain the trade-offs.</p><span class="path-link">Open decision engine →</span></a>
+      </div>
+    </section>
+
+    <section class="section-block" id="model-explorer">
+      <div class="section-kicker">MACHINE LEARNING ALGORITHMS</div><h2 class="section-title clean">Explore the core models</h2><p class="section-subtitle wide">Each tutorial includes intuition, mathematical formulation, assumptions, interactive visualization, evaluation, strengths, limitations, applications and questions.</p>
+      <div id="model-grid-root"></div>
+    </section>
+
+    <section class="section-block feature-showcase">
+      <div class="section-kicker">LEARN BY DOING</div><h2 class="section-title clean">The page should react when your understanding changes.</h2>
+      <div class="showcase-grid">
+        <div class="showcase-main"><div class="mini-label">INTERACTIVE LAB</div><h3>Change a parameter. Watch the mathematics respond.</h3><p>Drag points in KNN, move a regression sample, change K in K-Means, grow a decision tree, or train an SVM margin. Live captions translate the visual state back into the algorithm.</p><div class="mock-chart"><div class="axis-x"></div><div class="axis-y"></div><span class="pt p1"></span><span class="pt p2"></span><span class="pt p3"></span><span class="pt p4"></span><span class="pt p5"></span><div class="reg-line"></div></div></div>
+        <div class="showcase-side"><article><span>COMPARE</span><h3>Model vs model</h3><p>Contrast interpretability, complexity, data size, assumptions and evaluation metrics.</p><a href="pages/comparison.html">Compare algorithms →</a></article><article><span>SEARCH</span><h3>Find concepts, not pages</h3><p>Search terms such as gradient descent, entropy, margin, regularization or clustering.</p><button id="search-cta" class="text-button">Try global search →</button></article></div>
+      </div>
+    </section>
+
+    <section class="section-block" id="landscape">
+      <div class="section-kicker">THE BIG PICTURE</div><h2 class="section-title clean">Machine learning starts with the problem type.</h2>
+      <div class="landscape-grid">
+        <article><b>01</b><span>Have labels?</span><h3>Supervised Learning</h3><p>Learn a mapping from features to known targets.</p></article><article><b>02</b><span>Predict a number?</span><h3>Regression</h3><p>Linear, polynomial and regularized regression.</p></article><article><b>03</b><span>Predict a class?</span><h3>Classification</h3><p>Logistic, KNN, Naive Bayes, trees, forests and SVM.</p></article><article><b>04</b><span>No labels?</span><h3>Unsupervised Learning</h3><p>K-Means, hierarchical clustering, DBSCAN and PCA.</p></article>
+      </div>
+    </section>
+
+    <section class="section-block cta-panel"><div><div class="section-kicker">DON'T MEMORIZE ALGORITHMS</div><h2>Build a connected mental model of ML.</h2><p>Start with the roadmap, experiment with every visualizer, then use the comparison and model selector to understand when each method belongs.</p></div><a class="btn btn-primary btn-lg" href="pages/roadmap.html">Start learning →</a></section>
+  </main>
+
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Visual, mathematical and interactive machine learning education.</span></div><nav aria-label="Footer navigation"><a href="pages/roadmap.html">Roadmap</a><a href="pages/mathematics.html">Math</a><a href="pages/comparison.html">Compare</a><a href="pages/glossary.html">Glossary</a><a href="pages/resources.html">Resources</a><a href="pages/about.html">About</a></nav></footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

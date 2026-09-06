@@ -1,0 +1,60 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>DNA grows along a curve, not a line. A drug's dose-response bends; a child's height surges then stops. The straight line of Linear Regression cannot bend, so it underfits systematically — the residual still holds the shape. The problem is <strong>model non-linearity while keeping regression interpretable</strong>.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Almost no natural relationship is globally linear. Polynomial regression lets a single feature bend the fit — a dose–response curve, a growth curve, a calibration curve — while reusing the fast, closed-form least-squares machinery.</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>It is still a linear model — but the feature is expanded into powers. Treat \(x, x^2, x^3, \dots\) as new columns; the fit stays linear in the parameters, so the bowl is still smooth and has one bottom. The degree \(n\) is the flexibility dial: too low underfits, too high overfits and extrapolates wildly.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>Design matrix \(X=[1, x, x^2, \dots, x^n]\). The cost \(\|y-X\beta\|^2\) is still quadratic in \(\beta\), so the normal equations \(\beta=(X^{\top}X)^{-1}X^{\top}y\) still apply. The <strong>basis functions</strong> \(\phi_j(x)=x^j\) turn a non-linear shape into a linear-algebra problem.</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ \hat{y} = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_n x^n = \sum_{j=0}^{n}\beta_j\, x^{j} \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(n\)</span> polynomial degree — the flexibility dial</li>
+          <li><span class="eq-symbol">\(\beta_j\)</span> coefficient of the j-th power</li>
+          <li><span class="eq-symbol">\(x^j\)</span> the j-th basis function of \(x\)</li>
+          <li><span class="eq-symbol">\(\hat{y}\)</span> predicted continuous output</li>
+        </ul>
+      </section>
+      <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step"><strong>Basis-expand</strong> each input into \([1, x, x^2, \dots, x^n]\).</li>
+          <li class="flow-step"><strong>Solve normal equations</strong> for \(\beta\) (still one linear-algebra step).</li>
+          <li class="flow-step"><strong>Diagnose degree \(n\)</strong> — bias/variance; pick via cross-validation.</li>
+          <li class="flow-step"><strong>Predict</strong> \(\sum \beta_j x^{j}\) for new \(x\).</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow">
+          <div class="flow-step">Data \((x_i,y_i)\)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Expand to \(x^j\) basis</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">OLS → \(\beta_j\)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">\(\hat{y}=\sum\beta_j x^j\)</div>
+        </div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">Drag points to reshape the curve. Raise <strong>degree</strong> to chase every wiggle (overfitting), then press Reseed for fresh data. <em>Simplified visualization.</em></p>
+        <div class="viz-container">
+          <div class="viz-controls">
+            <div class="control-group"><label for="pr-degree">Degree <span id="pr-degree-label">n = 3</span></label><input type="range" id="pr-degree" min="1" max="8" step="1" value="3"></div>
+          </div>
+          <canvas id="pr-canvas" class="viz-stage" aria-label="Polynomial regression curve fit with degree control"></canvas>
+          <div class="viz-actions"><button id="pr-reseed" class="btn btn-sm">Reseed data</button></div>
+          <div id="pr-info"></div>
+        </div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>Dose \(x\) vs efficacy \(y\). Points suggest a plateau near \(x=8\). A degree-1 line is wrong; degree-5 fits but swings to \(\hat{y}=-2\) at \(x=10\) (impossible). Degree-2 \(\hat{y}=0.1+1.0x-0.08x^2\) plateaus — a parsimonious, sensible curve. This is the bias–variance dance in one number: \(n\).</p>
+      </section>

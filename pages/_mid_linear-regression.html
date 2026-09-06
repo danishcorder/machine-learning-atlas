@@ -1,0 +1,66 @@
+      <section class="section-block" id="problem">
+        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
+        <p>An agent asks: <strong>how much is this house worth?</strong> She has past sales as (size, location, price). Under-price and the seller leaves; over-price and holding costs pile up. The target is a <strong>continuous</strong> number recoverable only above the noise of features never fully captured.</p>
+      </section>
+      <section class="section-block" id="why">
+        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
+        <p>Regression is the engine behind pricing, demand, risk and dosage. Most "soft" quantities depend linearly on a few drivers, and a fit whose slope reads aloud ("each extra sq ft is \$137") is fast, auditable, and regulator-friendly.</p>
+      </section>
+      <section class="section-block" id="intuition">
+        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
+        <p>Points scatter but tilt. Linear regression is the straight line minimising the total squared vertical distance to every point. Each coefficient then reads: the marginal effect of that feature, holding the rest fixed.</p>
+      </section>
+      <section class="section-block" id="math">
+        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
+        <p>Residuals \(e_i = y_i - \hat{y}_i\); cost \(J=\tfrac{1}{n}\sum e_i^2\). Squaring makes a smooth, convex bowl — the unique global minimum is where calculus lands.</p>
+      </section>
+      <section class="section-block" id="equation">
+        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
+        <div class="equation-card">\[ \hat{y}_i = \beta_0 + \beta_1 x_i, \qquad J=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^{2} \]</div>
+        <ul class="equation-symbol-list">
+          <li><span class="eq-symbol">\(x_i\)</span> input feature for example \(i\)</li>
+          <li><span class="eq-symbol">\(y_i\)</span> observed target</li>
+          <li><span class="eq-symbol">\(\hat{y}_i\)</span> prediction</li>
+          <li><span class="eq-symbol">\(\beta_0\)</span> intercept — \(\hat{y}\) at \(x=0\)</li>
+          <li><span class="eq-symbol">\(\beta_1\)</span> slope — change in \(\hat{y}\) per unit \(x\)</li>
+          <li><span class="eq-symbol">\(J\)</span> mean squared error</li>
+        </ul>
+      </section>
+      <section class="section-block" id="learns">
+        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
+        <ol class="flow">
+          <li class="flow-step"><strong>Start anywhere.</strong> Guess \(\beta_0=\beta_1=0\).</li>
+          <li class="flow-step"><strong>Feel the slope.</strong> \(\nabla J=(-\tfrac{2}{n}\sum e_i,\;-\tfrac{2}{n}\sum e_i x_i)\).</li>
+          <li class="flow-step"><strong>Step downhill.</strong> \(\beta \leftarrow \beta - \eta\,\nabla J\).</li>
+          <li class="flow-step"><strong>Stop at bottom.</strong> The normal equations reach this point in one shot.</li>
+        </ol>
+      </section>
+      <section class="section-block" id="algorithm">
+        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
+        <div class="flow">
+          <div class="flow-step">Data \((x_i,y_i)\)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Guess \(\beta_0,\beta_1\)</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">Gradient descent → optimum</div><div class="flow-arrow">↓</div>
+          <div class="flow-step">\(\hat{y}=\beta_0+\beta_1 x\)</div>
+        </div>
+      </section>
+      <section class="section-block" id="lab">
+        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
+        <p class="section-subtitle">Click to add a point; drag to move it. Blue line is the best fit. Toggle residuals or run gradient descent down the error bowl. <em>Simplified visualization.</em></p>
+        <div class="viz-container">
+          <div class="viz-controls">
+            <div class="control-group"><label for="lr-slope">Slope \(\beta_1\)</label><input type="range" id="lr-slope" min="-3" max="3" step="0.05" value="1"></div>
+            <div class="control-group"><label for="lr-intercept">Intercept \(\beta_0\)</label><input type="range" id="lr-intercept" min="-5" max="10" step="0.05" value="0"></div>
+            <div class="control-group"><label for="lr-lr">Learning rate \(\eta\)</label><input type="range" id="lr-lr" min="0.001" max="0.1" step="0.001" value="0.05"></div>
+            <div class="control-group"><label for="lr-iters">GD steps</label><input type="number" id="lr-iters" min="1" max="200" value="50"></div>
+            <div class="control-group"><label><input type="checkbox" id="lr-residuals"> show residuals</label></div>
+          </div>
+          <canvas id="lr-canvas" class="viz-stage" aria-label="Linear regression data, best-fit line, residuals, gradient descent"></canvas>
+          <div class="viz-actions"><button id="lr-fit" class="btn btn-sm">Fit (OLS)</button><button id="lr-gd-run" class="btn btn-sm">Run gradient descent</button></div>
+          <div id="lr-info"></div>
+        </div>
+      </section>
+      <section class="section-block" id="example">
+        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
+        <p>Data \((1,1),(2,3),(3,2),(4,5),(5,5)\). \(\bar x=3,\bar y=3\), \(s_{xx}=10,s_{xy}=12\). So \(\beta_1=1.2,\beta_0=-0.6\). Model \(\hat{y}=-0.6+1.2x\). Predict \(x=6\): \(\hat{y}=6.6\).</p>
+      </section>

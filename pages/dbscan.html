@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="description" content="Learn DBSCAN visually: epsilon, minPts, core points, border points, noise and interactive density-based clustering.">
+  <meta name="author" content="Muhammad Danish">
+  <title>DBSCAN Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
+  <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/dbscan.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta property="og:title" content="DBSCAN Machine Learning Tutorial | ML Atlas">
+  <meta property="og:description" content="Learn DBSCAN visually: epsilon, minPts, core points, border points, noise and interactive density-based clustering.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/dbscan.html">
+  <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <meta property="og:site_name" content="Machine Learning Atlas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DBSCAN Machine Learning Tutorial | ML Atlas">
+  <meta name="twitter:description" content="Learn DBSCAN visually: epsilon, minPts, core points, border points, noise and interactive density-based clustering.">
+  <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DBSCAN Machine Learning Tutorial","description":"Learn DBSCAN visually: epsilon, minPts, core points, border points, noise and interactive density-based clustering.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/dbscan.html","about":{"@type":"DefinedTerm","name":"DBSCAN","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, DBSCAN, interactive machine learning, dbscan"}</script>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem('atlas_theme') || 'dark'; } catch { document.documentElement.dataset.theme = 'dark'; }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body data-model="dbscan">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="../index.html" class="nav-brand" aria-label="Machine Learning Atlas home"><span class="brand-mark">ML</span><span>ATLAS</span></a>
+    <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="../index.html#model-explorer" class="nav-link active">Algorithms</a></li>
+      <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
+      <li><a href="mathematics.html" class="nav-link">Math</a></li>
+      <li><a href="comparison.html" class="nav-link">Compare</a></li>
+      <li><a href="model-selector.html" class="nav-link">Choose a Model</a></li>
+      <li><a href="glossary.html" class="nav-link">Glossary</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="search-btn" class="icon-btn" aria-label="Open search"><span aria-hidden="true">⌘</span> Search</button>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <div class="container container-wide model-layout">
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
+
+    <main id="main-content">
+      <header class="model-hero model-hero-premium">
+        <div>
+          <div class="eyebrow">MACHINE LEARNING / CLUSTERING</div>
+          <h1 class="model-title">DBSCAN</h1>
+          <p class="model-subtitle">Discover arbitrarily shaped clusters from local density while labeling isolated points as noise.</p>
+          <div class="hero-badges"><span class="badge">Unsupervised</span><span class="badge">Clustering</span><span class="badge">Density-based</span><span class="badge">Noise detection</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+        </div>
+        <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
+      </header>
+
+      <div id="progress-wrap" class="progress-wrap" data-model="dbscan">
+        <span class="progress-label" aria-live="polite"></span>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill"></div></div>
+        <div class="progress-actions"><button id="mark-learned" class="btn btn-primary btn-sm" data-model="dbscan" aria-pressed="false">Mark as Learned</button><span class="storage-note">Saved only in this browser</span></div>
+      </div>
+
+      <nav id="model-toc" class="toc" aria-label="On this page"></nav>
+
+      <section class="section-block" id="overview">
+        <h2 class="section-title"><span class="section-number">01</span> Overview</h2>
+        <div id="sec-overview-body"></div>
+      </section>
+
+      <section class="section-block" id="problem"><h2 class="section-title"><span class="section-number">02</span> The Problem</h2><p>Clusters may be irregularly shaped and mixed with noise. DBSCAN defines a cluster through local density instead of requiring a fixed number of spherical groups.</p></section>
+      <section class="section-block" id="why"><h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2><p>DBSCAN can discover multiple shapes and explicitly label isolated observations as noise, which makes it useful for spatial and anomaly-oriented data.</p></section>
+      <section class="section-block" id="intuition"><h2 class="section-title"><span class="section-number">04</span> Intuition</h2><p>Draw a circle of radius epsilon around each point. Dense points form the seeds of clusters; nearby border points join them, while isolated points remain noise.</p></section>
+      <section class="section-block" id="math"><h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2><p>A point is core when its epsilon neighbourhood contains at least MinPts observations. Density reachability then expands a cluster through connected core points.</p></section>
+      <section class="section-block" id="equation"><h2 class="section-title"><span class="section-number">06</span> The Equation</h2><div class="equation-card">\[|N_{\epsilon}(p)|\geq\mathrm{MinPts}\Rightarrow p\text{ is core}\]</div><ul class="equation-symbol-list"><li><span class="eq-symbol">\(\epsilon\)</span> neighbourhood radius</li><li><span class="eq-symbol">\(N_{\epsilon}(p)\)</span> points within that radius</li><li><span class="eq-symbol">\(\mathrm{MinPts}\)</span> density threshold</li></ul></section>
+      <section class="section-block" id="learns"><h2 class="section-title"><span class="section-number">07</span> How It Learns</h2><ol class="flow"><li class="flow-step">Choose epsilon and MinPts.</li><li class="flow-step">Identify core points.</li><li class="flow-step">Expand clusters through density-connected cores.</li><li class="flow-step">Label unassigned points as noise or border.</li></ol></section>
+      <section class="section-block" id="algorithm"><h2 class="section-title"><span class="section-number">08</span> Algorithm</h2><div class="flow"><div class="flow-step">Neighbourhood query</div><div class="flow-arrow">↓</div><div class="flow-step">Core-point expansion</div><div class="flow-arrow">↓</div><div class="flow-step">Clusters plus noise</div></div></section>
+      <section class="section-block" id="lab"><h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2><p class="section-subtitle">Adjust epsilon and MinPts, then run DBSCAN on the generated points.</p><div class="viz-container"><div class="viz-controls"><label for="db-eps">Epsilon</label><input type="range" id="db-eps" min="0.5" max="3" step="0.1" value="1.4"><label for="db-min">MinPts</label><input type="range" id="db-min" min="2" max="8" step="1" value="4"><button id="db-run" class="btn btn-sm">Run DBSCAN</button><button id="db-reseed" class="btn btn-sm">Reseed</button></div><canvas id="db-canvas" class="viz-stage" aria-label="DBSCAN density canvas"></canvas><div id="db-info"></div></div></section>
+      <section class="section-block" id="example"><h2 class="section-title"><span class="section-number">10</span> Worked Example</h2><p class="section-subtitle">Increasing epsilon joins more points and may merge groups; increasing MinPts demands denser evidence and usually labels more points as noise.</p></section>
+
+
+      <section class="section-block" id="data">
+        <h2 class="section-title"><span class="section-number">11</span> Data &amp; Features</h2>
+        <div id="sec-data-features"></div>
+      </section>
+
+      <section class="section-block" id="evaluation">
+        <h2 class="section-title"><span class="section-number">12</span> Evaluation</h2>
+        <div id="sec-evaluation"></div>
+      </section>
+
+      <section class="section-block" id="strengths">
+        <h2 class="section-title"><span class="section-number">13</span> Strengths</h2>
+        <div id="sec-strengths"></div>
+      </section>
+
+      <section class="section-block" id="limitations">
+        <h2 class="section-title"><span class="section-number">14</span> Limitations</h2>
+        <div id="sec-limitations"></div>
+      </section>
+
+      <section class="section-block" id="when">
+        <h2 class="section-title"><span class="section-number">15</span> When to Use</h2>
+        <div id="sec-when"></div>
+      </section>
+
+      <section class="section-block" id="not">
+        <h2 class="section-title"><span class="section-number">16</span> When Not to Use</h2>
+        <div id="sec-whennot"></div>
+      </section>
+
+      <section class="section-block" id="apps">
+        <h2 class="section-title"><span class="section-number">17</span> Real-World Applications</h2>
+        <div class="grid-cards-2" id="sec-apps-grid"></div>
+      </section>
+
+      <section class="section-block" id="qa">
+        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
+        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
+        <div id="qa-list" class="qa-list"></div>
+      </section>
+
+      <section class="section-block" id="related">
+        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
+        <div id="sec-related"></div>
+      </section>
+
+      <section class="section-block" id="recap">
+        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <div id="sec-recap"></div>
+      </section>
+
+      <section class="section-block" id="continue">
+        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <div id="continue-learning"></div>
+      </section>
+
+      <div id="prev-next"></div>
+    </main>
+  </div>
+
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>
