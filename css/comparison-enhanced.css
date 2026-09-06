@@ -1,0 +1,439 @@
+/* ML ATLAS — Enhanced Comparison Page Styles */
+
+/* ---- Comparison Header ---- */
+.comparison-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+.comparison-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.comparison-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+.comparison-title em {
+  font-style: normal;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.comparison-description {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  line-height: 1.6;
+}
+
+/* ---- Category Filter Chips ---- */
+.comparison-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.filter-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.filter-chip:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-elevated);
+  color: var(--text-primary);
+}
+.filter-chip.active {
+  background: var(--accent-gradient);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---- Model Selection Panel ---- */
+.comparison-selector-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+}
+.selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.selector-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.selector-count {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-accent);
+  color: var(--accent-secondary);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+.selector-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+.selector-actions .btn {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+/* ---- Model Selection Grid ---- */
+.model-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.model-checkbox-card {
+  background: var(--bg-primary);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  user-select: none;
+  position: relative;
+  min-height: 60px;
+}
+.model-checkbox-card:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-elevated);
+  transform: translateY(-2px);
+}
+.model-checkbox-card.selected {
+  border-color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary));
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.15);
+}
+.model-checkbox-card input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--accent-primary);
+  flex-shrink: 0;
+}
+.model-checkbox-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  word-break: break-word;
+  flex: 1;
+}
+.model-checkbox-card:hover .model-checkbox-label {
+  color: var(--accent-secondary);
+}
+
+/* ---- Responsive Model Grid ---- */
+@media (max-width: 1080px) {
+  .model-selection-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .model-selection-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.75rem;
+  }
+  .selector-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 576px) {
+  .model-selection-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+  .comparison-selector-container {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ---- Comparison Table Wrapper ---- */
+.compare-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  margin-top: 1.5rem;
+}
+.compare-table-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.5rem;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+}
+
+/* ---- Enhanced Comparison Table ---- */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  min-width: 1200px;
+}
+.comparison-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-card-elevated);
+}
+.comparison-table th {
+  padding: clamp(0.75rem, 2vw, 1.1rem);
+  text-align: left;
+  border-bottom: 2px solid var(--border-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  font-weight: 700;
+  word-break: break-word;
+  min-width: fit-content;
+}
+.comparison-table td {
+  padding: clamp(0.75rem, 2vw, 1rem);
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.comparison-table tbody tr {
+  transition: background var(--transition-fast);
+}
+.comparison-table tbody tr:hover td {
+  background: var(--bg-soft);
+}
+.comparison-table tbody tr.highlight td {
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-primary));
+}
+.comparison-table .row-head {
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background: inherit;
+  min-width: 160px;
+  max-width: 200px;
+}
+.comparison-table tbody tr:hover .row-head {
+  background: color-mix(in srgb, var(--accent-secondary) 12%, var(--bg-card));
+}
+.comparison-table .row-head a {
+  color: var(--accent-secondary);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.comparison-table .row-head a:hover {
+  color: var(--accent-primary);
+  text-decoration: underline;
+}
+
+/* ---- Column Width Guidelines ---- */
+.comparison-table th:nth-child(1),
+.comparison-table td:nth-child(1) {
+  min-width: 160px;
+}
+.comparison-table th:nth-child(2),
+.comparison-table th:nth-child(3),
+.comparison-table th:nth-child(4),
+.comparison-table td:nth-child(2),
+.comparison-table td:nth-child(3),
+.comparison-table td:nth-child(4) {
+  min-width: 90px;
+}
+.comparison-table th:nth-child(5),
+.comparison-table td:nth-child(5) {
+  min-width: 80px;
+}
+.comparison-table th:nth-child(6),
+.comparison-table td:nth-child(6) {
+  min-width: 110px;
+}
+.comparison-table th:nth-child(7),
+.comparison-table th:nth-child(8),
+.comparison-table td:nth-child(7),
+.comparison-table td:nth-child(8) {
+  min-width: 90px;
+}
+.comparison-table th:nth-child(9),
+.comparison-table th:nth-child(10),
+.comparison-table td:nth-child(9),
+.comparison-table td:nth-child(10) {
+  min-width: 180px;
+}
+.comparison-table th:nth-child(11),
+.comparison-table td:nth-child(11) {
+  min-width: 200px;
+}
+
+/* ---- Rating Display ---- */
+.rating-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+.rating-stars {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.rating-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ---- Mobile Comparison Cards View ---- */
+.comparison-cards-view {
+  display: none;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.comparison-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  break-inside: avoid;
+}
+.comparison-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-accent);
+}
+.comparison-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+}
+.comparison-card-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: right;
+}
+.comparison-card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.comparison-card-row:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.comparison-card-label {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.comparison-card-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ---- Mobile/Tablet Breakpoint for Card View ---- */
+@media (max-width: 900px) {
+  .compare-table-wrapper {
+    display: none;
+  }
+  .comparison-cards-view {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Filter and Action Responsiveness ---- */
+@media (max-width: 768px) {
+  .comparison-filters {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+  .filter-chip {
+    flex-shrink: 0;
+  }
+  .selector-header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .comparison-header {
+    margin-bottom: 1.5rem;
+  }
+  .comparison-title {
+    font-size: 1.5rem;
+  }
+  .comparison-selector-container {
+    padding: 1.2rem;
+  }
+  .selector-title {
+    font-size: 1rem;
+  }
+  .model-selection-grid {
+    gap: 0.5rem;
+  }
+}
+
+/* ---- Table Scrolling Hint ---- */
+@media (min-width: 901px) {
+  .compare-table-hint {
+    display: none;
+  }
+}
