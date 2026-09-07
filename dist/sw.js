@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ml-atlas-v2-runtime';
+const CACHE_NAME = 'ml-atlas-v3-visual-runtime';
 const APP_SHELL = [
   './',
   './index.html',

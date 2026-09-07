@@ -1,10 +1,10 @@
 {
   "name": "Machine Learning Atlas",
   "short_name": "ML Atlas",
-  "description": "Learn machine learning algorithms visually with interactive browser labs.",
+  "description": "Learn machine learning algorithms visually with clear charts, diagrams and explanations.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#080b14",
-  "theme_color": "#080b14",
+  "background_color": "#101923",
+  "theme_color": "#101923",
   "icons": [{"src":"assets/favicon.svg","sizes":"any","type":"image/svg+xml"}]
 }
