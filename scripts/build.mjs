@@ -98,7 +98,7 @@ try {
     }
     
     console.log('  Copying root files...');
-    for (const f of ['index.html','robots.txt','sitemap.xml','manifest.webmanifest','404.html']) {
+    for (const f of ['index.html','robots.txt','sitemap.xml','manifest.webmanifest','404.html','sw.js']) {
       const p=path.join(ROOT,f); if (fs.existsSync(p)) fs.copyFileSync(p,path.join(DIST,f));
     }
   }

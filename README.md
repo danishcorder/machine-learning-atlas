@@ -135,7 +135,7 @@ Built with **zero dependencies** and zero build complexity:
 - **CSS3** — custom properties, Grid, Flexbox, cinematic design
 - **Vanilla JavaScript (ES modules)** — no frameworks, no transpilation
 - **Canvas & SVG** — interactive visualizations
-- **MathJax 3** — beautiful mathematical rendering
+- **MathJax 3** — beautiful mathematical rendering with service-worker caching
 - **localStorage** — theme and progress persistence
 - **PowerShell** — page assembly and automation
 
@@ -333,7 +333,7 @@ See `SEO_STRATEGY.md` for the full search-intent map.
 - [ ] Add t-SNE & UMAP (dimensionality reduction)
 - [ ] Add XGBoost & LightGBM (ensemble methods)
 - [ ] Synthetic dataset editor (draw your own data)
-- [ ] Offline mode (service worker + cached MathJax)
+- [x] Offline mode (service worker + cached MathJax after the first online visit)
 - [ ] Model recommendations based on dataset characteristics
 - [ ] Export training logs and visualizations
 
@@ -365,7 +365,7 @@ Please ensure:
 A: No. ML ATLAS is completely free and anonymous. Your progress is saved locally in your browser.
 
 **Q: Can I use this offline?**  
-A: Mostly yes. MathJax requires an internet connection for the first load. After that, most of the site works offline. Full offline support is on the roadmap.
+A: Yes, after opening the site once through a local web server while online. The service worker caches the app shell, pages, assets and MathJax response. Opening `index.html` directly with `file://` cannot install a service worker in modern browsers.
 
 **Q: Can I add my own models?**  
 A: Yes! Follow the [How to Add a New Model](#-how-to-add-a-new-model) guide. The architecture is designed for extensibility.

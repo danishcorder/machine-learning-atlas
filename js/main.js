@@ -16,6 +16,7 @@ import { buildModelPage } from './model-page.js';
 const MODEL_ID = document.body.getAttribute('data-model');
 
 document.addEventListener('DOMContentLoaded', () => {
+  registerOfflineSupport();
   initTheme();
   initSearch();
   initNavigation(MODEL_ID);
@@ -33,6 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
   buildHomeExplorer();
 });
 
+function registerOfflineSupport() {
+  if (!('serviceWorker' in navigator)) return;
+  const workerUrl = new URL('../sw.js', import.meta.url);
+  const scopeUrl = new URL('../', import.meta.url);
+  navigator.serviceWorker.register(workerUrl, { scope: scopeUrl.href }).catch((err) => {
+    console.warn('Offline support could not be enabled:', err);
+  });
+}
+
 /* dynamically import the lab engine for this model's page */
 async function loadVisualization(vizId) {
   if (!vizId) return;
@@ -43,6 +53,14 @@ async function loadVisualization(vizId) {
     initVizCaption(MODEL_MAP[MODEL_ID]);
   } catch (err) {
     console.warn(`Visualization "${vizId}" could not be loaded:`, err);
+    const lab = document.getElementById('lab');
+    if (lab) {
+      const notice = document.createElement('p');
+      notice.className = 'viz-error';
+      notice.setAttribute('role', 'alert');
+      notice.textContent = 'This interactive lab could not load. Reload the page or check that the app is being served from a local web server.';
+      lab.prepend(notice);
+    }
   }
 }
 
