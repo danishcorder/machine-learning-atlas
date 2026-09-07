@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn Linear Regression visually: least squares, slope, intercept, residuals, MSE and gradient descent with an interactive browser lab.">
+  <meta name="description" content="Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.">
   <meta name="author" content="Muhammad Danish">
   <title>Linear Regression Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/linear-regression.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Linear Regression Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn Linear Regression visually: least squares, slope, intercept, residuals, MSE and gradient descent with an interactive browser lab.">
+  <meta property="og:description" content="Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/linear-regression.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Linear Regression Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn Linear Regression visually: least squares, slope, intercept, residuals, MSE and gradient descent with an interactive browser lab.">
+  <meta name="twitter:description" content="Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linear Regression Machine Learning Tutorial","description":"Learn Linear Regression visually: least squares, slope, intercept, residuals, MSE and gradient descent with an interactive browser lab.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/linear-regression.html","about":{"@type":"DefinedTerm","name":"Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Linear Regression, interactive machine learning, linear regression"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linear Regression Machine Learning Tutorial","description":"Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/linear-regression.html","about":{"@type":"DefinedTerm","name":"Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Linear Regression, interactive machine learning, linear regression"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -62,8 +62,8 @@
           <div class="eyebrow">MACHINE LEARNING / REGRESSION</div>
           <h1 class="model-title">LINEAR <em>REGRESSION</em></h1>
           <p class="model-subtitle">Finding the straight-line relationship hidden inside data — the line that best explains a continuous target.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">Continuous output</span><span class="badge">Interpretable</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">Linear</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -127,22 +127,7 @@
           <div class="flow-step">\(\hat{y}=\beta_0+\beta_1 x\)</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Click to add a point; drag to move it. Blue line is the best fit. Toggle residuals or run gradient descent down the error bowl. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="lr-slope">Slope \(\beta_1\)</label><input type="range" id="lr-slope" min="-3" max="3" step="0.05" value="1"></div>
-            <div class="control-group"><label for="lr-intercept">Intercept \(\beta_0\)</label><input type="range" id="lr-intercept" min="-5" max="10" step="0.05" value="0"></div>
-            <div class="control-group"><label for="lr-lr">Learning rate \(\eta\)</label><input type="range" id="lr-lr" min="0.001" max="0.1" step="0.001" value="0.05"></div>
-            <div class="control-group"><label for="lr-iters">GD steps</label><input type="number" id="lr-iters" min="1" max="200" value="50"></div>
-            <div class="control-group"><label><input type="checkbox" id="lr-residuals"> show residuals</label></div>
-          </div>
-          <canvas id="lr-canvas" class="viz-stage" aria-label="Linear regression data, best-fit line, residuals, gradient descent"></canvas>
-          <div class="viz-actions"><button id="lr-fit" class="btn btn-sm">Fit (OLS)</button><button id="lr-gd-run" class="btn btn-sm">Run gradient descent</button></div>
-          <div id="lr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="linear-regression"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Data \((1,1),(2,3),(3,2),(4,5),(5,5)\). \(\bar x=3,\bar y=3\), \(s_{xx}=10,s_{xy}=12\). So \(\beta_1=1.2,\beta_0=-0.6\). Model \(\hat{y}=-0.6+1.2x\). Predict \(x=6\): \(\hat{y}=6.6\).</p>
@@ -210,7 +195,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

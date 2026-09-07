@@ -27,6 +27,10 @@ function initNavbar() {
       hamburger.setAttribute('aria-expanded', open);
     });
   }
+  const modelSelect = document.getElementById('model-select');
+  if (modelSelect) modelSelect.addEventListener('change', () => {
+    if (modelSelect.value) window.location.href = modelSelect.value;
+  });
   const sidebarToggle = document.getElementById('sidebar-toggle');
   const sidebar = document.getElementById('model-sidebar');
   if (sidebarToggle && sidebar) {
@@ -54,23 +58,18 @@ function buildSidebar(currentId) {
   const el = document.getElementById('model-sidebar');
   if (!el) return;
   let html = '<div class="sidebar-card">';
-  html += `<h4>Jump between models</h4>`;
-  html += '<ul class="sidebar-list">';
-  ORDER.forEach((id) => {
-    const m = MODEL_MAP[id];
-    const active = id === currentId ? 'active' : '';
-    html += `<li><a href="${PRE}${m.pagePath}" class="${active}" aria-current="${active ? 'page' : 'false'}"><span class="dot"></span>${escapeHtml(m.name)}</a></li>`;
-  });
-  html += '</ul></div>';
-  html += '<div class="sidebar-card"><h4>Browse by Category</h4>';
+  html += `<div class="model-picker-label">MODEL LIBRARY <span>${ORDER.indexOf(currentId) + 1} / ${ORDER.length}</span></div><select id="model-select" class="model-select" aria-label="Choose a model">`;
+  ORDER.forEach((id) => { const m = MODEL_MAP[id]; html += `<option value="${PRE}${m.pagePath}" ${id === currentId ? 'selected' : ''}>${escapeHtml(m.name)}</option>`; });
+  html += '</select></div>';
+  html += '<div class="sidebar-card sidebar-categories"><div class="model-picker-label">BROWSE BY CATEGORY</div>';
   MODEL_GROUPS.forEach((g) => {
-    html += `<div class="sidebar-group-title">${escapeHtml(g.name)}</div><ul class="sidebar-list">`;
+    html += `<details class="sidebar-group" ${g.models.includes(currentId) ? 'open' : ''}><summary>${escapeHtml(g.name)}<span>${g.models.length}</span></summary><ul class="sidebar-list">`;
     g.models.forEach((id) => {
       const m = MODEL_MAP[id];
       const active = id === currentId ? 'active' : '';
       html += `<li><a href="${PRE}${m.pagePath}" class="${active}"><span class="dot"></span>${escapeHtml(m.name)}</a></li>`;
     });
-    html += '</ul>';
+    html += '</ul></details>';
   });
   html += '</div>';
   el.innerHTML = html;
@@ -102,7 +101,7 @@ function buildTOC(currentId) {
   const sections = [
     ['overview', 'Overview'], ['problem', 'The Problem'], ['why', 'Why It Matters'],
     ['intuition', 'Intuition'], ['math', 'Mathematical Foundation'], ['equation', 'The Equation'],
-    ['learns', 'How It Learns'], ['algorithm', 'Algorithm'], ['lab', 'Interactive Lab'],
+    ['learns', 'How It Learns'], ['algorithm', 'Algorithm'], ['visuals', 'Visual Explanation'],
     ['example', 'Worked Example'], ['data', 'Data & Features'], ['evaluation', 'Evaluation'],
     ['strengths', 'Strengths'], ['limitations', 'Limitations'], ['when', 'When To Use'],
     ['not', 'When Not To Use'], ['apps', 'Real-World Applications'], ['qa', '20 Questions'],

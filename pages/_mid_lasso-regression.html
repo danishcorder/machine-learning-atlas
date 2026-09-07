@@ -43,18 +43,7 @@
           <div class="flow-step">ŷ = Xβ̂</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Raise <strong>λ</strong> — coefficients snap to zero one by one and the kept-feature count drops. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="la-lambda">λ <span id="la-lambda-label">λ = 1.0</span></label><input type="range" id="la-lambda" min="0" max="5" step="0.1" value="1"></div>
-          </div>
-          <canvas id="la-canvas" class="viz-stage" aria-label="Lasso regression coefficient path with lambda shrinkage"></canvas>
-          <div class="viz-actions"><button id="la-reseed" class="btn btn-sm">Reseed data</button></div>
-          <div id="la-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Predict house price from 6 features; only size, age, and location truly matter. At \(\lambda=0\) all six coefficients wiggle. At \(\lambda=1.4\) the tax-rate and school-rank coefficients hit zero — the model has <em>chosen</em> size, age, location and ignored the rest. Sparse, explainable, defensible.</p>

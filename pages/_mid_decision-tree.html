@@ -42,19 +42,7 @@
           <div class="flow-step">Route new point → leaf prediction</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">A tree is grown from (age, income) predicting loan approval by greedy information-gain splits. Step through one level at a time and watch the scatter recolour by leaf. <em>Simplified visualization.</em></p>
-        <div id="dt-lab" class="viz-container">
-          <div class="viz-controls">
-            <button data-dt-expand class="btn btn-sm">Expand one level</button>
-            <button data-dt-collapse class="btn btn-sm">Collapse level</button>
-          </div>
-          <svg role="img" aria-label="Decision tree grown level by level" style="width:100%;height:auto;"></svg>
-          <canvas class="viz-stage" aria-label="Dataset scatter coloured by predicted leaf" style="height:200px;"></canvas>
-          <div id="dt-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Parent 8 “yes”, 4 “no”: \(H=0.985\). Split on \(x_1\leq 32\): left \(3y,1n\) (\(H=0.811\)), right \(5y,3n\) (\(H=0.954\)). Gain = \(0.985-\tfrac{4}{12}0.811-\tfrac{8}{12}0.954=0.13\) bits. That is the feature chosen; recurse on each child. A path like \(x_1\leq32 \to x_2>50 \to\) leaf is exactly the “if-then” rule a loan officer can explain.</p>

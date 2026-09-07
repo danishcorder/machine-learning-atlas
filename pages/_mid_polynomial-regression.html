@@ -42,18 +42,7 @@
           <div class="flow-step">\(\hat{y}=\sum\beta_j x^j\)</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Drag points to reshape the curve. Raise <strong>degree</strong> to chase every wiggle (overfitting), then press Reseed for fresh data. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="pr-degree">Degree <span id="pr-degree-label">n = 3</span></label><input type="range" id="pr-degree" min="1" max="8" step="1" value="3"></div>
-          </div>
-          <canvas id="pr-canvas" class="viz-stage" aria-label="Polynomial regression curve fit with degree control"></canvas>
-          <div class="viz-actions"><button id="pr-reseed" class="btn btn-sm">Reseed data</button></div>
-          <div id="pr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Dose \(x\) vs efficacy \(y\). Points suggest a plateau near \(x=8\). A degree-1 line is wrong; degree-5 fits but swings to \(\hat{y}=-2\) at \(x=10\) (impossible). Degree-2 \(\hat{y}=0.1+1.0x-0.08x^2\) plateaus — a parsimonious, sensible curve. This is the bias–variance dance in one number: \(n\).</p>

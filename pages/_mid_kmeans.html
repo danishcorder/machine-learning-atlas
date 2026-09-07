@@ -36,11 +36,7 @@
         <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
         <div class="flow"><div class="flow-step">Initial centres</div><div class="flow-arrow">↓</div><div class="flow-step">Assign</div><div class="flow-arrow">↓</div><div class="flow-step">Update means</div><div class="flow-arrow">↓</div><div class="flow-step">Converged clusters</div></div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Choose k, add points by clicking the canvas, and run Lloyd's algorithm.</p>
-        <div class="viz-container"><div class="viz-controls"><label for="km-k">Clusters <span id="km-k-label">k = 3</span></label><input type="range" id="km-k" min="1" max="6" value="3"><button id="km-run" class="btn btn-sm">Run K-Means</button><button id="km-reseed" class="btn btn-sm">Reseed</button></div><canvas id="km-canvas" class="viz-stage" aria-label="K-Means clustering canvas"></canvas><div id="km-info"></div></div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>With <em>k</em> = 2, points near (1, 1) and (8, 8) quickly pull their centres toward those two groups. The final inertia measures the remaining within-cluster spread.</p>

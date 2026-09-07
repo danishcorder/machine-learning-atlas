@@ -43,18 +43,7 @@
           <div class="flow-step">ŷ = Xβ̂</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Drag points, then raise <strong>λ</strong> — watch the coefficients shrink and the line settle. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="ri-lambda">λ <span id="ri-lambda-label">λ = 1.0</span></label><input type="range" id="ri-lambda" min="0" max="10" step="0.1" value="1"></div>
-          </div>
-          <canvas id="ri-canvas" class="viz-stage" aria-label="Ridge regression fit with lambda shrinkage control"></canvas>
-          <div class="viz-actions"><button id="ri-reseed" class="btn btn-sm">Reseed data</button></div>
-          <div id="ri-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Forecast growth from 4 collinear indicators; OLS gives \(\beta=(12,-8,9,-11)\) — signs flip on reordering. Ridge with \(\lambda=4\) gives \(\beta=(1.9,0.6,-0.4,0.3)\): stable, sensible, every coefficient positive-ish. A little bias bought a lot of trustworthiness.</p>

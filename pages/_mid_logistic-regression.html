@@ -43,20 +43,7 @@
           <div class="flow-step">Threshold p → label</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Left-click adds a negative case, right/shift-click a positive case. Slide the intercept and slope and the decision threshold to trade off the two error types. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="lgr-b0">Intercept β₀</label><input type="range" id="lgr-b0" min="-8" max="8" step="0.1" value="-5.5"></div>
-            <div class="control-group"><label for="lgr-b1">Slope β₁</label><input type="range" id="lgr-b1" min="-5" max="5" step="0.1" value="1.1"></div>
-            <div class="control-group"><label for="lgr-thr">Threshold</label><input type="range" id="lgr-thr" min="0" max="1" step="0.01" value="0.5"></div>
-          </div>
-          <canvas id="lgr-canvas" class="viz-stage" aria-label="Logistic regression sigmoid curve and probability regions"></canvas>
-          <div class="viz-actions"><button id="lgr-reset" class="btn btn-sm">Reset parameters</button></div>
-          <div id="lgr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Marker \(x\): negatives avg 2.0, positives avg 6.2. Fit \(\beta_0=-9.5,\beta_1=2.7\). For \(x=5\): \(z=-9.5+13.5=4\), \(p=1/(1+e^{-4})=0.98\). At threshold 0.5 → “malignant”. Lower threshold to 0.3 ⇒ catches earlier cases but raises false alarms — the threshold is the clinical policy.</p>

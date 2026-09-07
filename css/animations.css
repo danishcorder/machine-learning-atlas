@@ -25,6 +25,14 @@
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+/* A quiet entrance gives the long-form pages a sense of place without slowing reading. */
+.model-hero { animation: hero-arrive 850ms cubic-bezier(.16, 1, .3, 1) both; }
+.model-dna-card { animation: card-arrive 900ms 120ms cubic-bezier(.16, 1, .3, 1) both; }
+.section-block { animation: section-arrive 700ms both; animation-timeline: view(); animation-range: entry 0% cover 18%; }
+@keyframes hero-arrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes card-arrive { from { opacity: 0; transform: translateX(20px) rotate(1deg); } to { opacity: 1; transform: translateX(0) rotate(0); } }
+@keyframes section-arrive { from { opacity: .2; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
 /* Stagger helper */
 .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .stagger.visible > * { opacity: 1; transform: translateY(0); }

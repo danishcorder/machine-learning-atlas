@@ -44,18 +44,7 @@
           <div class="flow-step">\(\hat{y}=x^{\top}\hat\beta\)</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Two features drive the prediction \(\hat{y}=\beta_0+\beta_1 x_1+\beta_2 x_2\). Move the sliders for the query point and watch the heatmap update. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="mlr-x1">Feature \(x_1\)</label><input type="range" id="mlr-x1" min="0" max="10" step="0.1" value="5"></div>
-            <div class="control-group"><label for="mlr-x2">Feature \(x_2\)</label><input type="range" id="mlr-x2" min="0" max="10" step="0.1" value="5"></div>
-          </div>
-          <canvas id="mlr-canvas" class="viz-stage" aria-label="Two-feature regression prediction heatmap"></canvas>
-          <div id="mlr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Fitted \(\hat{y}=2+1.2\,x_1-0.8\,x_2\). Client \(x_1=40,x_2=5\): \(\hat{y}=2+48-4=46\). Age adds 1.2 per year; exercise removes 0.8 — and clients differing only in exercise by 2 score \(2\times0.8=1.6\), ceteris paribus in action.</p>

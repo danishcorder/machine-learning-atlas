@@ -37,6 +37,8 @@
   .nav-controls { grid-template-columns: 1fr; }
   .nav-center { order: 0; }
   .compare-table-wrap { display: block; }
+  .visual-caption { grid-template-columns: 1fr; gap: .25rem; }
+  .static-chart { min-height: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

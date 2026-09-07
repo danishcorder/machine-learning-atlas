@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn Ridge Regression: L2 regularization, lambda, coefficient shrinkage, multicollinearity and interactive tuning.">
+  <meta name="description" content="Adds an L2 penalty λ‖β‖² to reduce variance and handle feature multicollinearity gracefully.">
   <meta name="author" content="Muhammad Danish">
   <title>Ridge Regression Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/ridge-regression.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Ridge Regression Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn Ridge Regression: L2 regularization, lambda, coefficient shrinkage, multicollinearity and interactive tuning.">
+  <meta property="og:description" content="Adds an L2 penalty λ‖β‖² to reduce variance and handle feature multicollinearity gracefully.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/ridge-regression.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ridge Regression Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn Ridge Regression: L2 regularization, lambda, coefficient shrinkage, multicollinearity and interactive tuning.">
+  <meta name="twitter:description" content="Adds an L2 penalty λ‖β‖² to reduce variance and handle feature multicollinearity gracefully.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Ridge Regression Machine Learning Tutorial","description":"Learn Ridge Regression: L2 regularization, lambda, coefficient shrinkage, multicollinearity and interactive tuning.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/ridge-regression.html","about":{"@type":"DefinedTerm","name":"Ridge Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Ridge Regression, interactive machine learning, ridge regression"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Ridge Regression Machine Learning Tutorial","description":"Adds an L2 penalty λ‖β‖² to reduce variance and handle feature multicollinearity gracefully.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/ridge-regression.html","about":{"@type":"DefinedTerm","name":"Ridge Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Ridge Regression, interactive machine learning, ridge regression"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -62,8 +62,8 @@
           <div class="eyebrow">MACHINE LEARNING / REGRESSION</div>
           <h1 class="model-title">RIDGE <em>REGRESSION</em></h1>
           <p class="model-subtitle">Least squares with an L2 safety net — shrink coefficients to gain stability under multicollinearity.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">L2 regularization</span><span class="badge">Shrinkage</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">Regularized</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -126,18 +126,7 @@
           <div class="flow-step">ŷ = Xβ̂</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Drag points, then raise <strong>λ</strong> — watch the coefficients shrink and the line settle. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="ri-lambda">λ <span id="ri-lambda-label">λ = 1.0</span></label><input type="range" id="ri-lambda" min="0" max="10" step="0.1" value="1"></div>
-          </div>
-          <canvas id="ri-canvas" class="viz-stage" aria-label="Ridge regression fit with lambda shrinkage control"></canvas>
-          <div class="viz-actions"><button id="ri-reseed" class="btn btn-sm">Reseed data</button></div>
-          <div id="ri-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="ridge-regression"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Forecast growth from 4 collinear indicators; OLS gives \(\beta=(12,-8,9,-11)\) — signs flip on reordering. Ridge with \(\lambda=4\) gives \(\beta=(1.9,0.6,-0.4,0.3)\): stable, sensible, every coefficient positive-ish. A little bias bought a lot of trustworthiness.</p>
@@ -205,7 +194,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

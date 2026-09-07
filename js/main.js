@@ -12,6 +12,7 @@ import { initProgress, renderProgressBar } from './progress.js';
 import { initComparison } from './comparison.js';
 import { initModelSelector } from './model-selector.js';
 import { buildModelPage } from './model-page.js';
+import { renderStaticVisual } from './static-visuals.js';
 
 const MODEL_ID = document.body.getAttribute('data-model');
 
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (MODEL_ID && MODEL_MAP[MODEL_ID]) {
     buildModelPage(MODEL_ID);
     initQA(MODEL_ID);
-    loadVisualization(MODEL_MAP[MODEL_ID].visualization);
+    renderStaticVisual(MODEL_ID);
   }
 
   initComparison();
@@ -41,27 +42,6 @@ function registerOfflineSupport() {
   navigator.serviceWorker.register(workerUrl, { scope: scopeUrl.href }).catch((err) => {
     console.warn('Offline support could not be enabled:', err);
   });
-}
-
-/* dynamically import the lab engine for this model's page */
-async function loadVisualization(vizId) {
-  if (!vizId) return;
-  try {
-    const mod = await import(`./visualizations/${vizId}.js`);
-    const fn = mod.default || Object.values(mod)[0];
-    if (typeof fn === 'function') fn();
-    initVizCaption(MODEL_MAP[MODEL_ID]);
-  } catch (err) {
-    console.warn(`Visualization "${vizId}" could not be loaded:`, err);
-    const lab = document.getElementById('lab');
-    if (lab) {
-      const notice = document.createElement('p');
-      notice.className = 'viz-error';
-      notice.setAttribute('role', 'alert');
-      notice.textContent = 'This interactive lab could not load. Reload the page or check that the app is being served from a local web server.';
-      lab.prepend(notice);
-    }
-  }
 }
 
 /* Home page: model explorer grid with category filter chips */
@@ -102,42 +82,6 @@ function buildHomeExplorer() {
   render();
 }
 
-
-function initVizCaption(model) {
-  const lab = document.getElementById('lab');
-  if (!lab || !model) return;
-  let caption = lab.querySelector('.viz-caption');
-  if (!caption) {
-    caption = document.createElement('div');
-    caption.className = 'viz-caption';
-    caption.setAttribute('role','status');
-    caption.setAttribute('aria-live','polite');
-    const stage = lab.querySelector('.viz-stage');
-    (stage?.parentElement || lab).appendChild(caption);
-  }
-  const update = () => {
-    const stats = [...lab.querySelectorAll('.viz-stats > div')].slice(0,3).map(el => {
-      const k=el.querySelector('.stat-label')?.textContent?.trim();
-      const v=el.querySelector('.stat-value')?.textContent?.trim();
-      return k && v ? `${k}: ${v}` : '';
-    }).filter(Boolean);
-    const guide = {
-      'linear-regression':'Move points or parameters and watch the fitted line minimize squared residual error.',
-      'logistic-regression':'Adjust the sigmoid or threshold and watch probabilities become class decisions.',
-      'knn':'Move the query point or change K; the prediction comes from the closest neighbours.',
-      'svm':'Train the separator and watch the margin change as support vectors constrain the optimum.',
-      'kmeans':'Run Lloyd’s algorithm: assign each point to its nearest centroid, then recompute cluster means.',
-      'decision-tree':'Grow another level and compare information gain with the resulting leaf purity.',
-      'dbscan':'Change ε and minPts to see density create core, border and noise points.',
-      'pca':'Rotate the principal direction and compare how much variance the projection preserves.'
-    }[model.id] || `Interact with the controls to see how ${model.name} changes its learned representation.`;
-    caption.innerHTML = `<span class="caption-step">LIVE EXPLANATION</span><strong>${guide}</strong>${stats.length?`<small>${stats.join(' · ')}</small>`:''}`;
-  };
-  const observer = new MutationObserver(update);
-  observer.observe(lab,{subtree:true,childList:true,characterData:true});
-  lab.addEventListener('input',update); lab.addEventListener('click',()=>setTimeout(update,0));
-  update();
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('search-cta')?.addEventListener('click', () => document.getElementById('search-btn')?.click());

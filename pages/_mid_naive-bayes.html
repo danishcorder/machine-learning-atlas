@@ -40,25 +40,7 @@
           <div class="flow-step">Threshold → label</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Toggle which words the email contains and slide the spam prior — watch the posterior update in real time. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="nb-prior">P(spam) <span id="nb-prior-label">P(spam)=0.40</span></label><input type="range" id="nb-prior" min="0" max="1" step="0.01" value="0.4"></div>
-          </div>
-          <div class="control-group checkboxes">
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-0" checked> free</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-1" checked> winner</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-2"> meeting</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-3"> project</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-4"> click</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-5"> invoice</span>
-          </div>
-          <canvas id="nb-canvas" class="viz-stage" aria-label="Naive Bayes spam probability vs prior and word evidence"></canvas>
-          <div id="nb-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Email contains “free” (P=0.55) and “winner” (0.40); absent “meeting” (so factor 0.70). Prior P(spam)=0.4. Log-odds = ln(0.4/0.6)+ln(0.55/0.04)+ln(0.40/0.02)+ln(0.70/0.30) ≈ 0.56 → P(spam) ≈ 0.64. Positive words swung it from 0.40 to 0.64 — Bayes in one paragraph.</p>

@@ -44,22 +44,7 @@
           <div class="flow-step">\(\hat{y}=\beta_0+\beta_1 x\)</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Click to add a point; drag to move it. Blue line is the best fit. Toggle residuals or run gradient descent down the error bowl. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="lr-slope">Slope \(\beta_1\)</label><input type="range" id="lr-slope" min="-3" max="3" step="0.05" value="1"></div>
-            <div class="control-group"><label for="lr-intercept">Intercept \(\beta_0\)</label><input type="range" id="lr-intercept" min="-5" max="10" step="0.05" value="0"></div>
-            <div class="control-group"><label for="lr-lr">Learning rate \(\eta\)</label><input type="range" id="lr-lr" min="0.001" max="0.1" step="0.001" value="0.05"></div>
-            <div class="control-group"><label for="lr-iters">GD steps</label><input type="number" id="lr-iters" min="1" max="200" value="50"></div>
-            <div class="control-group"><label><input type="checkbox" id="lr-residuals"> show residuals</label></div>
-          </div>
-          <canvas id="lr-canvas" class="viz-stage" aria-label="Linear regression data, best-fit line, residuals, gradient descent"></canvas>
-          <div class="viz-actions"><button id="lr-fit" class="btn btn-sm">Fit (OLS)</button><button id="lr-gd-run" class="btn btn-sm">Run gradient descent</button></div>
-          <div id="lr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Data \((1,1),(2,3),(3,2),(4,5),(5,5)\). \(\bar x=3,\bar y=3\), \(s_{xx}=10,s_{xy}=12\). So \(\beta_1=1.2,\beta_0=-0.6\). Model \(\hat{y}=-0.6+1.2x\). Predict \(x=6\): \(\hat{y}=6.6\).</p>

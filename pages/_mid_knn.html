@@ -43,20 +43,7 @@
           <div class="flow-step">Label of q</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Drag the orange query point and change \(k\) — see the highlighted neighbours and the vote shift. Click empty space to add a class, or pick the class for new points. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="knn-k">Neighbours <span id="knn-k-label">k = 3</span></label><input type="range" id="knn-k" min="1" max="9" step="2" value="3"></div>
-            <div class="control-group"><label for="knn-add-class">New point class</label>
-              <select id="knn-add-class"><option value="A">Class A</option><option value="B">Class B</option></select></div>
-          </div>
-          <canvas id="knn-canvas" class="viz-stage" aria-label="KNN query point, distances, nearest neighbours and vote"></canvas>
-          <div class="viz-actions"><button id="knn-reset" class="btn btn-sm">↻ Reset query</button></div>
-          <div id="knn-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="@@ID@@"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Query at (5,4). Distances: A at 1.4, 2.0, 2.8; B at 2.2, 3.5, 3.6. \(k=3\) voters {A:1.4, A:2.0, B:2.2} → <strong>A wins 2–1</strong>. \(k=5\) adds A:2.8 → {A,A,A,B,B} → <strong>A wins 3–2</strong>. The verdict held, but a tiny noise flip near 2.8 could have changed everything — \(k\) guards against exactly that.</p>

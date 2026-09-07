@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn Random Forest visually: bootstrap samples, random features, bagging, voting, feature importance and interactive prediction.">
+  <meta name="description" content="Bagging ensemble of trees trained on bootstrap samples with random feature subsets.">
   <meta name="author" content="Muhammad Danish">
   <title>Random Forest Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/random-forest.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Random Forest Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn Random Forest visually: bootstrap samples, random features, bagging, voting, feature importance and interactive prediction.">
+  <meta property="og:description" content="Bagging ensemble of trees trained on bootstrap samples with random feature subsets.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/random-forest.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Random Forest Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn Random Forest visually: bootstrap samples, random features, bagging, voting, feature importance and interactive prediction.">
+  <meta name="twitter:description" content="Bagging ensemble of trees trained on bootstrap samples with random feature subsets.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Random Forest Machine Learning Tutorial","description":"Learn Random Forest visually: bootstrap samples, random features, bagging, voting, feature importance and interactive prediction.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/random-forest.html","about":{"@type":"DefinedTerm","name":"Random Forest","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Random Forest, interactive machine learning, random forest"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Random Forest Machine Learning Tutorial","description":"Bagging ensemble of trees trained on bootstrap samples with random feature subsets.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/random-forest.html","about":{"@type":"DefinedTerm","name":"Random Forest","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Random Forest, interactive machine learning, random forest"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -62,8 +62,8 @@
           <div class="eyebrow">MACHINE LEARNING / ENSEMBLE</div>
           <h1 class="model-title">RANDOM <em>FOREST</em></h1>
           <p class="model-subtitle">Many diverse decision trees vote together to reduce variance and improve robustness.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Ensemble</span><span class="badge">Bagging</span><span class="badge">Robust</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Ensemble</span><span class="badge">Tree-based</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -88,7 +88,7 @@
       <section class="section-block" id="equation"><h2 class="section-title"><span class="section-number">06</span> The Equation</h2><div class="equation-card">\[\hat{f}(x)=\frac{1}{B}\sum_{b=1}^{B}T_b(x)\]</div><ul class="equation-symbol-list"><li><span class="eq-symbol">\(B\)</span> number of trees</li><li><span class="eq-symbol">\(T_b\)</span> prediction from tree <em>b</em></li><li><span class="eq-symbol">\(\hat f(x)\)</span> ensemble prediction</li></ul></section>
       <section class="section-block" id="learns"><h2 class="section-title"><span class="section-number">07</span> How It Learns</h2><ol class="flow"><li class="flow-step">Draw a bootstrap sample.</li><li class="flow-step">Grow a tree using random feature subsets.</li><li class="flow-step">Repeat for many trees.</li><li class="flow-step">Aggregate their predictions.</li></ol></section>
       <section class="section-block" id="algorithm"><h2 class="section-title"><span class="section-number">08</span> Algorithm</h2><div class="flow"><div class="flow-step">Bootstrap rows</div><div class="flow-arrow">↓</div><div class="flow-step">Grow varied trees</div><div class="flow-arrow">↓</div><div class="flow-step">Vote or average</div></div></section>
-      <section class="section-block" id="lab"><h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2><p class="section-subtitle">Drag the query point across the feature map and rebuild the bootstrap forest.</p><div class="viz-container"><canvas id="rf-canvas" class="viz-stage" aria-label="Random Forest voting canvas"></canvas><div class="viz-actions"><button id="rf-rebuild" class="btn btn-sm">Rebuild forest</button></div><div id="rf-info"></div></div></section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="random-forest"></div></section>
       <section class="section-block" id="example"><h2 class="section-title"><span class="section-number">10</span> Worked Example</h2><p class="section-subtitle">If four of five trees vote approve, the forest returns approve. A new bootstrap draw can change individual trees while leaving the majority stable.</p></section>
 
 
@@ -153,7 +153,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>
