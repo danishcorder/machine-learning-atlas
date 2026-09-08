@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn Logistic Regression visually: sigmoid, log-loss, decision threshold, coefficients and interactive classification.">
+  <meta name="description" content="Applies a sigmoid link to a linear score, outputs probabilities, learns via maximum likelihood.">
   <meta name="author" content="Muhammad Danish">
   <title>Logistic Regression Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/logistic-regression.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Logistic Regression Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn Logistic Regression visually: sigmoid, log-loss, decision threshold, coefficients and interactive classification.">
+  <meta property="og:description" content="Applies a sigmoid link to a linear score, outputs probabilities, learns via maximum likelihood.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/logistic-regression.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Logistic Regression Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn Logistic Regression visually: sigmoid, log-loss, decision threshold, coefficients and interactive classification.">
+  <meta name="twitter:description" content="Applies a sigmoid link to a linear score, outputs probabilities, learns via maximum likelihood.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Logistic Regression Machine Learning Tutorial","description":"Learn Logistic Regression visually: sigmoid, log-loss, decision threshold, coefficients and interactive classification.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/logistic-regression.html","about":{"@type":"DefinedTerm","name":"Logistic Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Logistic Regression, interactive machine learning, logistic regression"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Logistic Regression Machine Learning Tutorial","description":"Applies a sigmoid link to a linear score, outputs probabilities, learns via maximum likelihood.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/logistic-regression.html","about":{"@type":"DefinedTerm","name":"Logistic Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Logistic Regression, interactive machine learning, logistic regression"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -61,9 +61,9 @@
         <div>
           <div class="eyebrow">MACHINE LEARNING / CLASSIFICATION</div>
           <h1 class="model-title">LOGISTIC <em>REGRESSION</em></h1>
-          <p class="model-subtitle">A linear model that speaks in probabilities — the sigmoid turns scores into class probabilities.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Classification</span><span class="badge">Probability</span><span class="badge">Interpretable</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <p class="model-subtitle">A linear model that speaks in probabilities — the sigmoid turns scores into class predictions.</p>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Classification</span><span class="badge">Linear</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -126,20 +126,7 @@
           <div class="flow-step">Threshold p → label</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Left-click adds a negative case, right/shift-click a positive case. Slide the intercept and slope and the decision threshold to trade off the two error types. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="lgr-b0">Intercept β₀</label><input type="range" id="lgr-b0" min="-8" max="8" step="0.1" value="-5.5"></div>
-            <div class="control-group"><label for="lgr-b1">Slope β₁</label><input type="range" id="lgr-b1" min="-5" max="5" step="0.1" value="1.1"></div>
-            <div class="control-group"><label for="lgr-thr">Threshold</label><input type="range" id="lgr-thr" min="0" max="1" step="0.01" value="0.5"></div>
-          </div>
-          <canvas id="lgr-canvas" class="viz-stage" aria-label="Logistic regression sigmoid curve and probability regions"></canvas>
-          <div class="viz-actions"><button id="lgr-reset" class="btn btn-sm">Reset parameters</button></div>
-          <div id="lgr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="logistic-regression"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Marker \(x\): negatives avg 2.0, positives avg 6.2. Fit \(\beta_0=-9.5,\beta_1=2.7\). For \(x=5\): \(z=-9.5+13.5=4\), \(p=1/(1+e^{-4})=0.98\). At threshold 0.5 → “malignant”. Lower threshold to 0.3 ⇒ catches earlier cases but raises false alarms — the threshold is the clinical policy.</p>
@@ -181,25 +168,19 @@
         <div class="grid-cards-2" id="sec-apps-grid"></div>
       </section>
 
-      <section class="section-block" id="qa">
-        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
-        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
-        <div id="qa-list" class="qa-list"></div>
-      </section>
-
       <section class="section-block" id="related">
-        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <h2 class="section-title"><span class="section-number">18</span> Related Models</h2>
         <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
         <div id="sec-related"></div>
       </section>
 
       <section class="section-block" id="recap">
-        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <h2 class="section-title"><span class="section-number">19</span> 60-Second Recap</h2>
         <div id="sec-recap"></div>
       </section>
 
       <section class="section-block" id="continue">
-        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <h2 class="section-title"><span class="section-number">20</span> Continue Learning</h2>
         <div id="continue-learning"></div>
       </section>
 
@@ -207,7 +188,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

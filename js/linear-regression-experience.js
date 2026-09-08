@@ -11,7 +11,6 @@ function init() {
   buildLearningNav();
   groupFullNotes();
   wireMathSymbols();
-  wireQuiz();
   wireMetricCards();
   initLinearRegression('lr-canvas');
 }
@@ -77,16 +76,6 @@ function wireMathSymbols() {
     const key = button.dataset.focusSymbol;
     document.querySelectorAll('.lr-symbol-card').forEach((item) => item.classList.toggle('active', item === button));
     document.querySelectorAll('.lr-equation [data-symbol]').forEach((item) => item.classList.toggle('focused', item.dataset.symbol === key));
-  }));
-}
-
-function wireQuiz() {
-  const feedback = document.querySelector('.lr-quiz-feedback');
-  document.querySelectorAll('.lr-quiz-option').forEach((button) => button.addEventListener('click', () => {
-    const correct = button.dataset.correct === 'true';
-    document.querySelectorAll('.lr-quiz-option').forEach((item) => item.classList.remove('correct', 'incorrect'));
-    button.classList.add(correct ? 'correct' : 'incorrect');
-    if (feedback) feedback.textContent = correct ? 'Correct. The slope is the expected change in prediction for one unit of input.' : 'Not quite. Look for the parameter that controls the line’s tilt.';
   }));
 }
 

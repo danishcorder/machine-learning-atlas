@@ -158,11 +158,9 @@ ml-atlas/
 │   ├── main.js                      # Entry point, module orchestration
 │   ├── model-data.js                # Single source of truth (15 models)
 │   ├── model-page.js                # Dynamic content rendering
-│   ├── questions.js                 # Q&A database
 │   ├── concepts.js                  # Searchable math concepts
 │   ├── navigation.js                # UI navigation & sidebar
 │   ├── search.js                    # Global search engine
-│   ├── quiz.js                      # Reveal-card renderer
 │   ├── progress.js                  # Progress tracking
 │   ├── theme.js                     # Dark/light theme toggle
 │   ├── comparison.js                # Model Compass
@@ -199,15 +197,13 @@ The architecture is data-driven, so adding Model #16 takes minutes:
    { id: 16, name: "Gradient Boosting", category: "Regression", ... }
    ```
 
-2. **Write 5 Q&A cards** in `js/questions.js`
+2. **Add any new math concepts** to `js/concepts.js`
 
-3. **Add any new math concepts** to `js/concepts.js`
+3. **Write the narrative** as `pages/_mid-16.html` (sections 02–10)
 
-4. **Write the narrative** as `pages/_mid-16.html` (sections 02–10)
+4. **Build the visualizer** as `js/visualizations/gradient-boosting.js`
 
-5. **Build the visualizer** as `js/visualizations/gradient-boosting.js`
-
-6. **Assemble the page:**
+5. **Assemble the page:**
    ```bash
    powershell -File gen-pages.ps1
    ```

@@ -1,13 +1,12 @@
 /* ML ATLAS — central entry point.
  * Pages declare <body data-model="model-id"> (model pages) and/or host
- * containers: #qa-list, #model-sidebar, #prev-next, #model-toc, #dna-card,
+ * containers: #model-sidebar, #prev-next, #model-toc, #dna-card,
  * #progress-wrap, #compass-root, #selector-root, #home-progress, #model-explorer.
  */
 import { MODELS, MODEL_MAP, MODEL_GROUPS } from './model-data.js';
 import { initTheme } from './theme.js';
 import { initNavigation } from './navigation.js';
 import { initSearch } from './search.js';
-import { initQA } from './quiz.js';
 import { initProgress, renderProgressBar } from './progress.js';
 import { initComparison } from './comparison.js';
 import { initModelSelector } from './model-selector.js';
@@ -25,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (MODEL_ID && MODEL_MAP[MODEL_ID]) {
     buildModelPage(MODEL_ID);
-    initQA(MODEL_ID);
     renderStaticVisual(MODEL_ID);
+    typesetMath();
   }
 
   initComparison();
@@ -42,6 +41,16 @@ function registerOfflineSupport() {
   navigator.serviceWorker.register(workerUrl, { scope: scopeUrl.href }).catch((err) => {
     console.warn('Offline support could not be enabled:', err);
   });
+}
+
+function typesetMath(attempt = 0) {
+  if (!window.MathJax?.typesetPromise) {
+    if (attempt < 20) window.setTimeout(() => typesetMath(attempt + 1), 150);
+    return;
+  }
+  window.MathJax.typesetPromise([
+    ...document.querySelectorAll('.math-objective, .equation-card, .equation-symbol-list, .lr-disclosure-body')
+  ]).catch(() => {});
 }
 
 /* Home page: model explorer grid with category filter chips */

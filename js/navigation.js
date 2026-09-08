@@ -104,7 +104,7 @@ function buildTOC(currentId) {
     ['learns', 'How It Learns'], ['algorithm', 'Algorithm'], ['visuals', 'Visual Explanation'],
     ['example', 'Worked Example'], ['data', 'Data & Features'], ['evaluation', 'Evaluation'],
     ['strengths', 'Strengths'], ['limitations', 'Limitations'], ['when', 'When To Use'],
-    ['not', 'When Not To Use'], ['apps', 'Real-World Applications'], ['qa', '20 Questions'],
+    ['not', 'When Not To Use'], ['apps', 'Real-World Applications'],
     ['related', 'Related Models'], ['recap', '60-Second Recap'], ['continue', 'Continue Learning']
   ];
   el.innerHTML = sections.map((s, i) =>

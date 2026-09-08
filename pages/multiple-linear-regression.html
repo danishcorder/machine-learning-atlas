@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn Multiple Linear Regression with matrix notation, assumptions, coefficients and an interactive two-feature prediction surface.">
+  <meta name="description" content="Models y as a weighted linear combination of p predictors, solved jointly via normal equations.">
   <meta name="author" content="Muhammad Danish">
   <title>Multiple Linear Regression Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/multiple-linear-regression.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Multiple Linear Regression Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn Multiple Linear Regression with matrix notation, assumptions, coefficients and an interactive two-feature prediction surface.">
+  <meta property="og:description" content="Models y as a weighted linear combination of p predictors, solved jointly via normal equations.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/multiple-linear-regression.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Multiple Linear Regression Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn Multiple Linear Regression with matrix notation, assumptions, coefficients and an interactive two-feature prediction surface.">
+  <meta name="twitter:description" content="Models y as a weighted linear combination of p predictors, solved jointly via normal equations.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Multiple Linear Regression Machine Learning Tutorial","description":"Learn Multiple Linear Regression with matrix notation, assumptions, coefficients and an interactive two-feature prediction surface.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/multiple-linear-regression.html","about":{"@type":"DefinedTerm","name":"Multiple Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Multiple Linear Regression, interactive machine learning, multiple linear regression"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Multiple Linear Regression Machine Learning Tutorial","description":"Models y as a weighted linear combination of p predictors, solved jointly via normal equations.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/multiple-linear-regression.html","about":{"@type":"DefinedTerm","name":"Multiple Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Multiple Linear Regression, interactive machine learning, multiple linear regression"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -61,9 +61,9 @@
         <div>
           <div class="eyebrow">MACHINE LEARNING / REGRESSION</div>
           <h1 class="model-title">MULTIPLE LINEAR <em>REGRESSION</em></h1>
-          <p class="model-subtitle">One target, many drivers — a hyperplane that weighs every feature jointly and still explains each one separately.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">Multiple features</span><span class="badge">Interpretable</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <p class="model-subtitle">One target, many drivers — a hyperplane that weighs every feature to predict a scalar.</p>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">Linear</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -127,18 +127,7 @@
           <div class="flow-step">\(\hat{y}=x^{\top}\hat\beta\)</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Two features drive the prediction \(\hat{y}=\beta_0+\beta_1 x_1+\beta_2 x_2\). Move the sliders for the query point and watch the heatmap update. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="mlr-x1">Feature \(x_1\)</label><input type="range" id="mlr-x1" min="0" max="10" step="0.1" value="5"></div>
-            <div class="control-group"><label for="mlr-x2">Feature \(x_2\)</label><input type="range" id="mlr-x2" min="0" max="10" step="0.1" value="5"></div>
-          </div>
-          <canvas id="mlr-canvas" class="viz-stage" aria-label="Two-feature regression prediction heatmap"></canvas>
-          <div id="mlr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="multiple-linear-regression"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Fitted \(\hat{y}=2+1.2\,x_1-0.8\,x_2\). Client \(x_1=40,x_2=5\): \(\hat{y}=2+48-4=46\). Age adds 1.2 per year; exercise removes 0.8 — and clients differing only in exercise by 2 score \(2\times0.8=1.6\), ceteris paribus in action.</p>
@@ -180,25 +169,19 @@
         <div class="grid-cards-2" id="sec-apps-grid"></div>
       </section>
 
-      <section class="section-block" id="qa">
-        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
-        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
-        <div id="qa-list" class="qa-list"></div>
-      </section>
-
       <section class="section-block" id="related">
-        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <h2 class="section-title"><span class="section-number">18</span> Related Models</h2>
         <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
         <div id="sec-related"></div>
       </section>
 
       <section class="section-block" id="recap">
-        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <h2 class="section-title"><span class="section-number">19</span> 60-Second Recap</h2>
         <div id="sec-recap"></div>
       </section>
 
       <section class="section-block" id="continue">
-        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <h2 class="section-title"><span class="section-number">20</span> Continue Learning</h2>
         <div id="continue-learning"></div>
       </section>
 
@@ -206,7 +189,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

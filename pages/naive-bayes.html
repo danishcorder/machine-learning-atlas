@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn Naive Bayes: Bayes theorem, priors, likelihoods, conditional independence, smoothing and a browser-based example.">
+  <meta name="description" content="Applies Bayes theorem with naive conditional-independence between features for fast classification.">
   <meta name="author" content="Muhammad Danish">
   <title>Naive Bayes Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/naive-bayes.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Naive Bayes Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn Naive Bayes: Bayes theorem, priors, likelihoods, conditional independence, smoothing and a browser-based example.">
+  <meta property="og:description" content="Applies Bayes theorem with naive conditional-independence between features for fast classification.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/naive-bayes.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Naive Bayes Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn Naive Bayes: Bayes theorem, priors, likelihoods, conditional independence, smoothing and a browser-based example.">
+  <meta name="twitter:description" content="Applies Bayes theorem with naive conditional-independence between features for fast classification.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Naive Bayes Machine Learning Tutorial","description":"Learn Naive Bayes: Bayes theorem, priors, likelihoods, conditional independence, smoothing and a browser-based example.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/naive-bayes.html","about":{"@type":"DefinedTerm","name":"Naive Bayes","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Naive Bayes, interactive machine learning, naive bayes"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Naive Bayes Machine Learning Tutorial","description":"Applies Bayes theorem with naive conditional-independence between features for fast classification.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/naive-bayes.html","about":{"@type":"DefinedTerm","name":"Naive Bayes","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Naive Bayes, interactive machine learning, naive bayes"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -62,8 +62,8 @@
           <div class="eyebrow">MACHINE LEARNING / CLASSIFICATION</div>
           <h1 class="model-title">NAIVE <em>BAYES</em></h1>
           <p class="model-subtitle">Bayes theorem at full speed — powered by a deliberately strong conditional-independence assumption.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Classification</span><span class="badge">Probabilistic</span><span class="badge">Fast</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Classification</span><span class="badge">Probabilistic</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -123,25 +123,7 @@
           <div class="flow-step">Threshold → label</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Toggle which words the email contains and slide the spam prior — watch the posterior update in real time. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="nb-prior">P(spam) <span id="nb-prior-label">P(spam)=0.40</span></label><input type="range" id="nb-prior" min="0" max="1" step="0.01" value="0.4"></div>
-          </div>
-          <div class="control-group checkboxes">
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-0" checked> free</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-1" checked> winner</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-2"> meeting</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-3"> project</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-4"> click</span>
-            <span class="badge badge-neutral"><input type="checkbox" id="nb-word-5"> invoice</span>
-          </div>
-          <canvas id="nb-canvas" class="viz-stage" aria-label="Naive Bayes spam probability vs prior and word evidence"></canvas>
-          <div id="nb-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="naive-bayes"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Email contains “free” (P=0.55) and “winner” (0.40); absent “meeting” (so factor 0.70). Prior P(spam)=0.4. Log-odds = ln(0.4/0.6)+ln(0.55/0.04)+ln(0.40/0.02)+ln(0.70/0.30) ≈ 0.56 → P(spam) ≈ 0.64. Positive words swung it from 0.40 to 0.64 — Bayes in one paragraph.</p>
@@ -184,25 +166,19 @@
         <div class="grid-cards-2" id="sec-apps-grid"></div>
       </section>
 
-      <section class="section-block" id="qa">
-        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
-        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
-        <div id="qa-list" class="qa-list"></div>
-      </section>
-
       <section class="section-block" id="related">
-        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <h2 class="section-title"><span class="section-number">18</span> Related Models</h2>
         <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
         <div id="sec-related"></div>
       </section>
 
       <section class="section-block" id="recap">
-        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <h2 class="section-title"><span class="section-number">19</span> 60-Second Recap</h2>
         <div id="sec-recap"></div>
       </section>
 
       <section class="section-block" id="continue">
-        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <h2 class="section-title"><span class="section-number">20</span> Continue Learning</h2>
         <div id="continue-learning"></div>
       </section>
 
@@ -210,7 +186,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

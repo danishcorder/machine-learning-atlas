@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn Polynomial Regression visually: feature expansion, degree, overfitting, bias-variance and interactive curve fitting.">
+  <meta name="description" content="Models non-linear relationships by fitting polynomials of degree n still solved as linear least-squares.">
   <meta name="author" content="Muhammad Danish">
   <title>Polynomial Regression Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/polynomial-regression.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Polynomial Regression Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn Polynomial Regression visually: feature expansion, degree, overfitting, bias-variance and interactive curve fitting.">
+  <meta property="og:description" content="Models non-linear relationships by fitting polynomials of degree n still solved as linear least-squares.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/polynomial-regression.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Polynomial Regression Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn Polynomial Regression visually: feature expansion, degree, overfitting, bias-variance and interactive curve fitting.">
+  <meta name="twitter:description" content="Models non-linear relationships by fitting polynomials of degree n still solved as linear least-squares.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Polynomial Regression Machine Learning Tutorial","description":"Learn Polynomial Regression visually: feature expansion, degree, overfitting, bias-variance and interactive curve fitting.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/polynomial-regression.html","about":{"@type":"DefinedTerm","name":"Polynomial Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Polynomial Regression, interactive machine learning, polynomial regression"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Polynomial Regression Machine Learning Tutorial","description":"Models non-linear relationships by fitting polynomials of degree n still solved as linear least-squares.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/polynomial-regression.html","about":{"@type":"DefinedTerm","name":"Polynomial Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Polynomial Regression, interactive machine learning, polynomial regression"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -61,9 +61,9 @@
         <div>
           <div class="eyebrow">MACHINE LEARNING / REGRESSION</div>
           <h1 class="model-title">POLYNOMIAL <em>REGRESSION</em></h1>
-          <p class="model-subtitle">When a straight line cannot bend enough — fit curves while keeping the least-squares framework.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">Non-linear</span><span class="badge">Bias–variance</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <p class="model-subtitle">When a straight line cannot bend enough — fit curves while keeping the least-squares optimality.</p>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Regression</span><span class="badge">Non-linear</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -125,18 +125,7 @@
           <div class="flow-step">\(\hat{y}=\sum\beta_j x^j\)</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Drag points to reshape the curve. Raise <strong>degree</strong> to chase every wiggle (overfitting), then press Reseed for fresh data. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="pr-degree">Degree <span id="pr-degree-label">n = 3</span></label><input type="range" id="pr-degree" min="1" max="8" step="1" value="3"></div>
-          </div>
-          <canvas id="pr-canvas" class="viz-stage" aria-label="Polynomial regression curve fit with degree control"></canvas>
-          <div class="viz-actions"><button id="pr-reseed" class="btn btn-sm">Reseed data</button></div>
-          <div id="pr-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="polynomial-regression"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Dose \(x\) vs efficacy \(y\). Points suggest a plateau near \(x=8\). A degree-1 line is wrong; degree-5 fits but swings to \(\hat{y}=-2\) at \(x=10\) (impossible). Degree-2 \(\hat{y}=0.1+1.0x-0.08x^2\) plateaus — a parsimonious, sensible curve. This is the bias–variance dance in one number: \(n\).</p>
@@ -178,25 +167,19 @@
         <div class="grid-cards-2" id="sec-apps-grid"></div>
       </section>
 
-      <section class="section-block" id="qa">
-        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
-        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
-        <div id="qa-list" class="qa-list"></div>
-      </section>
-
       <section class="section-block" id="related">
-        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <h2 class="section-title"><span class="section-number">18</span> Related Models</h2>
         <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
         <div id="sec-related"></div>
       </section>
 
       <section class="section-block" id="recap">
-        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <h2 class="section-title"><span class="section-number">19</span> 60-Second Recap</h2>
         <div id="sec-recap"></div>
       </section>
 
       <section class="section-block" id="continue">
-        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <h2 class="section-title"><span class="section-number">20</span> Continue Learning</h2>
         <div id="continue-learning"></div>
       </section>
 
@@ -204,7 +187,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

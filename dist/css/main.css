@@ -217,7 +217,7 @@ select {
 }
 
 /* MathJax / equations */
-mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+mjx-container { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .15rem 0; }
 
 /* Footer */
 .site-footer {

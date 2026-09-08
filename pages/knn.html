@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn KNN visually: K value, Euclidean distance, nearest-neighbour voting, decision boundaries and interactive classification.">
+  <meta name="description" content="Instance-based learner that classifies by majority vote of k nearest stored training examples.">
   <meta name="author" content="Muhammad Danish">
   <title>K-Nearest Neighbors Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/knn.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="K-Nearest Neighbors Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn KNN visually: K value, Euclidean distance, nearest-neighbour voting, decision boundaries and interactive classification.">
+  <meta property="og:description" content="Instance-based learner that classifies by majority vote of k nearest stored training examples.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/knn.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="K-Nearest Neighbors Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn KNN visually: K value, Euclidean distance, nearest-neighbour voting, decision boundaries and interactive classification.">
+  <meta name="twitter:description" content="Instance-based learner that classifies by majority vote of k nearest stored training examples.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"K-Nearest Neighbors Machine Learning Tutorial","description":"Learn KNN visually: K value, Euclidean distance, nearest-neighbour voting, decision boundaries and interactive classification.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/knn.html","about":{"@type":"DefinedTerm","name":"K-Nearest Neighbors","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, K-Nearest Neighbors, interactive machine learning, knn"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"K-Nearest Neighbors Machine Learning Tutorial","description":"Instance-based learner that classifies by majority vote of k nearest stored training examples.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/knn.html","about":{"@type":"DefinedTerm","name":"K-Nearest Neighbors","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, K-Nearest Neighbors, interactive machine learning, knn"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -62,8 +62,8 @@
           <div class="eyebrow">MACHINE LEARNING / CLASSIFICATION</div>
           <h1 class="model-title">K-NEAREST <em>NEIGHBORS</em></h1>
           <p class="model-subtitle">No training equation — classify a point by asking its nearest neighbours to vote.</p>
-          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Classification</span><span class="badge">Lazy learning</span><span class="badge">Distance-based</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <div class="hero-badges"><span class="badge">Supervised</span><span class="badge">Classification</span><span class="badge">Instance-based</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -126,20 +126,7 @@
           <div class="flow-step">Label of q</div>
         </div>
       </section>
-      <section class="section-block" id="lab">
-        <h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2>
-        <p class="section-subtitle">Drag the orange query point and change \(k\) — see the highlighted neighbours and the vote shift. Click empty space to add a class, or pick the class for new points. <em>Simplified visualization.</em></p>
-        <div class="viz-container">
-          <div class="viz-controls">
-            <div class="control-group"><label for="knn-k">Neighbours <span id="knn-k-label">k = 3</span></label><input type="range" id="knn-k" min="1" max="9" step="2" value="3"></div>
-            <div class="control-group"><label for="knn-add-class">New point class</label>
-              <select id="knn-add-class"><option value="A">Class A</option><option value="B">Class B</option></select></div>
-          </div>
-          <canvas id="knn-canvas" class="viz-stage" aria-label="KNN query point, distances, nearest neighbours and vote"></canvas>
-          <div class="viz-actions"><button id="knn-reset" class="btn btn-sm">↻ Reset query</button></div>
-          <div id="knn-info"></div>
-        </div>
-      </section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="knn"></div></section>
       <section class="section-block" id="example">
         <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
         <p>Query at (5,4). Distances: A at 1.4, 2.0, 2.8; B at 2.2, 3.5, 3.6. \(k=3\) voters {A:1.4, A:2.0, B:2.2} → <strong>A wins 2–1</strong>. \(k=5\) adds A:2.8 → {A,A,A,B,B} → <strong>A wins 3–2</strong>. The verdict held, but a tiny noise flip near 2.8 could have changed everything — \(k\) guards against exactly that.</p>
@@ -181,25 +168,19 @@
         <div class="grid-cards-2" id="sec-apps-grid"></div>
       </section>
 
-      <section class="section-block" id="qa">
-        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
-        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
-        <div id="qa-list" class="qa-list"></div>
-      </section>
-
       <section class="section-block" id="related">
-        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <h2 class="section-title"><span class="section-number">18</span> Related Models</h2>
         <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
         <div id="sec-related"></div>
       </section>
 
       <section class="section-block" id="recap">
-        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <h2 class="section-title"><span class="section-number">19</span> 60-Second Recap</h2>
         <div id="sec-recap"></div>
       </section>
 
       <section class="section-block" id="continue">
-        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <h2 class="section-title"><span class="section-number">20</span> Continue Learning</h2>
         <div id="continue-learning"></div>
       </section>
 
@@ -207,7 +188,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

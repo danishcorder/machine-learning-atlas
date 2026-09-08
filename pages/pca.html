@@ -6,23 +6,23 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Learn PCA visually: covariance, eigenvectors, principal components, explained variance and interactive projection.">
+  <meta name="description" content="Linear transformation projecting data onto directions of maximal variance for compression and visualization.">
   <meta name="author" content="Muhammad Danish">
   <title>Principal Component Analysis Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/pca.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Principal Component Analysis Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Learn PCA visually: covariance, eigenvectors, principal components, explained variance and interactive projection.">
+  <meta property="og:description" content="Linear transformation projecting data onto directions of maximal variance for compression and visualization.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/pca.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Principal Component Analysis Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Learn PCA visually: covariance, eigenvectors, principal components, explained variance and interactive projection.">
+  <meta name="twitter:description" content="Linear transformation projecting data onto directions of maximal variance for compression and visualization.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Principal Component Analysis Machine Learning Tutorial","description":"Learn PCA visually: covariance, eigenvectors, principal components, explained variance and interactive projection.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/pca.html","about":{"@type":"DefinedTerm","name":"Principal Component Analysis","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Principal Component Analysis, interactive machine learning, pca"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Principal Component Analysis Machine Learning Tutorial","description":"Linear transformation projecting data onto directions of maximal variance for compression and visualization.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/pca.html","about":{"@type":"DefinedTerm","name":"Principal Component Analysis","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Principal Component Analysis, interactive machine learning, pca"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -53,7 +53,7 @@
   </nav>
 
   <div class="container container-wide model-layout">
-    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar">☰ Model index</button>
+    <button id="sidebar-toggle" class="model-sidebar-toggle" aria-expanded="false" aria-controls="model-sidebar"><span class="sidebar-toggle-icon">☰</span> Browse models <span class="sidebar-toggle-chevron">⌄</span></button>
     <aside id="model-sidebar" class="model-sidebar" aria-label="Machine learning algorithm navigation"></aside>
 
     <main id="main-content">
@@ -62,8 +62,8 @@
           <div class="eyebrow">MACHINE LEARNING / DIMENSIONALITY REDUCTION</div>
           <h1 class="model-title">PRINCIPAL COMPONENT <em>ANALYSIS</em></h1>
           <p class="model-subtitle">Rotate the coordinate system toward directions that preserve the most variance.</p>
-          <div class="hero-badges"><span class="badge">Unsupervised</span><span class="badge">Dimensionality reduction</span><span class="badge">Eigenvectors</span><span class="badge">Variance</span></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#lab">Open interactive lab</a></div>
+          <div class="hero-badges"><span class="badge">Unsupervised</span><span class="badge">Dimensionality Reduction</span><span class="badge">Linear</span></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#intuition">Build intuition</a><a class="btn btn-ghost" href="#visuals">See the visual</a></div>
         </div>
         <div id="dna-card" class="model-dna-card" aria-label="Model DNA summary"></div>
       </header>
@@ -88,7 +88,7 @@
       <section class="section-block" id="equation"><h2 class="section-title"><span class="section-number">06</span> The Equation</h2><div class="equation-card">\[\Sigma v_j=\lambda_jv_j\]</div><ul class="equation-symbol-list"><li><span class="eq-symbol">\(\Sigma\)</span> centred covariance matrix</li><li><span class="eq-symbol">\(v_j\)</span> principal direction</li><li><span class="eq-symbol">\(\lambda_j\)</span> variance explained by that direction</li></ul></section>
       <section class="section-block" id="learns"><h2 class="section-title"><span class="section-number">07</span> How It Learns</h2><ol class="flow"><li class="flow-step">Centre each feature.</li><li class="flow-step">Compute the covariance matrix.</li><li class="flow-step">Find eigenvectors and eigenvalues.</li><li class="flow-step">Sort directions by descending eigenvalue.</li></ol></section>
       <section class="section-block" id="algorithm"><h2 class="section-title"><span class="section-number">08</span> Algorithm</h2><div class="flow"><div class="flow-step">Data matrix</div><div class="flow-arrow">↓</div><div class="flow-step">Centre and covary</div><div class="flow-arrow">↓</div><div class="flow-step">Eigendecomposition</div><div class="flow-arrow">↓</div><div class="flow-step">Project onto selected PCs</div></div></section>
-      <section class="section-block" id="lab"><h2 class="section-title"><span class="section-number">09</span> Interactive Lab</h2><p class="section-subtitle">Toggle the projection lines and second component to see the coordinate change.</p><div class="viz-container"><div class="viz-controls"><label><input type="checkbox" id="pca-proj" checked> projection lines</label><label><input type="checkbox" id="pca-pc2"> show PC2</label><button id="pca-reseed" class="btn btn-sm">Reseed</button></div><canvas id="pca-canvas" class="viz-stage" aria-label="PCA projection canvas"></canvas><div id="pca-info"></div></div></section>
+      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="pca"></div></section>
       <section class="section-block" id="example"><h2 class="section-title"><span class="section-number">10</span> Worked Example</h2><p class="section-subtitle">If PC1 explains 92% of the variance, a one-dimensional projection retains most of the cloud's structure with a substantial reduction in representation size.</p></section>
 
 
@@ -127,25 +127,19 @@
         <div class="grid-cards-2" id="sec-apps-grid"></div>
       </section>
 
-      <section class="section-block" id="qa">
-        <h2 class="section-title"><span class="section-number">18</span> Questions &amp; Answers</h2>
-        <p class="section-subtitle" style="margin-bottom:1rem;">Test your understanding — select a card to reveal the answer.</p>
-        <div id="qa-list" class="qa-list"></div>
-      </section>
-
       <section class="section-block" id="related">
-        <h2 class="section-title"><span class="section-number">19</span> Related Models</h2>
+        <h2 class="section-title"><span class="section-number">18</span> Related Models</h2>
         <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
         <div id="sec-related"></div>
       </section>
 
       <section class="section-block" id="recap">
-        <h2 class="section-title"><span class="section-number">20</span> 60-Second Recap</h2>
+        <h2 class="section-title"><span class="section-number">19</span> 60-Second Recap</h2>
         <div id="sec-recap"></div>
       </section>
 
       <section class="section-block" id="continue">
-        <h2 class="section-title"><span class="section-number">21</span> Continue Learning</h2>
+        <h2 class="section-title"><span class="section-number">20</span> Continue Learning</h2>
         <div id="continue-learning"></div>
       </section>
 
@@ -153,7 +147,7 @@
     </main>
   </div>
 
-  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — math, intuition, interactive labs and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
+  <footer class="site-footer"><div><strong>Machine Learning Atlas</strong><span>Learn machine learning visually — clear explanations, diagrams and real-world use cases.</span></div><nav aria-label="Footer navigation"><a href="../index.html">Home</a><a href="roadmap.html">Roadmap</a><a href="mathematics.html">Math</a><a href="comparison.html">Compare</a><a href="glossary.html">Glossary</a><a href="resources.html">Resources</a><a href="about.html">About</a></nav></footer>
   <script type="module" src="../js/main.js"></script>
 </body>
 </html>

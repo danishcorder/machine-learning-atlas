@@ -1,6 +1,6 @@
 /* ML ATLAS — Master Model Data (15 models, full schema)
  * Single source of truth. Add model #16 here + its id to MODEL_ORDER/
- * MODEL_GROUPS + its 20 answers in questions.js + a viz module + an HTML page.
+ * MODEL_GROUPS + a viz module + an HTML page.
  */
 export const MODEL_ORDER = [
   'linear-regression','multiple-linear-regression','polynomial-regression',
@@ -368,7 +368,6 @@ export const nextModel = (id) => {
   return i < MODEL_ORDER.length - 1 ? MODEL_MAP[MODEL_ORDER[i + 1]] : null;
 };
 export default MODELS;
-
 
 
 
