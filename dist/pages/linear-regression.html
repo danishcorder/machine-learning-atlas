@@ -6,27 +6,28 @@
   <meta name="theme-color" content="#080b14">
   <meta name="color-scheme" content="dark light">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="description" content="Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.">
+  <meta name="description" content="Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.">
   <meta name="author" content="Muhammad Danish">
   <title>Linear Regression Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
   <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/linear-regression.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Linear Regression Machine Learning Tutorial | ML Atlas">
-  <meta property="og:description" content="Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.">
+  <meta property="og:description" content="Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/linear-regression.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Linear Regression Machine Learning Tutorial | ML Atlas">
-  <meta name="twitter:description" content="Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.">
+  <meta name="twitter:description" content="Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.">
   <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linear Regression Machine Learning Tutorial","description":"Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/linear-regression.html","about":{"@type":"DefinedTerm","name":"Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Linear Regression, interactive machine learning, linear regression"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linear Regression Machine Learning Tutorial","description":"Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/linear-regression.html","about":{"@type":"DefinedTerm","name":"Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Linear Regression, interactive machine learning, linear regression"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
   <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/linear-regression.css">
   <script>
     try { document.documentElement.dataset.theme = localStorage.getItem('atlas_theme') || 'dark'; } catch { document.documentElement.dataset.theme = 'dark'; }
   </script>
@@ -81,57 +82,70 @@
         <div id="sec-overview-body"></div>
       </section>
 
-      <section class="section-block" id="problem">
-        <h2 class="section-title"><span class="section-number">02</span> The Problem</h2>
-        <p>An agent asks: <strong>how much is this house worth?</strong> She has past sales as (size, location, price). Under-price and the seller leaves; over-price and holding costs pile up. The target is a <strong>continuous</strong> number recoverable only above the noise of features never fully captured.</p>
-      </section>
-      <section class="section-block" id="why">
-        <h2 class="section-title"><span class="section-number">03</span> Why It Matters</h2>
-        <p>Regression is the engine behind pricing, demand, risk and dosage. Most "soft" quantities depend linearly on a few drivers, and a fit whose slope reads aloud ("each extra sq ft is \$137") is fast, auditable, and regulator-friendly.</p>
-      </section>
-      <section class="section-block" id="intuition">
-        <h2 class="section-title"><span class="section-number">04</span> Intuition</h2>
-        <p>Points scatter but tilt. Linear regression is the straight line minimising the total squared vertical distance to every point. Each coefficient then reads: the marginal effect of that feature, holding the rest fixed.</p>
-      </section>
-      <section class="section-block" id="math">
-        <h2 class="section-title"><span class="section-number">05</span> Mathematical Foundation</h2>
-        <p>Residuals \(e_i = y_i - \hat{y}_i\); cost \(J=\tfrac{1}{n}\sum e_i^2\). Squaring makes a smooth, convex bowl — the unique global minimum is where calculus lands.</p>
-      </section>
-      <section class="section-block" id="equation">
-        <h2 class="section-title"><span class="section-number">06</span> The Equation</h2>
-        <div class="equation-card">\[ \hat{y}_i = \beta_0 + \beta_1 x_i, \qquad J=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^{2} \]</div>
-        <ul class="equation-symbol-list">
-          <li><span class="eq-symbol">\(x_i\)</span> input feature for example \(i\)</li>
-          <li><span class="eq-symbol">\(y_i\)</span> observed target</li>
-          <li><span class="eq-symbol">\(\hat{y}_i\)</span> prediction</li>
-          <li><span class="eq-symbol">\(\beta_0\)</span> intercept — \(\hat{y}\) at \(x=0\)</li>
-          <li><span class="eq-symbol">\(\beta_1\)</span> slope — change in \(\hat{y}\) per unit \(x\)</li>
-          <li><span class="eq-symbol">\(J\)</span> mean squared error</li>
-        </ul>
-      </section>
-      <section class="section-block" id="learns">
-        <h2 class="section-title"><span class="section-number">07</span> How It Learns</h2>
-        <ol class="flow">
-          <li class="flow-step"><strong>Start anywhere.</strong> Guess \(\beta_0=\beta_1=0\).</li>
-          <li class="flow-step"><strong>Feel the slope.</strong> \(\nabla J=(-\tfrac{2}{n}\sum e_i,\;-\tfrac{2}{n}\sum e_i x_i)\).</li>
-          <li class="flow-step"><strong>Step downhill.</strong> \(\beta \leftarrow \beta - \eta\,\nabla J\).</li>
-          <li class="flow-step"><strong>Stop at bottom.</strong> The normal equations reach this point in one shot.</li>
-        </ol>
-      </section>
-      <section class="section-block" id="algorithm">
-        <h2 class="section-title"><span class="section-number">08</span> Algorithm</h2>
-        <div class="flow">
-          <div class="flow-step">Data \((x_i,y_i)\)</div><div class="flow-arrow">↓</div>
-          <div class="flow-step">Guess \(\beta_0,\beta_1\)</div><div class="flow-arrow">↓</div>
-          <div class="flow-step">Gradient descent → optimum</div><div class="flow-arrow">↓</div>
-          <div class="flow-step">\(\hat{y}=\beta_0+\beta_1 x\)</div>
-        </div>
-      </section>
-      <section class="section-block visual-section" id="visuals"><h2 class="section-title"><span class="section-number">09</span> Visual Explanation</h2><p class="section-subtitle">A quick visual summary of how this model sees data and makes its prediction.</p><div class="visual-card" data-static-visual="linear-regression"></div></section>
-      <section class="section-block" id="example">
-        <h2 class="section-title"><span class="section-number">10</span> Worked Example</h2>
-        <p>Data \((1,1),(2,3),(3,2),(4,5),(5,5)\). \(\bar x=3,\bar y=3\), \(s_{xx}=10,s_{xy}=12\). So \(\beta_1=1.2,\beta_0=-0.6\). Model \(\hat{y}=-0.6+1.2x\). Predict \(x=6\): \(\hat{y}=6.6\).</p>
-      </section>
+<section class="lr-block lr-understand" id="understand">
+  <div class="lr-kicker">01 / UNDERSTAND</div>
+  <h2>What problem does a straight line solve?</h2>
+  <p class="lr-lead">Linear Regression finds the line that best connects an input to a continuous outcome. It turns a cloud of observations into a relationship we can explain, evaluate and use.</p>
+  <div class="lr-understand-grid">
+    <article class="lr-story-card"><span class="lr-card-number">01</span><h3>Start with data</h3><p>Past house sales pair size, location and price. The target is a number, not a category.</p></article>
+    <article class="lr-story-card"><span class="lr-card-number">02</span><h3>Look for a trend</h3><p>Points scatter, but they can still tilt. A slope describes the average change in the target.</p></article>
+    <article class="lr-story-card"><span class="lr-card-number">03</span><h3>Make it explainable</h3><p>Each coefficient has a readable meaning: how much the prediction changes per unit of input.</p></article>
+  </div>
+  <div class="lr-question-card"><span>REAL-WORLD QUESTION</span><strong>Can previous house sales teach us the mathematical relationship between size and price?</strong></div>
+</section>
+
+<section class="lr-block lr-visualize" id="visualize">
+  <div class="lr-kicker">02 / VISUALIZE</div>
+  <div class="lr-section-heading"><div><h2>See Linear Regression in Action</h2><p>Move the parameters and watch the line, residuals and error respond immediately.</p></div><span class="lr-live-pill"><i></i> LIVE MODEL</span></div>
+  <div class="lr-playground">
+    <div class="lr-plot-wrap"><canvas id="lr-canvas" class="lr-canvas" aria-label="Interactive linear regression scatter plot with best-fit line"></canvas><div class="lr-plot-help">Drag a point to change the data</div></div>
+    <aside class="lr-controls" aria-label="Regression controls">
+      <div class="lr-control-heading"><span>MODEL CONTROLS</span><strong>Shape the line</strong></div>
+      <label class="lr-range"><span>Slope <b id="lr-slope-value">β₁ = 1.00</b></span><input id="lr-slope" type="range" min="-3" max="3" step="0.05" value="1"></label>
+      <label class="lr-range"><span>Intercept <b id="lr-intercept-value">β₀ = 0.00</b></span><input id="lr-intercept" type="range" min="-5" max="10" step="0.05" value="0"></label>
+      <label class="lr-toggle"><input id="lr-residuals" type="checkbox"><span>Show residuals</span></label>
+      <label class="lr-toggle"><input id="lr-predictions" type="checkbox" checked><span>Show predictions</span></label>
+      <div id="lr-info" class="lr-live-stats" aria-live="polite"></div>
+      <div class="lr-control-actions"><button id="lr-fit" class="lr-button lr-button-primary" type="button">Best Fit</button><button id="lr-reset" class="lr-button" type="button">Reset</button></div>
+    </aside>
+  </div>
+</section>
+
+<section class="lr-block lr-intuition" id="intuition">
+  <div class="lr-kicker">03 / INTUITION</div><h2>From scattered data to a useful line</h2>
+  <div class="lr-concept-flow"><article><span>01</span><strong>Data</strong><p>Observe paired values.</p></article><b>→</b><article><span>02</span><strong>Guess a line</strong><p>Choose β₀ and β₁.</p></article><b>→</b><article><span>03</span><strong>Measure error</strong><p>Compare y to ŷ.</p></article><b>→</b><article><span>04</span><strong>Find best fit</strong><p>Minimize total error.</p></article></div>
+  <p class="lr-one-line">Linear Regression searches for the line that minimizes prediction error across the observed data.</p>
+</section>
+
+<section class="lr-block lr-math" id="math">
+  <div class="lr-kicker">04 / MATHEMATICS</div><h2>The Mathematics Behind Linear Regression</h2>
+  <div class="lr-equation-card"><div class="lr-equation" aria-label="y hat equals beta zero plus beta one x"><span data-symbol="prediction">ŷ</span> = <span data-symbol="intercept">β₀</span> + <span data-symbol="slope">β₁</span><span data-symbol="input">x</span></div><p>One line. Four ideas. Select a symbol to focus its meaning.</p></div>
+  <div class="lr-symbol-grid"><button class="lr-symbol-card" data-focus-symbol="prediction" type="button"><strong>ŷ</strong><span>Predicted output</span></button><button class="lr-symbol-card" data-focus-symbol="intercept" type="button"><strong>β₀</strong><span>Intercept</span></button><button class="lr-symbol-card" data-focus-symbol="slope" type="button"><strong>β₁</strong><span>Slope / coefficient</span></button><button class="lr-symbol-card" data-focus-symbol="input" type="button"><strong>x</strong><span>Input feature</span></button></div>
+  <details class="lr-disclosure"><summary>Explore the Mathematics <span>+</span></summary><div class="lr-disclosure-body"><p>A residual is \(e_i = y_i - \hat{y}_i\). Least squares minimizes \(J = \frac{1}{n}\sum_i (y_i-\hat{y}_i)^2\), producing a smooth convex loss surface. For a full matrix, the normal equation is \(\beta = (X^T X)^{-1}X^T y\). Gradient descent follows \(\beta \leftarrow \beta - \eta\nabla J\) until the loss stops improving.</p></div></details>
+  <details class="lr-disclosure"><summary>Show Full Derivation <span>+</span></summary><div class="lr-disclosure-body"><p>Centre x and y, compute \(s_{xx}=\sum(x_i-\bar{x})^2\) and \(s_{xy}=\sum(x_i-\bar{x})(y_i-\bar{y})\). Then \(\beta_1=s_{xy}/s_{xx}\) and \(\beta_0=\bar{y}-\beta_1\bar{x}\). Squaring the residuals makes the optimum unique for a non-degenerate dataset.</p></div></details>
+</section>
+
+<section class="lr-block lr-training" id="training">
+  <div class="lr-kicker">05 / TRAINING</div><h2>How the model learns</h2>
+  <div class="lr-pipeline"><article><span>01</span><strong>Guess parameters</strong><small>β₀ = 0 · β₁ = 0</small></article><b>→</b><article><span>02</span><strong>Predict</strong><small>ŷ = β₀ + β₁x</small></article><b>→</b><article><span>03</span><strong>Calculate error</strong><small>MSE = 24.7</small></article><b>→</b><article><span>04</span><strong>Update</strong><small>Step downhill</small></article><b>→</b><article><span>05</span><strong>Best fit</strong><small>MSE ↓ 0.42</small></article></div>
+  <div class="lr-loss-card"><div><span class="lr-card-label">LOSS CURVE</span><strong>Error falls as the line learns</strong></div><svg viewBox="0 0 520 110" role="img" aria-label="Descending loss curve"><path d="M12 18 C80 20 72 78 145 70 S202 53 260 60 S318 42 370 47 S432 34 510 38" fill="none" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round"/><path d="M12 91 H510" stroke="var(--border-subtle)"/><circle cx="510" cy="38" r="5" fill="var(--accent-secondary)"/></svg></div>
+  <details class="lr-disclosure"><summary>See the training algorithm <span>+</span></summary><div class="lr-disclosure-body"><p>Start with β₀ = β₁ = 0, compute the gradient of the mean squared error, step downhill with learning rate η, and repeat until the loss stabilizes. The normal equation reaches the same optimum directly when the matrix is well-conditioned.</p></div></details>
+</section>
+
+<section class="lr-block lr-practice" id="practice">
+  <div class="lr-kicker">06 / PRACTICE</div><h2>Work it through</h2>
+  <div class="lr-practice-grid"><div class="lr-worked-example"><div class="lr-card-label">WORKED EXAMPLE</div><h3>Five observations, one equation</h3><table><thead><tr><th>x</th><th>y</th></tr></thead><tbody><tr><td>1</td><td>1</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3</td><td>2</td></tr><tr><td>4</td><td>5</td></tr><tr><td>5</td><td>5</td></tr></tbody></table><ol class="lr-steps"><li><b>Average:</b> x̄ = 3, ȳ = 3</li><li><b>Slope:</b> β₁ = sxy / sxx = 12 / 10 = 1.2</li><li><b>Intercept:</b> β₀ = ȳ − β₁x̄ = −0.6</li></ol><div class="lr-result">ŷ = −0.6 + 1.2x <small>For x = 6, predict ŷ = 6.6</small></div></div><div class="lr-quiz-card"><div class="lr-card-label">LEARNER CHECK</div><h3>What does the slope tell us?</h3><button class="lr-quiz-option" data-correct="false" type="button">The model's average error</button><button class="lr-quiz-option" data-correct="true" type="button">The change in prediction for one unit of x</button><button class="lr-quiz-option" data-correct="false" type="button">The number of observations</button><p class="lr-quiz-feedback" aria-live="polite"></p></div></div>
+</section>
+
+<section class="lr-block lr-apply" id="apply">
+  <div class="lr-kicker">07 / APPLY</div><h2>Know when it earns its place</h2>
+  <div class="lr-compare"><div><h3>Great choice when</h3><p>✓ The relationship is roughly linear</p><p>✓ A continuous prediction is needed</p><p>✓ Interpretability matters</p><p>✓ A fast baseline is useful</p></div><div><h3>Avoid or be careful when</h3><p>× The relationship is highly nonlinear</p><p>× Extreme outliers dominate</p><p>× Complex interactions matter</p><p>× Assumptions are seriously violated</p></div></div>
+  <div class="lr-app-grid"><article><span>⌂</span><strong>Housing</strong><small>Size → Price</small></article><article><span>↗</span><strong>Marketing</strong><small>Spend → Sales</small></article><article><span>◒</span><strong>Energy</strong><small>Temperature → Consumption</small></article><article><span>✦</span><strong>Education</strong><small>Study hours → Score</small></article></div>
+  <div class="lr-metric-grid"><button class="lr-metric-card" type="button"><strong>MAE</strong><span>Average absolute error</span><em>Equation + use</em></button><button class="lr-metric-card" type="button"><strong>MSE</strong><span>Average squared error</span><em>Equation + use</em></button><button class="lr-metric-card" type="button"><strong>RMSE</strong><span>Error in target units</span><em>Equation + use</em></button><button class="lr-metric-card" type="button"><strong>R²</strong><span>Variance explained</span><em>Equation + use</em></button></div>
+  <div class="lr-recap"><div class="lr-card-label">60-SECOND RECAP</div><div class="lr-recap-flow"><span>Data</span><b>↓</b><span>Assume relationship</span><b>↓</b><span>Fit line</span><b>↓</b><span>Minimize error</span><b>↓</b><span>Evaluate</span><b>↓</b><span>Predict</span></div><p><strong>Remember:</strong> Linear Regression learns the straight-line function that best represents the relationship between input and output variables.</p></div>
+</section>
+
+<script type="module" src="../js/linear-regression-experience.js"></script>
 
 
       <section class="section-block" id="data">

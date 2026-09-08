@@ -12,7 +12,7 @@ const BASE_URL = (process.env.SITE_URL || CONFIG.defaultUrl).replace(/\/+$/, '')
 const CHECK_ONLY = process.argv.includes('--check');
 
 const models = [
-  ['linear-regression','Linear Regression','MACHINE LEARNING / REGRESSION','LINEAR <em>REGRESSION</em>','Finding the straight-line relationship hidden inside data — the line that best explains a continuous target.','Supervised|Regression|Linear','Fits a hyperplane to data by minimizing squared residual error via least squares or gradient descent.'],
+  ['linear-regression','Linear Regression','MACHINE LEARNING / REGRESSION','LINEAR <em>REGRESSION</em>','Finding the straight-line relationship hidden inside data — the line that best explains a continuous target.','Supervised|Regression|Linear','Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.'],
   ['multiple-linear-regression','Multiple Linear Regression','MACHINE LEARNING / REGRESSION','MULTIPLE LINEAR <em>REGRESSION</em>','One target, many drivers — a hyperplane that weighs every feature to predict a scalar.','Supervised|Regression|Linear','Models y as a weighted linear combination of p predictors, solved jointly via normal equations.'],
   ['polynomial-regression','Polynomial Regression','MACHINE LEARNING / REGRESSION','POLYNOMIAL <em>REGRESSION</em>','When a straight line cannot bend enough — fit curves while keeping the least-squares optimality.','Supervised|Regression|Non-linear','Models non-linear relationships by fitting polynomials of degree n still solved as linear least-squares.'],
   ['ridge-regression','Ridge Regression','MACHINE LEARNING / REGRESSION','RIDGE <em>REGRESSION</em>','Least squares with an L2 safety net — shrink coefficients to gain stability under multicollinearity.','Supervised|Regression|Regularized','Adds an L2 penalty λ‖β‖² to reduce variance and handle feature multicollinearity gracefully.'],
@@ -50,10 +50,12 @@ function modelPage(m) {
   }).replace(/</g,'\\u003c');
   const repl = {
     '@@ID@@':m.id,'@@TITLE@@':title,'@@PAGE_TITLE@@':m.title,'@@CAT@@':m.cat,'@@NAME@@':m.name,'@@SUB@@':m.sub,
-    '@@BADGES@@':badgeHtml(m.badges),'@@DESC@@':m.desc,'@@CANONICAL@@':url,'@@OG_IMAGE@@':canonical('assets/og-image.png'),'@@SCHEMA@@':schema
+    '@@BADGES@@':badgeHtml(m.badges),'@@DESC@@':m.desc,'@@CANONICAL@@':url,'@@OG_IMAGE@@':canonical('assets/og-image.png'),'@@SCHEMA@@':schema,
+    '@@EXTRA_HEAD@@': m.id === 'linear-regression' ? '<link rel="stylesheet" href="../css/linear-regression.css">' : ''
   };
   let html = top + '\n' + fs.readFileSync(midPath,'utf8') + '\n' + bottom;
   for (const [k,v] of Object.entries(repl)) html = html.split(k).join(v);
+  html = html.replace(/\n  \n  <script>/g, '\n  <script>');
   return html;
 }
 

@@ -10,6 +10,7 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
   const M = 48, XMAX = 10, YMAX = 10;
   let W = 0, H = 0;
   let pts = [{x:1.2,y:2.1},{x:2.8,y:3.9},{x:4.5,y:5.2},{x:6.1,y:6.8},{x:7.6,y:8.0}];
+  const initialPts = pts.map((p) => ({...p}));
   let b0 = 0, b1 = 1, gdTrail = [], anim = false, dragIdx = -1;
 
   const px = (x) => M + (x / XMAX) * (W - 2 * M);
@@ -83,13 +84,15 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
       ctx.stroke();
     });
     ctx.globalAlpha = 1;
-    // current fit line
-    ctx.strokeStyle = css('--accent-primary') || '#4f9';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(px(0),py(b0));
-    ctx.lineTo(px(XMAX),py(b0+b1*XMAX));
-    ctx.stroke();
+    // current fit line doubles as the prediction layer and can be hidden.
+    if (document.getElementById('lr-predictions')?.checked !== false) {
+      ctx.strokeStyle = css('--accent-primary') || '#4f9';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(px(0),py(b0));
+      ctx.lineTo(px(XMAX),py(b0+b1*XMAX));
+      ctx.stroke();
+    }
     // points
     pts.forEach(p=>{
       ctx.fillStyle = css('--text-primary') || '#fff';
@@ -111,6 +114,10 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
         <div><span class="stat-label">MSE</span><span class="stat-value">${mse().toFixed(4)}</span></div>
         <div><span class="stat-label">Points</span><span class="stat-value">${pts.length}</span></div>
       </div>`;
+    const slopeLabel = document.getElementById('lr-slope-value');
+    const interceptLabel = document.getElementById('lr-intercept-value');
+    if (slopeLabel) slopeLabel.textContent = `β₁ = ${b1.toFixed(2)}`;
+    if (interceptLabel) interceptLabel.textContent = `β₀ = ${b0.toFixed(2)}`;
     const sl = document.getElementById('lr-slope'), ic = document.getElementById('lr-intercept');
     if (sl && document.activeElement !== sl) sl.value = b1.toFixed(2);
     if (ic && document.activeElement !== ic) ic.value = b0.toFixed(2);
@@ -171,6 +178,12 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
   document.getElementById('lr-slope')?.addEventListener('input', (e) => { b1 = parseFloat(e.target.value); draw(); });
   document.getElementById('lr-intercept')?.addEventListener('input', (e) => { b0 = parseFloat(e.target.value); draw(); });
   document.getElementById('lr-residuals')?.addEventListener('change', draw);
+  document.getElementById('lr-predictions')?.addEventListener('change', draw);
+  document.getElementById('lr-reset')?.addEventListener('click', () => {
+    pts = initialPts.map((p) => ({...p}));
+    b0 = 0; b1 = 1; gdTrail = [];
+    syncSliders(); draw();
+  });
 
   new ResizeObserver(resize).observe(canvas);
   resize();
