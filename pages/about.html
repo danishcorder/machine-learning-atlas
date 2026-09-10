@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/about.html">
   <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "About Machine Learning Atlas", "description": "Learn about Machine Learning Atlas, a free static learning platform for machine learning algorithms, mathematics, interactive visualizations and model selection.", "url": "https://danishcorder.github.io/ml-atlas/pages/about.html", "isAccessibleForFree": true, "provider": {"@type": "Organization", "name": "Machine Learning Atlas"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"LearningResource","name":"About Machine Learning Atlas","description":"Learn about Machine Learning Atlas, a free static learning platform for machine learning algorithms, mathematics, interactive visualizations and model selection.","url":"https://danishcorder.github.io/ml-atlas/pages/about.html","isAccessibleForFree":true,"provider":{"@type":"Organization","name":"Machine Learning Atlas"},"creator":{"@id":"https://danishcorder.github.io/ml-atlas/pages/about.html#creator"}},{"@type":"Person","@id":"https://danishcorder.github.io/ml-atlas/pages/about.html#creator","name":"Muhammad Danish","jobTitle":"BS Mathematics Student, Data & AI Enthusiast, Developer","affiliation":{"@type":"CollegeOrUniversity","name":"Bahauddin Zakariya University"},"url":"https://muhammaddanish-sage.vercel.app/","sameAs":["https://github.com/danishcorder"]}]}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -79,13 +79,47 @@
       </ul>
     </section>
 
-    <section class="section-block" id="stack">
+  <section class="section-block" id="stack">
       <h2 class="section-title"><span class="section-number">04</span> Built with</h2>
       <div class="hero-badges" style="margin-bottom:1rem;">
         <span class="badge">HTML5</span><span class="badge">CSS custom properties</span><span class="badge">Vanilla JS (ES modules)</span>
         <span class="badge">SVG charts</span><span class="badge">MathJax 3</span><span class="badge">localStorage</span>
       </div>
       <p style="color:var(--text-secondary);">To use ML ATLAS, open <code>index.html</code> in a modern browser. No build or install needed; serving the folder over a static file server keeps ES module imports happy.</p>
+    </section>
+
+    <section class="section-block author-section" id="creator" aria-labelledby="creator-title">
+      <style>
+        .author-section { margin-top: 4rem; }
+        .author-layout { display: grid; grid-template-columns: minmax(220px, .72fr) minmax(0, 1.5fr); gap: 2rem; align-items: center; padding: clamp(1.25rem, 3vw, 2rem); background: linear-gradient(135deg, var(--bg-card), var(--bg-card-elevated)); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
+        .author-photo-wrap { min-width: 0; }
+        .author-photo { display: block; width: 100%; aspect-ratio: 1 / 1; max-width: 360px; margin: 0 auto; object-fit: cover; border: 1px solid var(--border-accent); border-radius: var(--radius-lg); background: var(--bg-secondary); transition: transform var(--transition-normal), border-color var(--transition-fast), box-shadow var(--transition-fast); }
+        .author-photo:hover { transform: translateY(-3px); border-color: var(--accent-primary); box-shadow: var(--shadow-glow); }
+        .author-kicker { display: block; margin-bottom: .7rem; color: var(--accent-secondary); font: 700 .75rem var(--font-mono); letter-spacing: .16em; }
+        .author-name { margin-bottom: .35rem; font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.1; }
+        .author-role { margin-bottom: 1rem; color: var(--accent-primary); font-weight: 700; }
+        .author-bio { max-width: 720px; color: var(--text-secondary); line-height: 1.75; }
+        .author-quote { margin: 1.25rem 0; padding: .9rem 1rem; border-left: 3px solid var(--accent-primary); background: var(--bg-soft); color: var(--text-primary); font-style: italic; }
+        .author-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 1.25rem; }
+        .author-links { display: flex; flex-wrap: wrap; gap: .7rem; }
+        @media (max-width: 700px) { .author-layout { grid-template-columns: 1fr; gap: 1.5rem; } .author-photo { max-width: 280px; } }
+        @media (prefers-reduced-motion: reduce) { .author-photo { transition: none; } }
+      </style>
+      <div class="author-layout">
+        <div class="author-photo-wrap">
+          <img class="author-photo" src="../assets/images/muhammad-danish.jpg" alt="Muhammad Danish — Creator of ML Atlas" loading="lazy" decoding="async">
+        </div>
+        <div class="author-content">
+          <span class="author-kicker">05 — MEET THE CREATOR</span>
+          <h2 class="author-name" id="creator-title">Muhammad Danish</h2>
+          <p class="author-role">BS Mathematics Student • Data &amp; AI Enthusiast • Developer</p>
+          <p class="author-bio">Muhammad Danish is a BS Mathematics student at Bahauddin Zakariya University (BZU), Multan, with interests in Machine Learning, Artificial Intelligence, Data Analytics, Software Development, and mathematical computing.</p>
+          <p class="author-bio">He created ML Atlas to make Machine Learning easier to understand by connecting mathematical foundations with visual explanations, interactive learning, and real-world applications. His work focuses on turning mathematical and technical concepts into practical, understandable, and interactive digital experiences.</p>
+          <blockquote class="author-quote">“I built ML Atlas to connect the mathematics behind Machine Learning with the way we actually see, understand, and use it.”</blockquote>
+          <div class="author-tags" aria-label="Areas of interest"><span class="badge">Machine Learning</span><span class="badge">Artificial Intelligence</span><span class="badge">Data Analytics</span><span class="badge">Mathematics</span><span class="badge">Python</span><span class="badge">Web Development</span></div>
+          <div class="author-links" aria-label="Author links"><a class="btn btn-primary" href="https://muhammaddanish-sage.vercel.app/" target="_blank" rel="noopener noreferrer">Portfolio ↗</a><a class="btn btn-ghost" href="https://github.com/danishcorder" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+        </div>
+      </div>
     </section>
   </main>
 
