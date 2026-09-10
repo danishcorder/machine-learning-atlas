@@ -79,9 +79,8 @@ Every model is grounded in core mathematics:
 
 | Feature | Description |
 |---------|-------------|
-| 🧬 **21-Section Arc** | Every model follows the same proven learning structure: Overview → Problem → Why It Matters → Intuition → Mathematics → Algorithm → Lab → Practice → Q&A |
+| 🧬 **20-Section Arc** | Every model follows the same proven learning structure: Overview → Problem → Why It Matters → Intuition → Mathematics → Algorithm → Lab → Practice → Applications |
 | 🖱️ **Interactive Labs** | Canvas + SVG visualizations in vanilla JS. Drag data points, adjust sliders, run algorithms in real time. No fake UI—everything actually computes. |
-| ❓ **20 Q&A Cards per Model** | Model-specific, mathematically rigorous questions with reveal-on-demand answers. Organized by Foundation / Mathematics / Algorithm / Practical. |
 | 🧭 **Model Compass** | Filter by category and compare up to 3 models head-to-head: interpretability, complexity, speed, strengths, weaknesses, use cases. |
 | 🤖 **Decision Engine** | A step-by-step wizard that scores all 15 models against your answers and gives a reasoned recommendation with trade-off analysis. |
 | 🔎 **Global Search** | Search models, equations, mathematical concepts, applications—returns all relevant results ranked by relevance. |
@@ -208,7 +207,7 @@ The architecture is data-driven, so adding Model #16 takes minutes:
    powershell -File gen-pages.ps1
    ```
 
-✅ Done. Navigation, search, comparison, decision engine, Q&A, and progress all auto-update.
+✅ Done. Navigation, search, comparison, decision engine, and progress all auto-update.
 
 ---
 
@@ -325,7 +324,6 @@ See `SEO_STRATEGY.md` for the full search-intent map.
 
 ## 🗺️ Roadmap
 
-- [ ] Expand Q&A from 5 to 20 questions per model
 - [ ] Add t-SNE & UMAP (dimensionality reduction)
 - [ ] Add XGBoost & LightGBM (ensemble methods)
 - [ ] Synthetic dataset editor (draw your own data)

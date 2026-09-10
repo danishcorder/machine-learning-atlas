@@ -11,7 +11,7 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
   let W = 0, H = 0;
   let pts = [{x:1.2,y:2.1},{x:2.8,y:3.9},{x:4.5,y:5.2},{x:6.1,y:6.8},{x:7.6,y:8.0}];
   const initialPts = pts.map((p) => ({...p}));
-  let b0 = 0, b1 = 1, gdTrail = [], anim = false, dragIdx = -1;
+  let b0 = 0, b1 = 1, gdTrail = [], anim = false, dragIdx = -1, gdRunId = 0;
 
   const px = (x) => M + (x / XMAX) * (W - 2 * M);
   const py = (y) => H - M - (y / YMAX) * (H - 2 * M);
@@ -134,6 +134,7 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
   function runGD() {
     if (anim || pts.length < 2) return;
     anim = true;
+    const runId = ++gdRunId;
     gdTrail = [];
     const lr = parseFloat(document.getElementById('lr-lr')?.value || '0.01');
     const iters = Math.min(parseInt(document.getElementById('lr-iters')?.value || '50'), 200);
@@ -142,6 +143,7 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
     if (btn) btn.disabled = true;
     let i = 0;
     (function step() {
+      if (runId !== gdRunId) return;
       if (i >= iters) { anim = false; if (btn) btn.disabled = false; draw(); return; }
       let g0 = 0, g1 = 0;
       pts.forEach(p => { const e = p.y - (t0 + t1*p.x); g0 -= 2*e; g1 -= 2*e*p.x; });
@@ -180,6 +182,10 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
   document.getElementById('lr-residuals')?.addEventListener('change', draw);
   document.getElementById('lr-predictions')?.addEventListener('change', draw);
   document.getElementById('lr-reset')?.addEventListener('click', () => {
+    gdRunId++;
+    anim = false;
+    const runButton = document.getElementById('lr-gd-run');
+    if (runButton) runButton.disabled = false;
     pts = initialPts.map((p) => ({...p}));
     b0 = 0; b1 = 1; gdTrail = [];
     syncSliders(); draw();
