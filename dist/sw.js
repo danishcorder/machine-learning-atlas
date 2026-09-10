@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ml-atlas-v4-complete-shell';
+const CACHE_NAME = 'ml-atlas-v5-creator-nav';
 const APP_SHELL = [
   './',
   './index.html',
