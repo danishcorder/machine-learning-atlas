@@ -18,6 +18,7 @@ const MODEL_ID = document.body.getAttribute('data-model');
 document.addEventListener('DOMContentLoaded', () => {
   registerOfflineSupport();
   initTheme();
+  initCreatorLink();
   initSearch();
   initNavigation(MODEL_ID);
   initProgress();
@@ -33,6 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProgressBar('home-progress');
   buildHomeExplorer();
 });
+
+function initCreatorLink() {
+  const actions = document.querySelector('.nav-actions');
+  if (!actions || actions.querySelector('.creator-link')) return;
+  const prefix = location.pathname.includes('/pages/') ? '' : 'pages/';
+  const link = document.createElement('a');
+  link.className = 'creator-link icon-btn';
+  link.href = `${prefix}about.html#creator`;
+  link.title = 'Meet the creator';
+  link.setAttribute('aria-label', 'Meet the creator, Muhammad Danish');
+  link.innerHTML = '<span class="creator-avatar" aria-hidden="true">MD</span><span class="creator-link-label">Creator</span>';
+  actions.append(link);
+}
 
 function registerOfflineSupport() {
   if (!('serviceWorker' in navigator)) return;

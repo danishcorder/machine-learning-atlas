@@ -156,6 +156,10 @@ img { max-width: 100%; }
   font-family: var(--font-mono); font-size: 0.85rem;
 }
 .icon-btn:hover { background: var(--bg-card-elevated); border-color: var(--border-accent); }
+.creator-link { display: inline-flex; align-items: center; gap: .45rem; padding: .32rem .55rem .32rem .35rem; text-transform: none; text-decoration: none; }
+.creator-avatar { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; border-radius: 50%; background: var(--accent-gradient); color: #fff; font: 800 .62rem var(--font-mono); letter-spacing: -.03em; }
+.creator-link-label { font-size: .76rem; font-weight: 700; }
+.creator-link:hover .creator-avatar { filter: brightness(1.08); }
 .btn-text {
   background: none; border: none; color: var(--accent-primary); cursor: pointer;
   font-family: var(--font-mono); font-weight: 600; font-size: 0.82rem; padding: 0.25rem;
