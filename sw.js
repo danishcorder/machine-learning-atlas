@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ml-atlas-v6-mobile-learning';
+const CACHE_NAME = 'ml-atlas-v7-mobile-drawer';
 const APP_SHELL = [
   './',
   './index.html',
