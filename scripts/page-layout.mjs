@@ -17,9 +17,24 @@ export function sharedPage(html, inPages = true) {
     <div class="nav-actions"><button id="search-btn" class="icon-btn" aria-label="Open search" title="Search"><span class="control-icon" aria-hidden="true">&#9906;</span><span class="control-label">Search</span></button><button id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme"><span class="control-icon" aria-hidden="true">&#9789;</span><span class="control-label">Theme</span></button><a class="creator-link icon-btn" href="${pages}about.html#creator" aria-label="Meet the creator, Muhammad Danish" title="Meet the creator"><span class="creator-avatar" aria-hidden="true">MD</span></a></div>
     <button id="hamburger" class="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links"><span aria-hidden="true">&#9776;</span></button>
   </nav>`;
-  return html.replace(/<nav class="navbar"[\s\S]*?<\/nav>/, nav)
-    .replaceAll('https://danishcorder.github.io/ml-atlas/', 'https://danishcorder.github.io/machine-learning-atlas/')
-    .replace('</head>', `<link rel="stylesheet" href="${root}css/learning.css">\n</head>`);
+  html = html.replace(/<nav class="navbar"[\s\S]*?<\/nav>/, nav)
+    .replaceAll('https://danishcorder.github.io/ml-atlas/', 'https://danishcorder.github.io/machine-learning-atlas/');
+
+  const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim() || 'Machine Learning Atlas';
+  const description = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i)?.[1] || 'Learn machine learning visually with mathematics, algorithms, visualizations and practical examples.';
+  const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
+  const image = html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i)?.[1] || 'https://danishcorder.github.io/machine-learning-atlas/assets/og-image.png';
+  const seo = [
+    html.includes('name="author"') ? '' : '<meta name="author" content="Muhammad Danish">',
+    html.includes('property="og:site_name"') ? '' : '<meta property="og:site_name" content="Machine Learning Atlas">',
+    html.includes('property="og:locale"') ? '' : '<meta property="og:locale" content="en_US">',
+    canonical && html.includes('name="twitter:title"') ? '' : `<meta name="twitter:title" content="${title.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}">`,
+    canonical && html.includes('name="twitter:description"') ? '' : `<meta name="twitter:description" content="${description.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}">`,
+    canonical && html.includes('name="twitter:image"') ? '' : `<meta name="twitter:image" content="${image}">`,
+    canonical && html.includes('name="twitter:url"') ? '' : `<meta name="twitter:url" content="${canonical || 'https://danishcorder.github.io/machine-learning-atlas/'}">`,
+    html.includes('name="theme-color"') ? '' : '<meta name="theme-color" content="#0b1220">'
+  ].filter(Boolean).join('\n');
+  return html.replace('</head>', `${seo}\n<link rel="stylesheet" href="${root}css/learning.css">\n</head>`);
 }
 
 export function lessonPage(html) {
