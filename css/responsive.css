@@ -1,58 +1,53 @@
-/* ML ATLAS — Responsive Design */
+/* Shared breakpoints: navigation changes when its content no longer fits. */
+@media (max-width: 1280px) {
+  .navbar { padding: 0 1rem; gap: .5rem; }
+  .hamburger { display: inline-grid; place-items: center; width: var(--touch-target); min-width: var(--touch-target); padding: 0; }
+  .nav-actions { margin-left: auto; gap: .35rem; }
+  .nav-links { display: none; position: absolute; top: 100%; inset-inline: 0; max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; overscroll-behavior: contain; padding: 1rem; background: var(--bg-primary); border-bottom: 1px solid var(--border-subtle); }
+  .nav-links.open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav-link { width: 100%; }
+  .nav-secondary { display: block; }
+}
 @media (max-width: 1080px) {
-  .model-layout { grid-template-columns: 1fr; }
-  .model-sidebar {
-    position: static; max-height: none; order: -1;
-    display: none;
-  }
+  .model-layout { grid-template-columns: minmax(0, 1fr); }
+  .model-sidebar { position: static; max-height: none; order: -1; display: none; }
   .model-sidebar.open { display: block; }
   .model-sidebar-toggle { display: inline-flex; }
 }
-
 @media (max-width: 900px) {
-  .navbar { min-width: 0; padding: 0 1rem; }
-  .nav-brand { min-width: 0; }
-  .nav-actions { flex-shrink: 0; }
-  .model-hero { grid-template-columns: 1fr; gap: 1.5rem; }
-  .hamburger { display: block; }
-  .nav-links {
-    position: fixed; top: var(--nav-h); right: 0; left: 0;
-    flex-direction: column; align-items: stretch; gap: 0.25rem;
-    background: var(--bg-primary); border-bottom: 1px solid var(--border-subtle);
-    padding: 1rem; display: none; z-index: 999;
-  }
-  .nav-links.open { display: flex; }
-  .nav-link { padding: 0.8rem 1rem; }
+  .model-hero { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
   .nav-controls { grid-template-columns: 1fr 1fr; }
   .nav-center { grid-column: 1 / -1; order: -1; }
 }
-
 @media (max-width: 600px) {
   .container { padding: 1.5rem 1rem 3rem; }
-  .model-title { font-size: 2.1rem; }
-  .section-title { font-size: 1.35rem; }
-  .nav-actions { gap: .35rem; }
-  .nav-actions .icon-btn { padding: .45rem .55rem; }
-  .nav-actions #search-btn,
-  .nav-actions #theme-toggle { font-size: 0; }
-  .nav-actions #search-btn span { font-size: 1rem; }
-  .creator-link { padding: .3rem; }
-  .creator-link-label { display: none; }
-  .stat-grid { grid-template-columns: repeat(2, 1fr); }
-  .qa-a p { padding-left: 1.3rem; }
-  .qa-q .q-cat { display: none; }
-  .toc { grid-template-columns: 1fr; }
-  .nav-controls { grid-template-columns: 1fr; }
+  .navbar { padding-inline: .5rem; gap: .25rem; }
+  .nav-brand { font-size: 1rem; gap: .35rem; flex-shrink: 0; }
+  .nav-actions { gap: .125rem; }
+  .nav-actions .icon-btn { padding: .35rem; }
+  .control-label, .creator-link-label { display: none; }
+  .control-icon { display: inline-block; font-size: 1.25rem; line-height: 1; }
+  .model-title { font-size: clamp(1.75rem, 7vw, 2.5rem); line-height: 1.15; }
+  .section-title { font-size: 1.4rem; }
+  .stat-grid, .toc, .nav-controls { grid-template-columns: minmax(0, 1fr); }
   .nav-center { order: 0; }
-  .compare-table-wrap { display: block; }
-  .visual-caption { grid-template-columns: 1fr; gap: .25rem; }
+  .visual-caption { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
   .static-chart { min-height: 0; }
+  .flow-step { flex-wrap: wrap; }
+  .progress-actions { flex-wrap: wrap; }
+  .search-box { width: 100%; padding: 1rem; }
+  .search-result-item { padding: .75rem .25rem; gap: .5rem; }
+  .search-hint { font-size: .875rem; }
+  .home-hero h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); line-height: 1.04; }
+  .home-hero .hero-demo { display: none; }
+  .home-hero { padding: 1.5rem 0; }
+  .hero-actions { display: grid; }
+  .hero-actions .btn { justify-content: center; }
+  .step-options { grid-template-columns: minmax(0, 1fr); }
+  .card-body, .app-dl dd, .term-card p, .path-card p { font-size: 1rem; line-height: 1.7; }
+  .filter-chips .chip, .phase-links a, .sidebar-list a { min-height: var(--touch-target); display: inline-flex; align-items: center; }
 }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

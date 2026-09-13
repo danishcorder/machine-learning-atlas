@@ -3,7 +3,7 @@
   "shortName": "ML Atlas",
   "tagline": "Learn Machine Learning Visually",
   "description": "Learn machine learning algorithms with interactive visualizations, mathematics, real-world examples, model comparison and a model-selection guide — all directly in your browser.",
-  "defaultUrl": "https://danishcorder.github.io/ml-atlas/",
+  "defaultUrl": "https://danishcorder.github.io/machine-learning-atlas/",
   "author": "Muhammad Danish",
   "language": "en"
 }

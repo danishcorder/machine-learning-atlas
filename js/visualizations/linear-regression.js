@@ -163,8 +163,9 @@ export function initLinearRegression(canvasId = 'lr-canvas') {
   const toPx = (e) => { const r = canvas.getBoundingClientRect(); return {px: e.clientX-r.left, py: e.clientY-r.top}; };
 
   canvas.addEventListener('pointerdown', (e) => {
+    canvas.setPointerCapture(e.pointerId);
     const {px:mx, py:my} = toPx(e);
-    dragIdx = pts.findIndex(p => Math.hypot(px(p.x)-mx, py(p.y)-my) < 12);
+    dragIdx = pts.findIndex(p => Math.hypot(px(p.x)-mx, py(p.y)-my) < (e.pointerType === 'touch' ? 24 : 12));
     if (dragIdx === -1) { pts.push({x:toX(e), y:toY(e)}); fitOLS(); }
     draw();
   });

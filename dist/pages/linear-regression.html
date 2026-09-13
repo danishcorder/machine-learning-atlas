@@ -9,20 +9,20 @@
   <meta name="description" content="Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.">
   <meta name="author" content="Muhammad Danish">
   <title>Linear Regression Tutorial: Math, Intuition & Interactive Visualization | ML Atlas</title>
-  <link rel="canonical" href="https://danishcorder.github.io/ml-atlas/pages/linear-regression.html">
+  <link rel="canonical" href="https://danishcorder.github.io/machine-learning-atlas/pages/linear-regression.html">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta property="og:title" content="Linear Regression Machine Learning Tutorial | ML Atlas">
   <meta property="og:description" content="Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://danishcorder.github.io/ml-atlas/pages/linear-regression.html">
-  <meta property="og:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
+  <meta property="og:url" content="https://danishcorder.github.io/machine-learning-atlas/pages/linear-regression.html">
+  <meta property="og:image" content="https://danishcorder.github.io/machine-learning-atlas/assets/og-image.png">
   <meta property="og:site_name" content="Machine Learning Atlas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Linear Regression Machine Learning Tutorial | ML Atlas">
   <meta name="twitter:description" content="Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.">
-  <meta name="twitter:image" content="https://danishcorder.github.io/ml-atlas/assets/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linear Regression Machine Learning Tutorial","description":"Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/ml-atlas/pages/linear-regression.html","about":{"@type":"DefinedTerm","name":"Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Linear Regression, interactive machine learning, linear regression"}</script>
+  <meta name="twitter:image" content="https://danishcorder.github.io/machine-learning-atlas/assets/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linear Regression Machine Learning Tutorial","description":"Learn Linear Regression visually with best-fit lines, slope, intercept, residuals, MSE and gradient descent.","author":{"@type":"Person","name":"Muhammad Danish"},"publisher":{"@type":"Organization","name":"Machine Learning Atlas"},"mainEntityOfPage":"https://danishcorder.github.io/machine-learning-atlas/pages/linear-regression.html","about":{"@type":"DefinedTerm","name":"Linear Regression","inDefinedTermSet":"Machine Learning Algorithms"},"educationalLevel":"Beginner to Intermediate","learningResourceType":"Interactive tutorial","isAccessibleForFree":true,"keywords":"machine learning tutorial, machine learning algorithms, Linear Regression, interactive machine learning, linear regression"}</script>
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/animations.css">
@@ -32,25 +32,15 @@
     try { document.documentElement.dataset.theme = localStorage.getItem('atlas_theme') || 'dark'; } catch { document.documentElement.dataset.theme = 'dark'; }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<link rel="stylesheet" href="../css/learning.css">
 </head>
 <body data-model="linear-regression">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <nav class="navbar" aria-label="Main navigation">
-    <a href="../index.html" class="nav-brand" aria-label="Machine Learning Atlas home"><span class="brand-mark">ML</span><span>ATLAS</span></a>
-    <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="../index.html" class="nav-link">Home</a></li>
-      <li><a href="../index.html#model-explorer" class="nav-link active">Algorithms</a></li>
-      <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
-      <li><a href="mathematics.html" class="nav-link">Math</a></li>
-      <li><a href="comparison.html" class="nav-link">Compare</a></li>
-      <li><a href="model-selector.html" class="nav-link">Choose a Model</a></li>
-      <li><a href="glossary.html" class="nav-link">Glossary</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button id="search-btn" class="icon-btn" aria-label="Open search"><span aria-hidden="true">⌘</span> Search</button>
-      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">☾</button>
-    </div>
+    <a class="nav-brand" href="../index.html" aria-label="ML Atlas home"><span class="brand-mark">ML</span><span>ATLAS</span></a>
+    <ul class="nav-links" id="nav-links"><li><a class="nav-link" href="../index.html">Home</a></li><li><a class="nav-link" href="roadmap.html">Learn</a></li><li><a class="nav-link" href="../index.html#model-explorer">Algorithms</a></li><li><a class="nav-link" href="mathematics.html">Math</a></li><li><a class="nav-link" href="comparison.html">Compare</a></li><li><a class="nav-link" href="model-selector.html">Choose Model</a></li><li><a class="nav-link" href="glossary.html">Glossary</a></li><li class="nav-secondary"><a class="nav-link" href="resources.html">Resources</a></li><li class="nav-secondary"><a class="nav-link" href="about.html">About</a></li></ul>
+    <div class="nav-actions"><button id="search-btn" class="icon-btn" aria-label="Open search" title="Search"><span class="control-icon" aria-hidden="true">&#9906;</span><span class="control-label">Search</span></button><button id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme"><span class="control-icon" aria-hidden="true">&#9789;</span><span class="control-label">Theme</span></button><a class="creator-link icon-btn" href="about.html#creator" aria-label="Meet the creator, Muhammad Danish" title="Meet the creator"><span class="creator-avatar" aria-hidden="true">MD</span></a></div>
+    <button id="hamburger" class="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links"><span aria-hidden="true">&#9776;</span></button>
   </nav>
 
   <div class="container container-wide model-layout">
@@ -77,14 +67,48 @@
 
       <nav id="model-toc" class="toc" aria-label="On this page"></nav>
 
-      <section class="section-block" id="overview">
-        <h2 class="section-title"><span class="section-number">01</span> Overview</h2>
-        <div id="sec-overview-body"></div>
-      </section>
+      
 
-<section class="lr-block lr-understand" id="understand">
-  <div class="lr-kicker">01 / UNDERSTAND</div>
-  <h2>What problem does a straight line solve?</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="module" src="../js/linear-regression-experience.js"></script>
+
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <section class="lesson-stage" id="stage-understand" aria-labelledby="stage-title-understand" data-stage="0"><header class="stage-heading"><p class="section-kicker">STAGE 1 OF 6</p><h2 id="stage-title-understand" tabindex="-1">Understand</h2></header><section class="lr-block lr-understand" id="understand">
+  
+  <h3>What problem does a straight line solve?</h3>
   <p class="lr-lead">Linear Regression finds the line that best connects an input to a continuous outcome. It turns a cloud of observations into a relationship we can explain, evaluate and use.</p>
   <div class="lr-understand-grid">
     <article class="lr-story-card"><span class="lr-card-number">01</span><h3>Start with data</h3><p>Past house sales pair size, location and price. The target is a number, not a category.</p></article>
@@ -93,10 +117,22 @@
   </div>
   <div class="lr-question-card"><span>REAL-WORLD QUESTION</span><strong>Can previous house sales teach us the mathematical relationship between size and price?</strong></div>
 </section>
-
-<section class="lr-block lr-visualize" id="visualize">
-  <div class="lr-kicker">02 / VISUALIZE</div>
-  <div class="lr-section-heading"><div><h2>See Linear Regression in Action</h2><p>Move the parameters and watch the line, residuals and error respond immediately.</p></div><span class="lr-live-pill"><i></i> LIVE MODEL</span></div>
+<section class="lr-block lr-intuition" id="intuition">
+  <h3>From scattered data to a useful line</h3>
+  <div class="lr-concept-flow"><article><span>01</span><strong>Data</strong><p>Observe paired values.</p></article><b>→</b><article><span>02</span><strong>Guess a line</strong><p>Choose β₀ and β₁.</p></article><b>→</b><article><span>03</span><strong>Measure error</strong><p>Compare y to ŷ.</p></article><b>→</b><article><span>04</span><strong>Find best fit</strong><p>Minimize total error.</p></article></div>
+  <p class="lr-one-line">Linear Regression searches for the line that minimizes prediction error across the observed data.</p>
+</section>
+<details class="lesson-detail" open><summary>Overview</summary><section class="section-block" id="overview">
+        <h3 class="section-title"><span class="section-number">03</span> Overview</h3>
+        <div id="sec-overview-body"></div>
+      </section></details>
+<details class="lesson-detail" open><summary>Data &amp; Features</summary><section class="section-block" id="data">
+        <h3 class="section-title"><span class="section-number">04</span> Data &amp; Features</h3>
+        <div id="sec-data-features"></div>
+      </section></details></section>
+<section class="lesson-stage" id="stage-visualize" aria-labelledby="stage-title-visualize" data-stage="1"><header class="stage-heading"><p class="section-kicker">STAGE 2 OF 6</p><h2 id="stage-title-visualize" tabindex="-1">Visualize</h2></header><section class="lr-block lr-visualize" id="visualize">
+  
+  <div class="lr-section-heading"><div><h3>See Linear Regression in Action</h3><p>Move the parameters and watch the line, residuals and error respond immediately.</p></div><span class="lr-live-pill"><i></i> LIVE MODEL</span></div>
   <div class="lr-playground">
     <div class="lr-plot-wrap"><canvas id="lr-canvas" class="lr-canvas" aria-label="Interactive linear regression scatter plot with best-fit line"></canvas><div class="lr-plot-help">Drag a point to change the data</div></div>
     <aside class="lr-controls" aria-label="Regression controls">
@@ -109,97 +145,69 @@
       <div class="lr-control-actions"><button id="lr-fit" class="lr-button lr-button-primary" type="button">Best Fit</button><button id="lr-reset" class="lr-button" type="button">Reset</button></div>
     </aside>
   </div>
-</section>
-
-<section class="lr-block lr-intuition" id="intuition">
-  <div class="lr-kicker">03 / INTUITION</div><h2>From scattered data to a useful line</h2>
-  <div class="lr-concept-flow"><article><span>01</span><strong>Data</strong><p>Observe paired values.</p></article><b>→</b><article><span>02</span><strong>Guess a line</strong><p>Choose β₀ and β₁.</p></article><b>→</b><article><span>03</span><strong>Measure error</strong><p>Compare y to ŷ.</p></article><b>→</b><article><span>04</span><strong>Find best fit</strong><p>Minimize total error.</p></article></div>
-  <p class="lr-one-line">Linear Regression searches for the line that minimizes prediction error across the observed data.</p>
-</section>
-
-<section class="lr-block lr-math" id="math">
-  <div class="lr-kicker">04 / MATHEMATICS</div><h2>The Mathematics Behind Linear Regression</h2>
+</section></section>
+<section class="lesson-stage" id="stage-mathematics" aria-labelledby="stage-title-mathematics" data-stage="2"><header class="stage-heading"><p class="section-kicker">STAGE 3 OF 6</p><h2 id="stage-title-mathematics" tabindex="-1">Mathematics</h2></header><section class="lr-block lr-math" id="math">
+  <h3>The Mathematics Behind Linear Regression</h3>
   <div class="lr-equation-card"><div class="lr-equation" aria-label="y hat equals beta zero plus beta one x"><span data-symbol="prediction">ŷ</span> = <span data-symbol="intercept">β₀</span> + <span data-symbol="slope">β₁</span><span data-symbol="input">x</span></div><p>One line. Four ideas. Select a symbol to focus its meaning.</p></div>
   <div class="lr-symbol-grid"><button class="lr-symbol-card" data-focus-symbol="prediction" type="button"><strong>ŷ</strong><span>Predicted output</span></button><button class="lr-symbol-card" data-focus-symbol="intercept" type="button"><strong>β₀</strong><span>Intercept</span></button><button class="lr-symbol-card" data-focus-symbol="slope" type="button"><strong>β₁</strong><span>Slope / coefficient</span></button><button class="lr-symbol-card" data-focus-symbol="input" type="button"><strong>x</strong><span>Input feature</span></button></div>
   <details class="lr-disclosure"><summary>Explore the Mathematics <span>+</span></summary><div class="lr-disclosure-body"><p>A residual is \(e_i = y_i - \hat{y}_i\). Least squares minimizes \(J = \frac{1}{n}\sum_i (y_i-\hat{y}_i)^2\), producing a smooth convex loss surface. For a full matrix, the normal equation is \(\beta = (X^T X)^{-1}X^T y\). Gradient descent follows \(\beta \leftarrow \beta - \eta\nabla J\) until the loss stops improving.</p></div></details>
   <details class="lr-disclosure"><summary>Show Full Derivation <span>+</span></summary><div class="lr-disclosure-body"><p>Centre x and y, compute \(s_{xx}=\sum(x_i-\bar{x})^2\) and \(s_{xy}=\sum(x_i-\bar{x})(y_i-\bar{y})\). Then \(\beta_1=s_{xy}/s_{xx}\) and \(\beta_0=\bar{y}-\beta_1\bar{x}\). Squaring the residuals makes the optimum unique for a non-degenerate dataset.</p></div></details>
-</section>
-
-<section class="lr-block lr-training" id="training">
-  <div class="lr-kicker">05 / TRAINING</div><h2>How the model learns</h2>
+</section></section>
+<section class="lesson-stage" id="stage-learn" aria-labelledby="stage-title-learn" data-stage="3"><header class="stage-heading"><p class="section-kicker">STAGE 4 OF 6</p><h2 id="stage-title-learn" tabindex="-1">Learn</h2></header><section class="lr-block lr-training" id="training">
+  <h3>How the model learns</h3>
   <div class="lr-pipeline"><article><span>01</span><strong>Guess parameters</strong><small>β₀ = 0 · β₁ = 0</small></article><b>→</b><article><span>02</span><strong>Predict</strong><small>ŷ = β₀ + β₁x</small></article><b>→</b><article><span>03</span><strong>Calculate error</strong><small>MSE = 24.7</small></article><b>→</b><article><span>04</span><strong>Update</strong><small>Step downhill</small></article><b>→</b><article><span>05</span><strong>Best fit</strong><small>MSE ↓ 0.42</small></article></div>
   <div class="lr-loss-card"><div><span class="lr-card-label">LOSS CURVE</span><strong>Error falls as the line learns</strong></div><svg viewBox="0 0 520 110" role="img" aria-label="Descending loss curve"><path d="M12 18 C80 20 72 78 145 70 S202 53 260 60 S318 42 370 47 S432 34 510 38" fill="none" stroke="var(--accent-primary)" stroke-width="4" stroke-linecap="round"/><path d="M12 91 H510" stroke="var(--border-subtle)"/><circle cx="510" cy="38" r="5" fill="var(--accent-secondary)"/></svg></div>
   <details class="lr-disclosure"><summary>See the training algorithm <span>+</span></summary><div class="lr-disclosure-body"><p>Start with β₀ = β₁ = 0, compute the gradient of the mean squared error, step downhill with learning rate η, and repeat until the loss stabilizes. The normal equation reaches the same optimum directly when the matrix is well-conditioned.</p></div></details>
-</section>
-
-<section class="lr-block lr-practice" id="practice">
-  <div class="lr-kicker">06 / PRACTICE</div><h2>Work it through</h2>
+</section></section>
+<section class="lesson-stage" id="stage-practice" aria-labelledby="stage-title-practice" data-stage="4"><header class="stage-heading"><p class="section-kicker">STAGE 5 OF 6</p><h2 id="stage-title-practice" tabindex="-1">Practice</h2></header><section class="lr-block lr-practice" id="practice">
+  <h3>Work it through</h3>
   <div class="lr-practice-grid"><div class="lr-worked-example"><div class="lr-card-label">WORKED EXAMPLE</div><h3>Five observations, one equation</h3><table><thead><tr><th>x</th><th>y</th></tr></thead><tbody><tr><td>1</td><td>1</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3</td><td>2</td></tr><tr><td>4</td><td>5</td></tr><tr><td>5</td><td>5</td></tr></tbody></table><ol class="lr-steps"><li><b>Average:</b> x̄ = 3, ȳ = 3</li><li><b>Slope:</b> β₁ = sxy / sxx = 12 / 10 = 1.2</li><li><b>Intercept:</b> β₀ = ȳ − β₁x̄ = −0.6</li></ol><div class="lr-result">ŷ = −0.6 + 1.2x <small>For x = 6, predict ŷ = 6.6</small></div></div></div>
-</section>
-
-<section class="lr-block lr-apply" id="apply">
-  <div class="lr-kicker">07 / APPLY</div><h2>Know when it earns its place</h2>
+</section></section>
+<section class="lesson-stage" id="stage-apply" aria-labelledby="stage-title-apply" data-stage="5"><header class="stage-heading"><p class="section-kicker">STAGE 6 OF 6</p><h2 id="stage-title-apply" tabindex="-1">Apply</h2></header><section class="lr-block lr-apply" id="apply">
+  <h3>Know when it earns its place</h3>
   <div class="lr-compare"><div><h3>Great choice when</h3><p>✓ The relationship is roughly linear</p><p>✓ A continuous prediction is needed</p><p>✓ Interpretability matters</p><p>✓ A fast baseline is useful</p></div><div><h3>Avoid or be careful when</h3><p>× The relationship is highly nonlinear</p><p>× Extreme outliers dominate</p><p>× Complex interactions matter</p><p>× Assumptions are seriously violated</p></div></div>
   <div class="lr-app-grid"><article><span>⌂</span><strong>Housing</strong><small>Size → Price</small></article><article><span>↗</span><strong>Marketing</strong><small>Spend → Sales</small></article><article><span>◒</span><strong>Energy</strong><small>Temperature → Consumption</small></article><article><span>✦</span><strong>Education</strong><small>Study hours → Score</small></article></div>
   <div class="lr-metric-grid"><button class="lr-metric-card" type="button"><strong>MAE</strong><span>Average absolute error</span><em>Equation + use</em></button><button class="lr-metric-card" type="button"><strong>MSE</strong><span>Average squared error</span><em>Equation + use</em></button><button class="lr-metric-card" type="button"><strong>RMSE</strong><span>Error in target units</span><em>Equation + use</em></button><button class="lr-metric-card" type="button"><strong>R²</strong><span>Variance explained</span><em>Equation + use</em></button></div>
   <div class="lr-recap"><div class="lr-card-label">60-SECOND RECAP</div><div class="lr-recap-flow"><span>Data</span><b>↓</b><span>Assume relationship</span><b>↓</b><span>Fit line</span><b>↓</b><span>Minimize error</span><b>↓</b><span>Evaluate</span><b>↓</b><span>Predict</span></div><p><strong>Remember:</strong> Linear Regression learns the straight-line function that best represents the relationship between input and output variables.</p></div>
 </section>
-
-<script type="module" src="../js/linear-regression-experience.js"></script>
-
-
-      <section class="section-block" id="data">
-        <h2 class="section-title"><span class="section-number">11</span> Data &amp; Features</h2>
-        <div id="sec-data-features"></div>
-      </section>
-
-      <section class="section-block" id="evaluation">
-        <h2 class="section-title"><span class="section-number">12</span> Evaluation</h2>
+<details class="lesson-detail" open><summary>Evaluation</summary><section class="section-block" id="evaluation">
+        <h3 class="section-title"><span class="section-number">10</span> Evaluation</h3>
         <div id="sec-evaluation"></div>
-      </section>
-
-      <section class="section-block" id="strengths">
-        <h2 class="section-title"><span class="section-number">13</span> Strengths</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>Strengths</summary><section class="section-block" id="strengths">
+        <h3 class="section-title"><span class="section-number">11</span> Strengths</h3>
         <div id="sec-strengths"></div>
-      </section>
-
-      <section class="section-block" id="limitations">
-        <h2 class="section-title"><span class="section-number">14</span> Limitations</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>Limitations</summary><section class="section-block" id="limitations">
+        <h3 class="section-title"><span class="section-number">12</span> Limitations</h3>
         <div id="sec-limitations"></div>
-      </section>
-
-      <section class="section-block" id="when">
-        <h2 class="section-title"><span class="section-number">15</span> When to Use</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>When to Use</summary><section class="section-block" id="when">
+        <h3 class="section-title"><span class="section-number">13</span> When to Use</h3>
         <div id="sec-when"></div>
-      </section>
-
-      <section class="section-block" id="not">
-        <h2 class="section-title"><span class="section-number">16</span> When Not to Use</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>When Not to Use</summary><section class="section-block" id="not">
+        <h3 class="section-title"><span class="section-number">14</span> When Not to Use</h3>
         <div id="sec-whennot"></div>
-      </section>
-
-      <section class="section-block" id="apps">
-        <h2 class="section-title"><span class="section-number">17</span> Real-World Applications</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>Real-World Applications</summary><section class="section-block" id="apps">
+        <h3 class="section-title"><span class="section-number">15</span> Real-World Applications</h3>
         <div class="grid-cards-2" id="sec-apps-grid"></div>
-      </section>
-
-      <section class="section-block" id="related">
-        <h2 class="section-title"><span class="section-number">18</span> Related Models</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>Related Models</summary><section class="section-block" id="related">
+        <h3 class="section-title"><span class="section-number">16</span> Related Models</h3>
         <p class="section-subtitle" style="margin-bottom:0.8rem;">Where to go next from here:</p>
         <div id="sec-related"></div>
-      </section>
-
-      <section class="section-block" id="recap">
-        <h2 class="section-title"><span class="section-number">19</span> 60-Second Recap</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>60-Second Recap</summary><section class="section-block" id="recap">
+        <h3 class="section-title"><span class="section-number">17</span> 60-Second Recap</h3>
         <div id="sec-recap"></div>
-      </section>
-
-      <section class="section-block" id="continue">
-        <h2 class="section-title"><span class="section-number">20</span> Continue Learning</h2>
+      </section></details>
+<details class="lesson-detail" open><summary>Continue Learning</summary><section class="section-block" id="continue">
+        <h3 class="section-title"><span class="section-number">18</span> Continue Learning</h3>
         <div id="continue-learning"></div>
-      </section>
-
-      <div id="prev-next"></div>
+      </section></details></section>
+<div id="prev-next"></div>
     </main>
   </div>
 

@@ -4,6 +4,7 @@ import { MODELS, MODEL_MAP, MODEL_GROUPS, prevModel, nextModel } from './model-d
 const ORDER = MODELS.map((m) => m.id);
 /* pages live in /pages/ → prefix site-root-relative hrefs so links work from anywhere */
 const PRE = location.pathname.includes('/pages/') ? '../' : '';
+const modelHref = (model) => PRE + model.pagePath.replace(/^pages\//, '');
 
 export function initNavigation(currentModelId) {
   initNavbar();
@@ -11,7 +12,7 @@ export function initNavigation(currentModelId) {
   if (currentModelId) {
     buildSidebar(currentModelId);
     buildPrevNext(currentModelId);
-    buildTOC(currentModelId);
+    if (!document.querySelector('.lesson-stage')) buildTOC(currentModelId);
     fillDNA(currentModelId);
     fillContinueLearning(currentModelId);
   }
@@ -21,10 +22,36 @@ function initNavbar() {
   const hamburger = document.getElementById('hamburger');
   const links = document.getElementById('nav-links');
   if (hamburger && links) {
-    hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', open);
+    const compact = matchMedia('(max-width: 1280px)');
+    const main = document.getElementById('main-content');
+    function setOpen(open, restore = false) {
+      links.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      hamburger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      hamburger.innerHTML = open ? '<span aria-hidden="true">&#215;</span>' : '<span aria-hidden="true">&#9776;</span>';
+      document.body.classList.toggle('menu-open', open);
+      if (main) main.inert = open;
+      if (open) links.querySelector('a')?.focus();
+      else if (restore) hamburger.focus();
+    }
+    hamburger.addEventListener('click', () => setOpen(!links.classList.contains('open'), true));
+    links.addEventListener('click', event => { if (event.target.closest('a')) setOpen(false, true); });
+    document.addEventListener('search-open', () => setOpen(false));
+    compact.addEventListener('change', () => setOpen(false));
+    document.addEventListener('keydown', event => {
+      if (!links.classList.contains('open')) return;
+      if (event.key === 'Escape') { event.preventDefault(); setOpen(false, true); }
+      if (event.key === 'Tab') {
+        const items = [...document.querySelectorAll('.navbar a, .navbar button')].filter(el => el.getClientRects().length);
+        const first = items[0], last = items.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+    links.querySelectorAll('a').forEach(link => {
+      if (new URL(link.href).pathname === location.pathname && !new URL(link.href).hash) {
+        link.classList.add('active'); link.setAttribute('aria-current', 'page');
+      }
     });
   }
   const modelSelect = document.getElementById('model-select');
@@ -59,7 +86,7 @@ function buildSidebar(currentId) {
   if (!el) return;
   let html = '<div class="sidebar-card">';
   html += `<div class="model-picker-label">MODEL LIBRARY <span>${ORDER.indexOf(currentId) + 1} / ${ORDER.length}</span></div><select id="model-select" class="model-select" aria-label="Choose a model">`;
-  ORDER.forEach((id) => { const m = MODEL_MAP[id]; html += `<option value="${PRE}${m.pagePath}" ${id === currentId ? 'selected' : ''}>${escapeHtml(m.name)}</option>`; });
+  ORDER.forEach((id) => { const m = MODEL_MAP[id]; html += `<option value="${modelHref(m)}" ${id === currentId ? 'selected' : ''}>${escapeHtml(m.name)}</option>`; });
   html += '</select></div>';
   html += '<div class="sidebar-card sidebar-categories"><div class="model-picker-label">BROWSE BY CATEGORY</div>';
   MODEL_GROUPS.forEach((g) => {
@@ -67,12 +94,13 @@ function buildSidebar(currentId) {
     g.models.forEach((id) => {
       const m = MODEL_MAP[id];
       const active = id === currentId ? 'active' : '';
-      html += `<li><a href="${PRE}${m.pagePath}" class="${active}"><span class="dot"></span>${escapeHtml(m.name)}</a></li>`;
+      html += `<li><a href="${modelHref(m)}" class="${active}"><span class="dot"></span>${escapeHtml(m.name)}</a></li>`;
     });
     html += '</ul></details>';
   });
   html += '</div>';
   el.innerHTML = html;
+  el.querySelector('#model-select')?.addEventListener('change', event => { location.href = event.target.value; });
 }
 
 function currentName(id) {
@@ -87,10 +115,10 @@ function buildPrevNext(currentId) {
   const next = nextModel(currentId);
   wrap.innerHTML = `
     <div class="nav-controls">
-      ${prev ? `<a class="nav-ctrl" href="${PRE}${prev.pagePath}"><span class="dir">← Previous</span><span class="nm">${escapeHtml(prev.name)}</span></a>`
+      ${prev ? `<a class="nav-ctrl" href="${modelHref(prev)}"><span class="dir">← Previous</span><span class="nm">${escapeHtml(prev.name)}</span></a>`
              : `<span class="nav-ctrl"><span class="dir">← Previous</span><span class="nm" style="color:var(--text-muted)">Start of series</span></span>`}
       <div class="nav-center"><a href="${PRE}index.html" class="btn btn-ghost btn-sm">← All Models</a></div>
-      ${next ? `<a class="nav-ctrl right" href="${PRE}${next.pagePath}"><span class="dir">Next →</span><span class="nm">${escapeHtml(next.name)}</span></a>`
+      ${next ? `<a class="nav-ctrl right" href="${modelHref(next)}"><span class="dir">Next →</span><span class="nm">${escapeHtml(next.name)}</span></a>`
              : `<span class="nav-ctrl right"><span class="dir">Next →</span><span class="nm" style="color:var(--text-muted)">End of series</span></span>`}
     </div>`;
 }
@@ -139,7 +167,7 @@ function fillContinueLearning(currentId) {
   if (!m) return;
   const related = (m.relatedModels || []).map((name) => {
     const found = MODELS.find((x) => x.name === name);
-    return found ? `· <a href="${PRE}${found.pagePath}" style="color:var(--accent-secondary)">${escapeHtml(name)}</a>` : `· ${escapeHtml(name)}`;
+    return found ? `· <a href="${modelHref(found)}" style="color:var(--accent-secondary)">${escapeHtml(name)}</a>` : `· ${escapeHtml(name)}`;
   }).join(' ');
   el.innerHTML = `
     <div class="card">

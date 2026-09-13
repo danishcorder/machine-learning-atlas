@@ -8,7 +8,8 @@ export function initTheme() {
   const updateLabel = () => {
     const light = root.getAttribute('data-theme') === 'light';
     btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
-    btn.textContent = light ? '☀ Light' : '☾ Dark';
+    btn.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+    btn.innerHTML = `<span class="control-icon" aria-hidden="true">${light ? '&#9728;' : '&#9789;'}</span><span class="control-label">${light ? 'Light' : 'Dark'}</span>`;
   };
   updateLabel();
   btn.addEventListener('click', () => {

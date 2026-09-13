@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { sharedPage, lessonPage } from './page-layout.mjs';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +57,7 @@ function modelPage(m) {
   let html = top + '\n' + fs.readFileSync(midPath,'utf8') + '\n' + bottom;
   for (const [k,v] of Object.entries(repl)) html = html.split(k).join(v);
   html = html.replace(/\n  \n  <script>/g, '\n  <script>');
-  return html;
+  return sharedPage(lessonPage(html));
 }
 
 function copyTree(src, dest, filter=()=>true) {
@@ -96,12 +97,15 @@ try {
     fs.mkdirSync(path.join(DIST,'pages'),{recursive:true});
     for (const f of fs.readdirSync(PAGES)) {
       if (!f.endsWith('.html') || f.startsWith('_') || models.some(m=>`${m.id}.html`===f)) continue;
-      fs.copyFileSync(path.join(PAGES,f),path.join(DIST,'pages',f));
+      fs.writeFileSync(path.join(DIST,'pages',f), sharedPage(fs.readFileSync(path.join(PAGES,f), 'utf8')));
     }
     
     console.log('  Copying root files...');
     for (const f of ['index.html','robots.txt','sitemap.xml','manifest.webmanifest','404.html','sw.js']) {
-      const p=path.join(ROOT,f); if (fs.existsSync(p)) fs.copyFileSync(p,path.join(DIST,f));
+      const p=path.join(ROOT,f); if (fs.existsSync(p)) {
+        if (f === 'index.html') fs.writeFileSync(path.join(DIST,f), sharedPage(fs.readFileSync(p,'utf8'), false));
+        else fs.copyFileSync(p,path.join(DIST,f));
+      }
     }
   }
 

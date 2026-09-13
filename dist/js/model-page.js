@@ -7,6 +7,7 @@
 import { MODEL_MAP, MODELS } from './model-data.js';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const modelHref = (model) => (location.pathname.includes('/pages/') ? '../' : '') + model.pagePath.replace(/^pages\//, '');
 
 export function buildModelPage(modelId) {
   const m = MODEL_MAP[modelId];
@@ -71,12 +72,11 @@ export function buildModelPage(modelId) {
       </ul>
     </div>`);
 
-  const PRE2 = location.pathname.includes('/pages/') ? '../' : '';
   fill('#sec-related', () => {
     const chips = (m.relatedModels || []).map((name) => {
       const found = MODELS.find((x) => x.name === name);
       return found
-        ? `<a class="badge" href="${PRE2}${found.pagePath}" style="text-transform:none;">${esc(name)} →</a>`
+        ? `<a class="badge" href="${modelHref(found)}" style="text-transform:none;">${esc(name)} →</a>`
         : `<span class="badge" style="text-transform:none;">${esc(name)}</span>`;
     });
     return `<div class="hero-badges">${chips.join('')}</div>`;

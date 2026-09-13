@@ -8,11 +8,14 @@ function init() {
   document.body.classList.add('lr-page');
   personalizeHero();
   addHeroGraphic();
-  buildLearningNav();
-  groupFullNotes();
+  // The shared lesson builder owns stages, contents and full reference notes.
   wireMathSymbols();
   wireMetricCards();
-  initLinearRegression('lr-canvas');
+  try { initLinearRegression('lr-canvas'); } catch (error) {
+    const wrap = document.querySelector('.lr-plot-wrap');
+    if (wrap) wrap.insertAdjacentHTML('beforeend', '<p role="status">Interactive visualization could not load. The explanation and worked example are still available.</p>');
+    console.warn('Linear regression visualization:', error);
+  }
 }
 
 function personalizeHero() {

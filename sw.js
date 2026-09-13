@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ml-atlas-v5-creator-nav';
+const CACHE_NAME = 'ml-atlas-v6-mobile-learning';
 const APP_SHELL = [
   './',
   './index.html',
@@ -10,6 +10,9 @@ const APP_SHELL = [
   './css/linear-regression.css',
   './css/animations.css',
   './css/responsive.css',
+  './css/learning.css',
+  './js/learning.js',
+  './assets/images/muhammad-danish.jpg',
   './js/main.js',
   './js/model-data.js',
   './js/model-page.js',
@@ -61,7 +64,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((keys) => Promise.all(keys
-        .filter((key) => key !== CACHE_NAME)
+        .filter((key) => key.startsWith('ml-atlas-') && key !== CACHE_NAME)
         .map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );

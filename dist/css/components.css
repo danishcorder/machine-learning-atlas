@@ -112,8 +112,8 @@
 
 .callout {
 /* ---- Grids & Cards ---- */
-.grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-.grid-cards-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.grid-cards-2 { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
 .model-card {
   background: var(--bg-card); border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md); padding: 1.5rem;
@@ -440,8 +440,8 @@ canvas.viz-stage, svg.viz-stage { width: 100%; height: 380px; }
   --accent-yellow: #facc15;
 }
 html { scroll-behavior: smooth; }
-body { overflow-x: hidden; }
-.ambient { position: fixed; width: 42rem; height: 42rem; border-radius: 50%; filter: blur(110px); opacity: .11; pointer-events: none; z-index: -2; }
+/* Overflow is constrained at the component instead of clipping the page. */
+.ambient { display: none; }
 .ambient-a { top: -18rem; right: -16rem; background: var(--accent-violet); }
 .ambient-b { bottom: -22rem; left: -18rem; background: var(--accent-cyan); }
 .brand-mark { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: .65rem; background: linear-gradient(135deg,var(--accent-cyan),var(--accent-violet)); color:#050816; font-weight:900; font-size:.78rem; box-shadow: 0 0 28px rgba(103,232,249,.25); }

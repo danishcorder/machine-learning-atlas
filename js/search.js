@@ -13,12 +13,16 @@ export function initSearch() {
   modal.className = 'search-modal';
   modal.setAttribute('role', 'dialog');
   modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', 'Search ML Atlas');
+  modal.hidden = true;
   modal.innerHTML = `
     <div class="search-box">
+      <div class="search-toolbar"><strong>Search ML Atlas</strong><button type="button" class="btn search-close">Close</button></div>
       <input type="text" class="search-input" id="search-query"
              placeholder="Search models, concepts, math (e.g. gradient descent, entropy, margin)..."
              aria-label="Search models and concepts">
       <p class="search-hint">Try: "gradient descent", "entropy", "cross-entropy", "margin", "clustering"</p>
+      <button type="button" class="btn search-clear">Clear search</button>
       <ul class="search-results" id="search-results-list" aria-live="polite"></ul>
       <p class="search-hint">↑↓ navigate · Enter open · Esc close</p>
     </div>`;
@@ -27,8 +31,15 @@ export function initSearch() {
   const queryInput = modal.querySelector('#search-query');
   const resultsList = modal.querySelector('#search-results-list');
   let selectedIndex = -1;
+  let returnFocus = searchBtn;
 
   function open() {
+    returnFocus = document.activeElement;
+    document.dispatchEvent(new Event('search-open'));
+    modal.hidden = false;
+    document.body.classList.add('search-open');
+    document.getElementById('main-content')?.setAttribute('inert', '');
+    document.querySelector('.navbar')?.setAttribute('inert', '');
     modal.classList.add('active');
     queryInput.value = '';
     resultsList.innerHTML = '';
@@ -37,8 +48,21 @@ export function initSearch() {
   }
   function close() {
     modal.classList.remove('active');
-    searchBtn.focus();
+    modal.hidden = true;
+    document.body.classList.remove('search-open');
+    document.getElementById('main-content')?.removeAttribute('inert');
+    document.querySelector('.navbar')?.removeAttribute('inert');
+    returnFocus?.focus();
   }
+  modal.querySelector('.search-close').addEventListener('click', close);
+  modal.querySelector('.search-clear').addEventListener('click', () => { queryInput.value = ''; render(''); queryInput.focus(); });
+  modal.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const items = [...modal.querySelectorAll('button, input, [tabindex="0"]')];
+    const first = items[0], last = items.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
 
   searchBtn.addEventListener('click', open);
 
@@ -105,8 +129,9 @@ export function initSearch() {
       li.innerHTML = `<div><strong>${escapeHtml(m.name)}</strong>
         <div style="font-size:0.78rem; color:var(--text-muted)">${escapeHtml(m.problemType)} · ${escapeHtml(m.learningType)}</div></div>
         <span class="badge badge-neutral">Model</span>`;
-      li.addEventListener('click', () => { window.location.href = prefix() + m.pagePath.replace(/^pages\//,''); });
-      li.addEventListener('keydown', (e) => { if (e.key === 'Enter') window.location.href = prefix() + m.pagePath.replace(/^pages\//,''); });
+      li.setAttribute('role', 'link');
+      li.addEventListener('click', () => { window.location.href = prefix() + m.pagePath; });
+      li.addEventListener('keydown', (e) => { if (e.key === 'Enter') window.location.href = prefix() + m.pagePath; });
       resultsList.appendChild(li);
     });
 

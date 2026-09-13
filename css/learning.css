@@ -1,0 +1,62 @@
+/* Lesson components, shared by the static build and progressive enhancement. */
+.lesson-stage { margin: 2rem 0 3rem; scroll-margin-top: calc(var(--nav-h) + 10rem); }
+.stage-heading { margin: 1.5rem 0; }
+.stage-heading h2 { font-size: clamp(1.75rem, 4vw, 2.6rem); line-height: 1.2; }
+.lesson-stage .section-block, .lesson-stage .lr-block { margin: 1.5rem 0; }
+.lesson-detail { border-bottom: 1px solid var(--border-subtle); margin: 1rem 0; }
+.lesson-detail > summary { color: var(--text-secondary); font-weight: 650; }
+.lesson-detail > section { padding: 0 1rem 1rem; }
+.lesson-contents { margin: 1.5rem 0; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: var(--bg-card); }
+.lesson-contents > summary { font-weight: 700; }
+.contents-stage { float: right; color: var(--text-muted); }
+.stage-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; padding: .75rem; }
+.stage-links a { display: block; padding: .65rem; min-height: var(--touch-target); }
+.stage-links summary[aria-current="step"] { color: var(--accent-secondary); }
+.lesson-navigator { padding: 1rem; border: 1px solid var(--border-accent); border-radius: var(--radius-md); background: var(--bg-primary); }
+.stage-status { font-weight: 700; }
+.lesson-navigator progress { width: 100%; height: .5rem; accent-color: var(--accent-secondary); display: block; margin: .75rem 0; }
+.stage-controls { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+.stage-controls .btn { justify-content: center; font-size: .875rem; }
+.stage-count { white-space: nowrap; color: var(--text-muted); }
+.math-module { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); margin: 1rem 0; }
+.math-module > summary { padding: 1.25rem; }
+.math-module-title { display: inline; font-weight: 750; font-size: 1.2rem; }
+.math-module > summary > span + span, .math-module small { display: block; margin-top: .4rem; color: var(--text-secondary); }
+.math-module > section { margin: 0; padding: 1rem; }
+.table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.table-scroll::before { content: 'Data table - scroll horizontally if needed'; display: block; font-size: .875rem; color: var(--text-muted); margin-bottom: .5rem; }
+.table-scroll table { min-width: 100%; }
+.continue-lesson { margin-bottom: 1rem; }
+.visual-card { min-width: 0; }
+.static-chart text { font-family: var(--font-sans); }
+@media (max-width: 768px) {
+  .stage-links { grid-template-columns: minmax(0, 1fr); }
+  .lesson-navigator { position: sticky; top: var(--nav-h); z-index: 30; padding: .65rem; border-radius: 0 0 var(--radius-md) var(--radius-md); }
+  .lesson-stage .section-block > .section-title .section-number { display: none; }
+  .lesson-stage .section-title { line-height: 1.3; }
+  .lesson-detail .section-title { font-size: 1.2rem; }
+  .lesson-detail .section-title .section-number { display: none; }
+  .lesson-stage .lr-block h3 { font-size: 1.4rem; line-height: 1.3; }
+  .model-dna-card { display: none; }
+  .teaching-schema { grid-template-columns: minmax(0, 1fr); }
+  .teaching-schema .tuning-card dl { grid-template-columns: minmax(0, 1fr); }
+  .lr-page .model-hero { min-height: 0; padding: 1.5rem; }
+  .lr-pipeline { flex-direction: column; }
+  .lr-pipeline > b { transform: rotate(90deg); }
+  .lr-pipeline article { width: 100%; }
+  .lr-symbol-grid, .lr-app-grid, .lr-metric-grid { grid-template-columns: minmax(0, 1fr); }
+  .lr-playground { padding: .5rem; }
+  .lr-controls { padding: .75rem; min-width: 0; }
+  .lr-equation { font-size: clamp(1.5rem, 6vw, 2.5rem); }
+  .lr-range, .lr-toggle { min-height: var(--touch-target); }
+  .lr-page .lr-range input[type="range"] { height: var(--touch-target); }
+  .lr-plot-wrap { min-height: 300px; }
+  .static-chart { min-width: 560px; }
+  .visual-card { overflow-x: auto; }
+  .visual-card::before { content: 'Diagram - swipe horizontally to explore'; display: block; color: var(--text-muted); font-size: .875rem; padding: .5rem; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .lesson-navigator { position: static; }
+  .search-modal { padding-block: .5rem; }
+  .search-box { max-height: calc(100dvh - 1rem); }
+}

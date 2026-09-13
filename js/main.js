@@ -12,6 +12,7 @@ import { initComparison } from './comparison.js';
 import { initModelSelector } from './model-selector.js';
 import { buildModelPage } from './model-page.js';
 import { renderStaticVisual } from './static-visuals.js';
+import { initLearning } from './learning.js';
 
 const MODEL_ID = document.body.getAttribute('data-model');
 
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initModelSelector();
   renderProgressBar('home-progress');
   buildHomeExplorer();
+  initLearning(MODEL_ID);
 });
 
 function initCreatorLink() {
