@@ -24,20 +24,34 @@ function initNavbar() {
   if (hamburger && links) {
     const compact = matchMedia('(max-width: 1280px)');
     const main = document.getElementById('main-content');
+    if (!links.querySelector('.mobile-nav-header')) {
+      links.insertAdjacentHTML('afterbegin', '<li class="mobile-nav-header"><span class="mobile-nav-title">ATLAS</span><button type="button" class="mobile-nav-close" aria-label="Close navigation">&#215;</button></li>');
+    }
+    const closeButton = links.querySelector('.mobile-nav-close');
+    const backdrop = document.createElement('button');
+    backdrop.type = 'button';
+    backdrop.className = 'nav-backdrop';
+    backdrop.setAttribute('aria-label', 'Close navigation');
+    document.body.append(backdrop);
     function setOpen(open, restore = false) {
       links.classList.toggle('open', open);
+      backdrop.classList.toggle('open', open);
       hamburger.setAttribute('aria-expanded', String(open));
       hamburger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
       hamburger.innerHTML = open ? '<span aria-hidden="true">&#215;</span>' : '<span aria-hidden="true">&#9776;</span>';
+      links.setAttribute('aria-hidden', String(compact.matches && !open));
       document.body.classList.toggle('menu-open', open);
       if (main) main.inert = open;
-      if (open) links.querySelector('a')?.focus();
+      if (open) closeButton?.focus();
       else if (restore) hamburger.focus();
     }
     hamburger.addEventListener('click', () => setOpen(!links.classList.contains('open'), true));
+    closeButton?.addEventListener('click', () => setOpen(false, true));
+    backdrop.addEventListener('click', () => setOpen(false, true));
     links.addEventListener('click', event => { if (event.target.closest('a')) setOpen(false, true); });
     document.addEventListener('search-open', () => setOpen(false));
     compact.addEventListener('change', () => setOpen(false));
+    links.setAttribute('aria-hidden', String(compact.matches));
     document.addEventListener('keydown', event => {
       if (!links.classList.contains('open')) return;
       if (event.key === 'Escape') { event.preventDefault(); setOpen(false, true); }

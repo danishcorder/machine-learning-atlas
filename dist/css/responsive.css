@@ -3,9 +3,16 @@
   .navbar { padding: 0 1rem; gap: .5rem; }
   .hamburger { display: inline-grid; place-items: center; width: var(--touch-target); min-width: var(--touch-target); padding: 0; }
   .nav-actions { margin-left: auto; gap: .35rem; }
-  .nav-links { display: none; position: absolute; top: 100%; inset-inline: 0; max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; overscroll-behavior: contain; padding: 1rem; background: var(--bg-primary); border-bottom: 1px solid var(--border-subtle); }
-  .nav-links.open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .nav-link { width: 100%; }
+  .nav-backdrop { position: fixed; inset: 0; z-index: 999; border: 0; padding: 0; background: rgba(4, 8, 18, .62); opacity: 0; pointer-events: none; transition: opacity var(--transition-fast); }
+  .nav-backdrop.open { opacity: 1; pointer-events: auto; }
+  .nav-links { display: flex; flex-direction: column; align-items: stretch; gap: .5rem; position: fixed; top: 0; left: 0; z-index: 1001; width: min(84vw, 320px); height: 100dvh; max-height: none; overflow-y: auto; overscroll-behavior: contain; padding: 1rem; background: var(--bg-primary); border-right: 1px solid var(--border-subtle); border-bottom: 0; box-shadow: 1.5rem 0 3rem rgba(0, 0, 0, .2); transform: translateX(-105%); visibility: hidden; transition: transform var(--transition-normal), visibility var(--transition-normal); }
+  .nav-links.open { transform: translateX(0); visibility: visible; }
+  .nav-links > li { display: block; width: 100%; flex: 0 0 auto; }
+  .mobile-nav-header { display: flex !important; align-items: center; justify-content: space-between; min-height: var(--nav-h); margin: -1rem -1rem .5rem; padding: 0 1rem; border-bottom: 1px solid var(--border-subtle); }
+  .mobile-nav-title { color: var(--text-primary); font-weight: 800; font-size: 1.1rem; letter-spacing: .12em; }
+  .mobile-nav-close { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-primary); font-size: 1.7rem; line-height: 1; cursor: pointer; }
+  .mobile-nav-close:hover, .mobile-nav-close:focus-visible { border-color: var(--border-accent); background: var(--bg-card-elevated); }
+  .nav-link { display: flex; align-items: center; width: 100%; min-height: 52px; padding: .7rem .85rem; }
   .nav-secondary { display: block; }
 }
 @media (max-width: 1080px) {
